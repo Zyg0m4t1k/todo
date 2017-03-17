@@ -1,0 +1,81 @@
+
+ul {
+	list-style:none;
+}
+
+.name_event {
+	margin-left:5px;
+}
+
+
+.maliste{
+	background-color: rgba(51, 51, 51, 0.2);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+	border-radius: 30px;
+	border: 1px solid #444;
+	
+}
+.list_mobile{
+	margin-left:15px;
+	padding:10px;
+	width:250px;
+	float:left;
+
+	
+}
+
+
+.actions{
+	position:absolute;
+	right:7px;
+	top:6px;
+	margin-top:7px;
+}
+
+.actions a{
+	display:block;
+	width:16px;
+	height:16px;
+	overflow:hidden;
+	float:left;
+	text-indent:-9999px;
+	margin:3px;
+}
+
+.actions a.edit{
+	background:url("../../../../img/edit.png") no-repeat center center;
+	cursor:pointer;
+}
+
+.actions a.delete{
+	background:url("../../../../img/delete.png") no-repeat center center;
+}
+
+.actions a.red{
+	background:url("../../../../img/red.png") no-repeat center center;
+	cursor:pointer;
+}
+
+.actions a.green{
+	background:url("../../../../img/green.png") no-repeat center center;
+	cursor:pointer;
+}
+
+.actions a.today{
+	background:url("../../../../img/today.png") no-repeat center center;
+	cursor:pointer;
+}
+
+.actions a.info{
+	background:url("../../../../img/info.png") no-repeat center center;
+	cursor:pointer;
+}
+
+.ui-checkbox > input {
+    left: -15px;
+    top: -6px;
+}
+
+.name_mobile {
+	margin-left: 10px;
+}

@@ -1,0 +1,22 @@
+
+== TodoList
+
+=== Description
+Ce plugin vous permet de Créer des lists de tâches, d'actions , de courses. Libre à vous de savoir ce que vous allez en faire
+
+
+'''
+=== Installation
+include::installation.asciidoc[]
+
+'''
+=== Configuration
+include::configuration.asciidoc[]
+
+'''
+=== Utilisation
+include::utilisation.asciidoc[]
+
+'''
+=== Changelog
+include::changelog.asciidoc[]

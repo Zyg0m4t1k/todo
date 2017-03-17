@@ -1,0 +1,48 @@
+
+
+.actions{
+	display:inline-block;
+	position:absolute;
+	right:7px;
+	top:6px;
+}
+
+.actions a{
+	display:block;
+	width:16px;
+	height:16px;
+	overflow:hidden;
+	float:left;
+	text-indent:-9999px;
+	margin:3px;
+}
+
+.actions a.edit{
+	background:url("../../../../img/edit.png") no-repeat center center;
+	cursor:pointer;
+}
+
+.actions a.delete{
+	background:url("../../../../img/delete.png") no-repeat center center;
+}
+
+.actions a.info{
+	background:url("../../../../img/info.png") no-repeat center center;
+	cursor:pointer;
+}
+
+.actions a.red{
+	background:url("../../../../img/red.png") no-repeat center center;
+	cursor:pointer;
+}
+
+.actions a.green{
+	background:url("../../../../img/green.png") no-repeat center center;
+	cursor:pointer;
+}
+
+.actions a.today{
+	background:url("../../../../img/today.png") no-repeat center center;
+	cursor:pointer;
+}
+

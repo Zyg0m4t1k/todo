@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<info>
+    <id>todo</id>
+    <name>Todo List</name>
+    <description>Plugin pour créer des todolists</description>
+    <icon>fa fa-server</icon>
+    <licence>AGPL</licence>
+    <author>zyg0m4t1k</author>
+    <installation>Aucune</installation>
+    <require>2.2</require>
+    <mobile>todos</mobile>
+    <category>organization</category>
+</info>
+
+
+
