@@ -107,7 +107,7 @@ foreach (object::all() as $object) {
         <table id="table_cmd" class="table table-bordered table-condensed">
             <thead>
                 <tr>
-                    <th>{{Nom}}</th><th>{{delai}}</th><th>{{remove}}</th>
+                    <th>{{Nom}}</th><th>{{delai}}</th><th>{{Visible}}</th><th>{{Remove}}</th>
                 </tr>
             </thead>
             <tbody>

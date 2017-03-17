@@ -31,10 +31,12 @@ function addCmdToTable(_cmd) {
     var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">';
     tr += '<td><input class="cmdAttr form-control input-sm" data-l1key="id" style="display : none;"><input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 90%;margin-left:auto;margin-right:auto;" placeholder="{{Nom}}" /></td>';
     tr += '<td><input id="ident' + init(_cmd.id) + '" class="delai cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="cron_todo" style="width :90%;margin-left:auto;margin-right:auto;" placeholder="{{delai}}" readonly/><input type="hidden" class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="timestamp" value=""  ></td>';
-	tr += '<td><span><input type="checkbox" data-size="mini" data-label-text="{{Visible}}" class="cmdAttr bootstrapSwitch" data-l1key="isVisible" checked/></span><i class="fa fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i>';    
+	tr += '<td><span><input type="checkbox" data-size="mini" data-label-text="{{Visible}}" class="cmdAttr checkbox-inline" data-l1key="isVisible" checked/></span>'; 
 	tr += '<input class="cmdAttr form-control input-sm" data-l1key="type" value="info" style="display : none;" />';
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="subtype" value="string" style="display : none;" />';
     tr += '</td>';
+	tr += '<td><i class="fa fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i>';
+	tr += '</td>';
     tr += '</tr>';
 	}
     $('#table_cmd tbody').append(tr);
