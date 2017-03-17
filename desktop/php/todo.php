@@ -30,9 +30,9 @@ foreach ($eqLogics as $eqLogic) {
             <div class="eqLogicThumbnailContainer">
                       <div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
            <center>
-            <i class="fa fa-plus-circle" style="font-size : 7em;color:#94ca02;"></i>
+            <i class="fa fa-plus-circle" style="font-size : 7em;color:#00A9EC;"></i>
         </center>
-        <span style="font-size : 1.1em;position:relative; top : 23px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#94ca02"><center>Ajouter</center></span>
+        <span style="font-size : 1.1em;position:relative; top : 23px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#00A9EC"><center>Ajouter</center></span>
     </div>
                 <?php
 foreach ($eqLogics as $eqLogic) {
@@ -86,13 +86,16 @@ foreach (object::all() as $object) {
                                 ?>
           </div>
         </div>          
-                <div class="form-group">
-                 <label class="col-sm-2 control-label" ></label>
-                <div class="col-sm-9">
-                 <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Activer}}" data-l1key="isEnable" checked/>
-                  <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Visible}}" data-l1key="isVisible" checked/>
-                </div>              
-                </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label" >{{Activer}}</label>
+              <div class="col-md-1">
+                <input type="checkbox" class="eqLogicAttr checkbox-inline" data-label-text="{{Activer}}" data-l1key="isEnable" checked/>
+              </div>
+              <label class="col-md-2 control-label prog_visible" >{{Visible}}</label>
+              <div class="col-md-1 prog_visible">
+                <input type="checkbox" class="eqLogicAttr checkbox-inline" data-label-text="{{Visible}}" data-l1key="isVisible" checked/>
+              </div>
+            </div>
             </fieldset>
         </form>
         
