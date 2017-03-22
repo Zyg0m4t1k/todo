@@ -1,0 +1,5 @@
+==== 22.03.2017
+- Ajout de la doc.
+
+==== 26.01.2016
+- Passage en stable et compatible jeedom v2.
