@@ -1,24 +1,24 @@
-== Verschiedene Ansichten
+== Vues diverses
 
 - Possibilité d'ajouter une date pour le todo et ensuite check lors de l'affichage qui vérifie si date passée ( icône rouge-> dépassée , icône verte-> ok , agenda-> aujourd'hui)
 
-Hier ist der Blick auf das Armaturenbrett
+Voici la vue sur le dashboard
 
 image::../images/viewdash.png[]
 
-Hier die mobile Ansicht 
+Voici la vue mobile 
 
 image::../images/viewmobile.png[]
 
 
-Hier ist die mobile Ansicht als Plugins/Todo Liste
+Voici la vue mobile dans plugins/Todo List
 
 image::../images/viewplug.png[]
 
-Mann kann ein Datum über das Plugin Menü hinzufügen
+Possible d'ajouter une date via le menu du plugin
 
 image::../images/config.png[]
 
-oder über das Armaturenbrett, indem Sie auf Bearbeiten klicken
+ou via le dashboard en cliquant sur l'icône edit
 
 image::../images/modal.png[]

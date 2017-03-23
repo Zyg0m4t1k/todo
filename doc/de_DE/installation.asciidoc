@@ -1,1 +1,1 @@
-Nach dem Download des Plugins auf ihr Jeedom, müssen Sie es aktivieren.
+Après téléchargement du plugin sur votre Jeedom , il vous faut activer celui-ci.
