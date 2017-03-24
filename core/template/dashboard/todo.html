@@ -43,7 +43,7 @@
 			
 		});
 		
-		$( ".delete" ).unbind().on('click', function() {
+		$( ".delete").on('click', function() {
 			idcmd = $(this).attr('alt'); 
 			id = $(this).attr('name');
 			changeTodo('del',idcmd,id)
@@ -85,7 +85,7 @@
 						return;
 					}
 				if (_action != 'check') {
-				  location.reload();
+					 location.reload();
 				}
 				
 				}

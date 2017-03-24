@@ -25,7 +25,7 @@ try {
     }
 
     if (init('action') == 'changeTodo') {
-        $todo = todo::changeTodo(init('acte'),init('idcmd'),init('id'));
+      	$todo = todo::changeTodo(init('acte'),init('idcmd'),init('id'));
 		ajax::success();
     } elseif (init('action') == 'editCmd') { 
 		 $todo = todo::editCmd(init('id'),init('nom'),init('info'),init('datetodo'),init('timestamp'));
@@ -33,7 +33,7 @@ try {
 	} elseif (init('action') == 'getAllTodo') { 
 		 $return = todo::getTodos();
 		 ajax::success($return);
-	}
+	} 
 	
     if (init('action') == 'gettodos') {
         log::add('todo','debug','gettodos');
