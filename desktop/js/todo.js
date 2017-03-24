@@ -27,7 +27,7 @@ function addCmdToTable(_cmd) {
     if (!isset(_cmd.configuration)) {
         _cmd.configuration = {};
     }
-	if (_cmd.name != 'Creer') {
+	if (_cmd.name != 'Nouveau') {
     var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">';
     tr += '<td><input class="cmdAttr form-control input-sm" data-l1key="id" style="display : none;"><input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 90%;margin-left:auto;margin-right:auto;" placeholder="{{Nom}}" /></td>';
     tr += '<td><input id="ident' + init(_cmd.id) + '" class="delai cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="cron_todo" style="width :90%;margin-left:auto;margin-right:auto;" placeholder="{{delai}}" readonly/><input type="hidden" class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="timestamp" value=""  ></td>';
