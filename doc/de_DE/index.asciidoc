@@ -1,8 +1,8 @@
 
-== TodoList
+== TodoListe
 
-=== Description
-Ce plugin vous permet de Créer des lists de tâches, d'actions , de courses. Libre à vous de savoir ce que vous allez en faire
+=== Beschreibung
+Mit diesem Plugin können Sie Listen für Aufgaben, Aktionen, Besorgungen erstellen. Damit Sie wissen, was zu tun ist.
 
 
 '''
@@ -10,13 +10,13 @@ Ce plugin vous permet de Créer des lists de tâches, d'actions , de courses. Li
 include::installation.asciidoc[]
 
 '''
-=== Configuration
+=== Konfiguration
 include::configuration.asciidoc[]
 
 '''
-=== Utilisation
+=== Verwendung
 include::utilisation.asciidoc[]
 
 '''
-=== Changelog
+=== Änderungsprotokoll
 include::changelog.asciidoc[]
