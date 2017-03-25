@@ -29,7 +29,7 @@ class todo extends eqLogic {
 
     public static $_widgetPossibility = array('custom' => true);
 	
-	public function changeTodo($action, $idcmd,$id) {
+	public static function changeTodo($action, $idcmd,$id) {
 		switch ($action) {	
 			case 'del': 
 			    $todo = cmd::byId($idcmd);
@@ -47,15 +47,15 @@ class todo extends eqLogic {
 					$todoCmd->setName(__(str_replace("'", " ",$idcmd), __FILE__));
 					$todoCmd->setEqLogic_id($action);
 					$todoCmd->setType('info');
-					$todoCmd->setSubType('other');
+					$todoCmd->setSubType('numeric');
 					$todoCmd->save();	
 					$list->refreshWidget();	
 				}
-				break;
+				break;			
 		}
 	}
 	
-	public function editCmd($id, $nom,$info,$datetodo,$timestamp) {
+	public static function editCmd($id, $nom,$info,$datetodo,$timestamp) {
 		$cmd= cmd::byId($id);
 		$cmd->setName($nom);
 		$cmd->setConfiguration('info', $info);
@@ -65,7 +65,7 @@ class todo extends eqLogic {
 		
 	}
 	
-    public function getTodos() {
+    public static function getTodos() {
 		 $return = array();
 		 $i = 0;
 		 $j = 0;
@@ -92,7 +92,7 @@ class todo extends eqLogic {
 	}
 
 
-    public function createTodo($nom,$todo) {
+    public static function createTodo($nom,$todo) {
 		$eqLogics = eqLogic::byType('todo');
 	    foreach($eqLogics as $eqLogic) {
             if ($eqLogic->getName() == $nom) {
@@ -133,12 +133,12 @@ class todo extends eqLogic {
 	
 	
 
-    public function postUpdate() {
+    public function preSave() {
 		$creer = $this->getCmd(null, 'new');
 		if (!is_object($creer)) {
 			$creer = new todoCmd();
 		}
-		$creer->setName(__('Nouveau', __FILE__));
+		$creer->setName(__('New todo', __FILE__));
 		$creer->setLogicalId('new');
 		$creer->setEqLogic_id($this->id);
 		$creer->setIsVisible(0);
@@ -242,16 +242,7 @@ class todo extends eqLogic {
 class todoCmd extends cmd {
 
     public function execute($_options = array()) {
-		if ($_options['slider'] == '') {
-			throw new Exception(__('La commande ne peut être vide', __FILE__));
-			
-		}
-		$todoCmd = new todoCmd();
-		$todoCmd->setName(__($_options['slider'], __FILE__));
-		$todoCmd->setEqLogic_id($this->id);
-		$todoCmd->setType('info');
-		$todoCmd->setSubType('other');
-		$todoCmd->save();			        
+		        
     }
 
     /*     * **********************Getteur Setteur*************************** */
