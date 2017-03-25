@@ -1,10 +1,10 @@
 ==== 24.03.2017
-- Ajout d'une action pour créer une tâche
-- Possibilité d'effacer la tâche depuis le widget (correction)
-- Nettoyage du code
+- hinzufügen einer Aktion, um eine Aufgabe zu erstellen
+- Möglichkeit, die Aufgabe auf dem Widget zu löschen (verbessert)
+- Code aufgeräumt 
 
 ==== 22.03.2017
-- Ajout de la doc.
+- Doc hinzugefügt.
 
 ==== 26.01.2016
-- Passage en stable et compatible jeedom v2.
+ - Übergang zur stabilen Version und kompatibel mit Jeedom V2.
