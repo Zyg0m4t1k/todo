@@ -1,12 +1,12 @@
-== Vues diverses
+== Verschiedene Ansichten
 
 - Possibilité d'ajouter une date pour le todo et ensuite check lors de l'affichage qui vérifie si date passée ( icône rouge-> dépassée , icône verte-> ok , agenda-> aujourd'hui)
 
-Voici la vue sur le dashboard
+Hier ist die Ansicht des Armaturenbretts
 
 image::../images/viewdash.png[]
 
-Voici la vue mobile 
+Hier ist die mobile Ansicht 
 
 image::../images/viewmobile.png[]
 
