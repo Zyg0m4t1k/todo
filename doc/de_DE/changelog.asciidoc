@@ -1,5 +1,10 @@
 ==== 24.03.2017
-- hinzufügen einer Aktion, um eine Aufgabe zu erstellen
+
+- Correction d'un bug d'affichage
+
+
+==== 24.03.2017
+
 - Möglichkeit, die Aufgabe auf dem Widget zu löschen (verbessert)
 - Code aufgeräumt 
 

@@ -1,5 +1,10 @@
 ==== 24.03.2017
-- Ajout d'une action pour créer une tâche
+
+- Correction d'un bug d'affichage
+
+
+==== 24.03.2017
+
 - Possibilité d'effacer la tâche depuis le widget (correction)
 - Nettoyage du code
 
