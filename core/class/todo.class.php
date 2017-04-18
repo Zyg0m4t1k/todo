@@ -30,6 +30,7 @@ class todo extends eqLogic {
     public static $_widgetPossibility = array('custom' => true);
 	
 	public static function changeTodo($action, $idcmd,$id) {
+		
 		switch ($action) {	
 			case 'del': 
 			    $todo = cmd::byId($idcmd);
