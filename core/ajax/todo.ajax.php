@@ -25,7 +25,7 @@ try {
     }
 
     if (init('action') == 'changeTodo') {
-        $todo = todo::changeTodo(init('acte'),init('idcmd'),init('id'));
+      	$todo = todo::changeTodo(init('acte'),init('idcmd'),init('id'));
 		ajax::success();
     } elseif (init('action') == 'editCmd') { 
 		 $todo = todo::editCmd(init('id'),init('nom'),init('info'),init('datetodo'),init('timestamp'));
@@ -33,10 +33,9 @@ try {
 	} elseif (init('action') == 'getAllTodo') { 
 		 $return = todo::getTodos();
 		 ajax::success($return);
-	}
+	} 
 	
-    if (init('action') == 'gettodos') {
-        log::add('todo','debug','gettodos');
+    if (init('action') == 'getTodo') {
 		if (init('object_id') == '') {
 			$object = object::byId($_SESSION['user']->getOptions('defaultDashboardObject'));
 		} else {
@@ -56,6 +55,14 @@ try {
 		} else {
 			foreach ($object->getEqLogic(true, false, 'todo') as $todo) {
 				$return['eqLogics'][] = $todo->toHtml(init('version'));
+			}
+			foreach (object::buildTree($object) as $child) {
+				$todos = $child->getEqLogic(true, false, 'todo');
+				if (count($todos) > 0) {
+					foreach ($todos as $todo) {
+						$return['eqLogics'][] = $todo->toHtml(init('version'));
+					}
+				}
 			}
 
 		}

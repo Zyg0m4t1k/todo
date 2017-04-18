@@ -1,4 +1,4 @@
-<div class="eqLogic eqLogic-widget allowResize" style="border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#;width: #width#;height: #height#; padding : 0px;" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="dashboard">
+<div class="eqLogic eqLogic-widget allowResize" style="border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#;width: 290px;height: #height#; padding : 0px;" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="dashboard">
 	<link rel="stylesheet" href="plugins/todo/core/template/dashboard/css/style.css" />
 <center><a href="#eqLink#" style="font-size : 1.5em;#hideEqLogicName#">#name_display# </a></center>
     <div class="row" style="margin:2px;">
@@ -43,7 +43,7 @@
 			
 		});
 		
-		$( ".delete" ).unbind().on('click', function() {
+		$( ".delete").on('click', function() {
 			idcmd = $(this).attr('alt'); 
 			id = $(this).attr('name');
 			changeTodo('del',idcmd,id)
@@ -85,7 +85,7 @@
 						return;
 					}
 				if (_action != 'check') {
-				  location.reload();
+					 location.reload();
 				}
 				
 				}

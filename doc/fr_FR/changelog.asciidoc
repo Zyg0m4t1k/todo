@@ -1,3 +1,13 @@
+==== 24.03.2017
+
+- Correction d'un bug d'affichage
+
+
+==== 24.03.2017
+
+- Possibilité d'effacer la tâche depuis le widget (correction)
+- Nettoyage du code
+
 ==== 22.03.2017
 - Ajout de la doc.
 

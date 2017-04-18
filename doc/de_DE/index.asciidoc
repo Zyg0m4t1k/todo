@@ -1,8 +1,8 @@
 
-== ToDo Liste
+== TodoListe
 
 === Beschreibung
-Dieses Plugin ermöglicht es ihnen, Aufgabenlisten, Aktionen, Rennen zu erschaffen. Damit Sie wissen, was sie tun haben
+Mit diesem Plugin können Sie Listen für Aufgaben, Aktionen, Besorgungen erstellen. Damit Sie wissen, was zu tun ist.
 
 
 '''
@@ -18,5 +18,5 @@ include::configuration.asciidoc[]
 include::utilisation.asciidoc[]
 
 '''
-=== Changelog
+=== Änderungsprotokoll
 include::changelog.asciidoc[]

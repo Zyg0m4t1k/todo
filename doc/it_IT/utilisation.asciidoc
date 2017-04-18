@@ -22,3 +22,7 @@ image::../images/config.png[]
 ou via le dashboard en cliquant sur l'icône edit
 
 image::../images/modal.png[]
+
+-Possibilité de créer une todo via un scénario
+
+image::../images/action.png[]

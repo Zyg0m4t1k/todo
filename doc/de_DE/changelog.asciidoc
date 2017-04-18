@@ -1,3 +1,15 @@
-==== 26.01.2016
+==== 24.03.2017
 
-- Umstellung in stabil und kompatibel mit Jeedom V2.  
+- Correction d'un bug d'affichage
+
+
+==== 24.03.2017
+
+- Möglichkeit, die Aufgabe auf dem Widget zu löschen (verbessert)
+- Code aufgeräumt 
+
+==== 22.03.2017
+- Doc hinzugefügt.
+
+==== 26.01.2016
+ - Übergang zur stabilen Version und kompatibel mit Jeedom V2.

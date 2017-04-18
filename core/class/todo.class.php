@@ -29,47 +29,34 @@ class todo extends eqLogic {
 
     public static $_widgetPossibility = array('custom' => true);
 	
-	public function changeTodo($action, $idcmd,$id) {
+	public static function changeTodo($action, $idcmd,$id) {
+		
 		switch ($action) {	
 			case 'del': 
-			    log::add('todo','debug','/////////////////////del//////////////////////');
 			    $todo = cmd::byId($idcmd);
-				$list = todo::byId($id);
                 $todo->remove();
-				log::add('todo','debug','/////////////////////'.$idcmd.'//////////////////////');
 				break;
 			case 'check':
-				log::add('todo','debug','/////////////////////check//////////////////////'); 
 				$todo = cmd::byId($idcmd);
 				$todo->setIsVisible($id);
 				$todo->save();
-				log::add('todo','debug','/////////////////////'.$idcmd.'//////////////////////');
 				break;
 			default: 
-			 	log::add('todo','debug','/////////////////////Add//////////////////////');
 			    $list = todo::byId($action);
 				if (is_object($list)) {
 					$todoCmd = new todoCmd();
 					$todoCmd->setName(__(str_replace("'", " ",$idcmd), __FILE__));
 					$todoCmd->setEqLogic_id($action);
 					$todoCmd->setType('info');
-					$todoCmd->setSubType('other');
+					$todoCmd->setSubType('numeric');
 					$todoCmd->save();	
-					$mc = cache::byKey('todoWidgetdashboard' . $action);
-					$mc->remove();
-					$mc = cache::byKey('todoWidgetdview' . $action);
-					$mc->remove();
-					$mc = cache::byKey('todoWidgetmobile' . $action);
-					$mc->remove();
-					$mc = cache::byKey('todoWidgetmview' . $action);
-					$mc->remove();
 					$list->refreshWidget();	
 				}
-				break;
+				break;			
 		}
 	}
 	
-	public function editCmd($id, $nom,$info,$datetodo,$timestamp) {
+	public static function editCmd($id, $nom,$info,$datetodo,$timestamp) {
 		$cmd= cmd::byId($id);
 		$cmd->setName($nom);
 		$cmd->setConfiguration('info', $info);
@@ -79,13 +66,12 @@ class todo extends eqLogic {
 		
 	}
 	
-    public function getTodos() {
+    public static function getTodos() {
 		 $return = array();
 		 $i = 0;
 		 $j = 0;
 		 foreach (todo::byType('todo') as $todo) {
 			 $id = $todo->getId();
-			 log::add('todo','debug','/////////////////////id :'.$id.'//////////////////////');
 				foreach (cmd::byEqLogicId($todo->getId()) as $cmd_todo){
 					if ($cmd_todo->getName() != 'Creer') {
 					$return[$i]['nom'] = $todo->getName();
@@ -107,8 +93,7 @@ class todo extends eqLogic {
 	}
 
 
-    public function createTodo($nom,$todo) {
-		log::add('todo','debug','/////////////////////create todo//////////////////////');
+    public static function createTodo($nom,$todo) {
 		$eqLogics = eqLogic::byType('todo');
 	    foreach($eqLogics as $eqLogic) {
             if ($eqLogic->getName() == $nom) {
@@ -126,7 +111,6 @@ class todo extends eqLogic {
 			$todoCmd->setType('info');
 			$todoCmd->setSubType('other');
 			$todoCmd->save();	
-			log::add('todo','debug','/////////////////////commande ajoutée//////////////////////');
 		} else {
 			$eqLogic = new eqLogic();
 			$eqLogic->setEqType_name('todo');
@@ -142,68 +126,26 @@ class todo extends eqLogic {
 			$todoCmd->setSubType('other');
 			$todoCmd->save();
 		}
-	   log::add('todo','debug','/////////////////////'.$exist.'//////////////////////');
 	}
 			
-	/*
-     * Fonction exécutée automatiquement toutes les minutes par Jeedom
-      public static function cron() {
-
-      }
-     */
-
-
-    /*
-     * Fonction exécutée automatiquement toutes les heures par Jeedom
-      public static function cronHourly() {
-
-      }
-     */
-
-    /*
-     * Fonction exécutée automatiquement tous les jours par Jeedom
-      public static function cronDayly() {
-
-      }
-     */
-
 
 
     /*     * *********************Méthodes d'instance************************* */
 	
 	
-    public function preInsert() {
-        
-    }
-
-    public function postInsert() {
-
-	}
 
     public function preSave() {
-        
-    }
-
-    public function postSave() {
-/*		$creer = $this->getCmd(null, 'Creer');
+		$creer = $this->getCmd(null, 'new');
 		if (!is_object($creer)) {
 			$creer = new todoCmd();
-			$creer->setLogicalId('Creer');
-			$creer->setIsVisible(0);
-			$creer->setName(__('Creer', __FILE__));
 		}
+		$creer->setName(__('New todo', __FILE__));
+		$creer->setLogicalId('new');
+		$creer->setEqLogic_id($this->id);
+		$creer->setIsVisible(0);
 		$creer->setType('action');
-		$creer->setSubType('message');
-		$creer->setEqLogic_id($this->getId());
-		$creer->save(); */
-    }    
-
-
-    public function preUpdate() {
-        
-    }
-
-    public function postUpdate() {
+		$creer->setSubType('slider');
+		$creer->save(); 		
 
 	}
 
@@ -216,12 +158,6 @@ class todo extends eqLogic {
     }
 
 	
-	/*
-     * Non obligatoire mais permet de modifier l'affichage du widget si vous en avez besoin
-      public function toHtml($_version = 'dashboard') {
-
-      }
-     */
 	public function toHtml($_version = 'dashboard') {
 		$replace = $this->preToHtml($_version);
 		if (!is_array($replace)) {
@@ -256,10 +192,10 @@ class todo extends eqLogic {
 				if ($name_event != 'Creer') {
 					if($cmd_todo->getIsVisible() == 1){
 					$li .= '<li id="'.$cmd_id.'" class="list-group-item list_edit" style="background-color:transparent;font-size : 0.9em;"><span><input value="'.$cmd_id.'" type="checkbox" >
-		</span><span class="name_event_'.$cmd_id.'" name="'.$id.'" >'.$name_event.'</span> <div class="actions"><a  name="'.$id.'"  class="'.$class.'" alt="'.$cmd_id.'">info</a><a  name="'.$id.'"  class="edit" alt="'.$cmd_id.'">Edit</a><a href="" name="'.$id.'"  class="delete" alt="'.$cmd_id.'">delete</a></div> </li>';
+		</span><span class="name_event_'.$cmd_id.'" name="'.$id.'" >'.$name_event.'</span> <div class="actions"><a  name="'.$id.'"  class="'.$class.'" alt="'.$cmd_id.'">info</a><a  name="'.$id.'"  class="edit" alt="'.$cmd_id.'">Edit</a><img src="plugins/todo/img/delete.png" href="" name="'.$id.'"  class="delete" alt="'.$cmd_id.'"></div> </li>';
 					} else {
 					$li .= '<li id="'.$cmd_id.'" class="list-group-item list_edit" style="text-decoration:line-through;background-color:transparent;font-size : 0.9em;"><span><input value="'.$cmd_id.'" type="checkbox" checked>
-		</span><span class="name_event_'.$cmd_id.'" name="'.$id.'" >'.$name_event.' </span><div class="actions"><a  name="'.$id.'"  class="'.$class.'" alt="'.$cmd_id.'">info</a><a  name="'.$id.'"  class="edit" alt="'.$cmd_id.'">edit</a><a href="" name="'.$id.'" h class="delete" alt="'.$cmd_id.'">delete</a></div> </li>';
+		</span><span class="name_event_'.$cmd_id.'" name="'.$id.'" >'.$name_event.' </span><div class="actions"><a  name="'.$id.'"  class="'.$class.'" alt="'.$cmd_id.'">info</a><a  name="'.$id.'"  class="edit" alt="'.$cmd_id.'">edit</a><img src="plugins/todo/img/delete.png" href="" name="'.$id.'"  class="delete" alt="'.$cmd_id.'"></div> </li>';
 					}
 				}
 			}
@@ -285,10 +221,10 @@ class todo extends eqLogic {
 				if ($name_event != 'Creer') {
 					if($cmd_todo->getIsVisible() == 1){
 					$li .= '<li id="'.$cmd_id.'" class="list-group-item list_edit" style="background-color:transparent;font-size : 0.9em;"><span><input value="'.$cmd_id.'" type="checkbox" >
-		</span><span class="name_mobile name_event_'.$cmd_id.'" name="'.$id.'" >'.$name_event.'</span> <div class="actions"><a  name="'.$id.'"  class="'.$class.'" alt="'.$cmd_id.'">info</a><a href="" name="'.$id.'"  class="delete" alt="'.$cmd_id.'">delete</a></div> </li>';
+		</span><span class="name_mobile name_event_'.$cmd_id.'" name="'.$id.'" >'.$name_event.'</span> <div class="actions"><a  name="'.$id.'"  class="'.$class.'" alt="'.$cmd_id.'">info</a><img src="plugins/todo/img/delete.png" href="" name="'.$id.'"  class="delete" alt="'.$cmd_id.'"></div> </li>';
 					} else {
 					$li .= '<li id="'.$cmd_id.'" class="list-group-item list_edit" style="text-decoration:line-through;background-color:transparent;font-size : 0.9em;"><span><input value="'.$cmd_id.'" type="checkbox" checked>
-		</span><span class="name_mobile name_event_'.$cmd_id.'" name="'.$id.'" >'.$name_event.' </span><div class="actions"><a  name="'.$id.'"  class="'.$class.'" alt="'.$cmd_id.'">info</a><a href="" name="'.$id.'" h class="delete" alt="'.$cmd_id.'">delete</a></div> </li>';
+		</span><span class="name_mobile name_event_'.$cmd_id.'" name="'.$id.'" >'.$name_event.' </span><div class="actions"><a  name="'.$id.'"  class="'.$class.'" alt="'.$cmd_id.'">info</a><img src="plugins/todo/img/delete.png" href="" name="'.$id.'"  class="delete" alt="'.$cmd_id.'"></div> </li>';
 					}
 				}
 			}
@@ -302,35 +238,11 @@ class todo extends eqLogic {
 				
 	}
 	
-    /*     * **********************Getteur Setteur*************************** */
 }
 
 class todoCmd extends cmd {
-    /*     * *************************Attributs****************************** */
-
-
-    /*     * ***********************Methode static*************************** */
-
-
-    /*     * *********************Methode d'instance************************* */
-
-    /*
-     * Non obligatoire permet de demander de ne pas supprimer les commandes même si elles ne sont pas dans la nouvelle configuration de l'équipement envoyé en JS
-      public function dontRemoveCmd() {
-      return true;
-      }
-     */
 
     public function execute($_options = array()) {
-		
-/*        if ($_options['message'] == '' || $_options['title'] == '') {
-            throw new Exception(__('Le message et le sujet ne peuvent être vide', __FILE__));
-        }
-		
-		$name = $_options['title'];
-		$todo = $_options['message'];
-		self::createTodo($name,$todo);
-		*/
 		        
     }
 
