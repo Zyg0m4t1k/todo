@@ -134,19 +134,8 @@ class todo extends eqLogic {
 	
 	
 
-    public function preSave() {
-		$creer = $this->getCmd(null, 'new');
-		if (!is_object($creer)) {
-			$creer = new todoCmd();
-		}
-		$creer->setName(__('New todo', __FILE__));
-		$creer->setLogicalId('new');
-		$creer->setEqLogic_id($this->id);
-		$creer->setIsVisible(0);
-		$creer->setType('action');
-		$creer->setSubType('slider');
-		$creer->save(); 		
-
+    public function postSave() {
+					
 	}
 
     public function preRemove() {
@@ -242,8 +231,7 @@ class todo extends eqLogic {
 
 class todoCmd extends cmd {
 
-    public function execute($_options = array()) {
-		        
+	public function execute($_options = array()) {
     }
 
     /*     * **********************Getteur Setteur*************************** */
