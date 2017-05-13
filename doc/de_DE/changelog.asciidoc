@@ -1,12 +1,12 @@
-==== 24.03.2017
+==== 12.05.2017
 
 - Correction d'un bug d'affichage
-
 
 ==== 24.03.2017
 
 - Möglichkeit, die Aufgabe auf dem Widget zu löschen (verbessert)
 - Code aufgeräumt 
+- Correction d'un bug d'affichage
 
 ==== 22.03.2017
 - Doc hinzugefügt.
