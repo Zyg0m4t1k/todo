@@ -134,8 +134,8 @@ class todo extends eqLogic {
 	
 	
 
-    public function postSave() {
-					
+    public function preSave() {		
+
 	}
 
     public function preRemove() {
@@ -231,7 +231,8 @@ class todo extends eqLogic {
 
 class todoCmd extends cmd {
 
-	public function execute($_options = array()) {
+    public function execute($_options = array()) {
+		        
     }
 
     /*     * **********************Getteur Setteur*************************** */
