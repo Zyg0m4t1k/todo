@@ -3,7 +3,7 @@
 	"name" : "Todo List",
 	"licence" : "AGPL",
 	"author" : "zyg0m4t1k",
-	"require" : "2.4",
+	"require" : "3.0",
 	"category" : "organization",
 	"mobile" : "todos"
 }

@@ -33,24 +33,34 @@ class todo extends eqLogic {
 		
 		switch ($action) {	
 			case 'del': 
-			    $todo = cmd::byId($idcmd);
-                $todo->remove();
+			    $cmd = cmd::byId($idcmd);
+				 if (is_object($cmd)) {
+					 $id = $cmd->getEqLogic_id();			 
+					 $cmd->remove();
+					self::allTodo($id);	
+				 }	
+				
 				break;
 			case 'check':
-				$todo = cmd::byId($idcmd);
-				$todo->setIsVisible($id);
-				$todo->save();
+				$cmd = cmd::byId($idcmd);
+				if (is_object($cmd)) {
+					$cmd->setIsVisible($id);
+					$cmd->save();
+					self::allTodo($cmd->getEqLogic_id());						
+				}
 				break;
 			default: 
-			    $list = todo::byId($action);
-				if (is_object($list)) {
+			    $todo = todo::byId($action);
+				if (is_object($todo)) {
 					$todoCmd = new todoCmd();
 					$todoCmd->setName(__(str_replace("'", " ",$idcmd), __FILE__));
 					$todoCmd->setEqLogic_id($action);
 					$todoCmd->setType('info');
-					$todoCmd->setSubType('numeric');
-					$todoCmd->save();	
-					$list->refreshWidget();	
+					$todoCmd->setSubType('string');
+					$todoCmd->save();
+					self::allTodo($todo->getId());		
+					$todo->refreshWidget();
+					self::allTodo($todo->getId());	
 				}
 				break;			
 		}
@@ -62,10 +72,34 @@ class todo extends eqLogic {
 		$cmd->setConfiguration('info', $info);
 		$cmd->setConfiguration('cron_todo', $datetodo);
 		$cmd->setConfiguration('timestamp', $timestamp);
+		$cmd->setSubType('string');
 		$cmd->save();
+		self::allTodo($cmd->getEqLogic_id());		
+		
+		
 		
 	}
-	
+
+ 	public  function allTodo($_id) {
+	  $eq = todo::byId($_id);
+	  $cmds = $eq->getCmd();
+	  $count = count($cmds);
+	  $list = 'Dans la liste :';
+	  $i = 1;
+	  foreach ($cmds as $cmd) {
+		  if ($i == $count ) {
+			  $list .=  ' ' . $cmd->getName();
+		  } else {
+			  $list .=  ' ' . $cmd->getName() . ',';
+		  }
+		  
+		  $i++;
+		  
+	  }
+	  log::add('todo','debug', 'set all todo ' . $eq->getName());
+	  $eq->checkAndUpdateCmd('list', $list);		
+	}
+	 
     public static function getTodos() {
 		 $return = array();
 		 $i = 0;
@@ -94,38 +128,38 @@ class todo extends eqLogic {
 
 
     public static function createTodo($nom,$todo) {
-		$eqLogics = eqLogic::byType('todo');
+		log::add('todo','debug', 'Create todo ' . $nom . ' ' . $todo);
+		$eqLogics = todo::byType('todo');
+		$exist = false;
 	    foreach($eqLogics as $eqLogic) {
             if ($eqLogic->getName() == $nom) {
-				$exist = 1;
+				$exist = true;
 				$id = $eqLogic->id;
+				
 				break;
-			} else {
-				$exist = 0;
-			}
+			} 
 		};
-		if ($exist == 1) {
-			$todoCmd = new todoCmd();
-			$todoCmd->setName(__(str_replace("'", " ",$todo), __FILE__));
-			$todoCmd->setEqLogic_id($id);
-			$todoCmd->setType('info');
-			$todoCmd->setSubType('other');
-			$todoCmd->save();	
-		} else {
+		
+		if (!$exist) {
 			$eqLogic = new eqLogic();
 			$eqLogic->setEqType_name('todo');
 			$eqLogic->setIsEnable(1);
 			$eqLogic->setName($nom);
 			$eqLogic->save();
-			$eqLogic = self::byId($eqLogic->id);
-			
-			$todoCmd = new todoCmd();
-			$todoCmd->setName(__(str_replace("'", " ",$todo), __FILE__));
-			$todoCmd->setEqLogic_id($eqLogic->id);
-			$todoCmd->setType('info');
-			$todoCmd->setSubType('other');
-			$todoCmd->save();
+			$eqLogic = self::byId($eqLogic->getId());
+			$id =  $eqLogic->getId();	
 		}
+
+		$todoCmd = new todoCmd();
+		$todoCmd->setName(__(str_replace("'", " ",$todo), __FILE__));
+		$todoCmd->setEqLogic_id($id);
+		$todoCmd->setType('info');
+		$todoCmd->setSubType('string');
+		$todoCmd->save();
+		
+		$todo = todo::byId($id);
+		$todo->allTodo();
+		
 	}
 			
 
@@ -134,9 +168,36 @@ class todo extends eqLogic {
 	
 	
 
-    public function preSave() {		
-
+    public function postSave() {
+		$new = $this->getCmd(null, 'new');
+		if (!is_object($new)) {
+			$new = new todoCmd();
+			$new->setLogicalId('new');
+							
+		}
+		$new->setName(__('New todo', __FILE__));
+		$new->setEqLogic_id($this->getId());
+		$new->setType('action');
+		$new->setSubType('message');
+		$new->save(); 
+		
+		$list = $this->getCmd(null, 'list');
+		if (!is_object($list)) {
+			$list = new todoCmd();
+			$list->setLogicalId('list');
+							
+		}
+		$list->setName(__('Liste', __FILE__));
+		$list->setEqLogic_id($this->getId());
+		$list->setType('info');
+		$list->setSubType('string');
+		$list->save(); 
+		
+		self::allTodo($this->getId());
+		
 	}
+	
+	
 
     public function preRemove() {
         
@@ -158,6 +219,7 @@ class todo extends eqLogic {
 		$li = null;
 		$test = array();
 		$test = cmd::byEqLogicId($id);
+		$except = array('Creer','new','getlist','list');
 		if ($_version != 'mobile') {
 			foreach (cmd::byEqLogicId($id) as $cmd_todo){
 				$array = array();
@@ -178,7 +240,7 @@ class todo extends eqLogic {
 				}
 				$cmd_id = $cmd_todo->getID();
 				$name_event = $cmd_todo->getName();
-				if ($name_event != 'Creer') {
+				if (!in_array( $cmd_todo->getLogicalId(), $except)) {
 					if($cmd_todo->getIsVisible() == 1){
 					$li .= '<li id="'.$cmd_id.'" class="list-group-item list_edit" style="background-color:transparent;font-size : 0.9em;"><span><input value="'.$cmd_id.'" type="checkbox" >
 		</span><span class="name_event_'.$cmd_id.'" name="'.$id.'" >'.$name_event.'</span> <div class="actions"><a  name="'.$id.'"  class="'.$class.'" alt="'.$cmd_id.'">info</a><a  name="'.$id.'"  class="edit" alt="'.$cmd_id.'">Edit</a><img src="plugins/todo/img/delete.png" href="" name="'.$id.'"  class="delete" alt="'.$cmd_id.'"></div> </li>';
@@ -207,7 +269,7 @@ class todo extends eqLogic {
 					
 				}				
 				$name_event = $cmd_todo->getName();
-				if ($name_event != 'Creer') {
+				if (!in_array( $cmd_todo->getLogicalId(), $except)) {
 					if($cmd_todo->getIsVisible() == 1){
 					$li .= '<li id="'.$cmd_id.'" class="list-group-item list_edit" style="background-color:transparent;font-size : 0.9em;"><span><input value="'.$cmd_id.'" type="checkbox" >
 		</span><span class="name_mobile name_event_'.$cmd_id.'" name="'.$id.'" >'.$name_event.'</span> <div class="actions"><a  name="'.$id.'"  class="'.$class.'" alt="'.$cmd_id.'">info</a><img src="plugins/todo/img/delete.png" href="" name="'.$id.'"  class="delete" alt="'.$cmd_id.'"></div> </li>';
@@ -230,8 +292,21 @@ class todo extends eqLogic {
 }
 
 class todoCmd extends cmd {
-
+	
+	public function preSave() {
+		if ($this->getSubtype() == 'message') {
+			$this->setDisplay('title_disable', 1);
+		}
+	}
+	
     public function execute($_options = array()) {
+		$todo = todo::byId($this->getEqLogic_id());
+		switch ($this->getLogicalId()) {
+			case 'new': 
+			log::add('todo','debug', 'launch new todo ' . $todo->getName() . ' ' . $_options['message']);
+			todo::createTodo($todo->getName(),$_options['message']);
+			break;		
+		}
 		        
     }
 

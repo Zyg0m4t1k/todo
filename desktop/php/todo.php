@@ -2,8 +2,9 @@
 if (!isConnect('admin')) {
 	throw new Exception('{{401 - Accès non autorisé}}');
 }
-sendVarToJS('eqType', 'todo');
-$eqLogics = eqLogic::byType('todo');
+$plugin = plugin::byId('todo');
+sendVarToJS('eqType', $plugin->getId());
+$eqLogics = eqLogic::byType($plugin->getId());
 ?>
 
 
@@ -39,7 +40,7 @@ foreach ($eqLogics as $eqLogic) {
 	$opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
 	echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
 	echo "<center>";
-	echo '<img src="plugins/todo/doc/images/todo_icon.png" height="105" width="95" />';
+	echo '<img src="' . $plugin->getPathImgIcon() . '" height="105" width="95" />';
 	echo "</center>";
 	echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;"><center>' . $eqLogic->getHumanName(true, true) . '</center></span>';
 	echo '</div>';
@@ -86,8 +87,8 @@ foreach (object::all() as $object) {
                 
                 
         <div class="category form-group">
-          <label class="col-md-2 control-label">{{Catégorie}}</label>
-          <div class="col-md-8">
+          <label class="col-sm-3 control-label">{{Catégorie}}</label>
+          <div class="col-sm-9">
             <?php
                                 foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
                                     echo '<label class="checkbox-inline">';
@@ -97,16 +98,13 @@ foreach (object::all() as $object) {
                                 ?>
           </div>
         </div>          
-            <div class="form-group">
-              <label class="col-md-2 control-label" >{{Activer}}</label>
-              <div class="col-md-1">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" data-label-text="{{Activer}}" data-l1key="isEnable" checked/>
-              </div>
-              <label class="col-md-2 control-label prog_visible" >{{Visible}}</label>
-              <div class="col-md-1 prog_visible">
-                <input type="checkbox" class="eqLogicAttr checkbox-inline" data-label-text="{{Visible}}" data-l1key="isVisible" checked/>
-              </div>
-            </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                        <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
+                        <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
+                    </div>
+                </div>
             </fieldset>
         </form>
         </div>

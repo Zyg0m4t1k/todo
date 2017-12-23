@@ -23,7 +23,9 @@ function todo_install() {
 }
 
 function todo_update() {
-    
+	 foreach (todo::byType('todo') as $todo) {
+		 $todo->save();
+	 }
 }
 
 
