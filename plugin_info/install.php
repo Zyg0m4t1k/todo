@@ -26,6 +26,7 @@ function todo_update() {
 	 foreach (todo::byType('todo') as $todo) {
 		 $todo->save();
 	 }
+	 log::add('todo', 'error', 'Lire le changelog et la doc');
 }
 
 

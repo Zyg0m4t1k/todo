@@ -86,17 +86,18 @@ class todo extends eqLogic {
 	  $count = count($cmds);
 	  $list = 'Dans la liste :';
 	  $i = 1;
+	  $except = array('new','getlist','list');
 	  foreach ($cmds as $cmd) {
-		  if ($i == $count ) {
-			  $list .=  ' ' . $cmd->getName();
-		  } else {
-			  $list .=  ' ' . $cmd->getName() . ',';
+		  if (!in_array( $cmd->getLogicalId(), $except)) {
+			  if ($i == $count ) {
+				  $list .=  ' ' . $cmd->getName();
+			  } else {
+				  $list .=  ' ' . $cmd->getName() . ',';
+			  }
+		  $i++;
 		  }
 		  
-		  $i++;
-		  
 	  }
-	  log::add('todo','debug', 'set all todo ' . $eq->getName());
 	  $eq->checkAndUpdateCmd('list', $list);		
 	}
 	 
@@ -128,7 +129,6 @@ class todo extends eqLogic {
 
 
     public static function createTodo($nom,$todo) {
-		log::add('todo','debug', 'Create todo ' . $nom . ' ' . $todo);
 		$eqLogics = todo::byType('todo');
 		$exist = false;
 	    foreach($eqLogics as $eqLogic) {
@@ -156,10 +156,7 @@ class todo extends eqLogic {
 		$todoCmd->setType('info');
 		$todoCmd->setSubType('string');
 		$todoCmd->save();
-		
-		$todo = todo::byId($id);
-		$todo->allTodo();
-		
+		self::allTodo($id);
 	}
 			
 
@@ -219,7 +216,7 @@ class todo extends eqLogic {
 		$li = null;
 		$test = array();
 		$test = cmd::byEqLogicId($id);
-		$except = array('Creer','new','getlist','list');
+		$except = array('new','getlist','list');
 		if ($_version != 'mobile') {
 			foreach (cmd::byEqLogicId($id) as $cmd_todo){
 				$array = array();
@@ -303,7 +300,6 @@ class todoCmd extends cmd {
 		$todo = todo::byId($this->getEqLogic_id());
 		switch ($this->getLogicalId()) {
 			case 'new': 
-			log::add('todo','debug', 'launch new todo ' . $todo->getName() . ' ' . $_options['message']);
 			todo::createTodo($todo->getName(),$_options['message']);
 			break;		
 		}

@@ -23,6 +23,20 @@ ou via le dashboard en cliquant sur l'icône edit
 
 image::../images/modal.png[]
 
--Possibilité de créer une todo via un scénario
 
-image::../images/action.png[]
+== Les commandes
+
+- Possibilité de créer une todo via un scénario :
+
+image::../images/todo2.png[]
+
+- Ou de récupérer la liste de toutes les tâches
+
+image::../images/todo1.png[]
+
+
+
+
+
+
+
