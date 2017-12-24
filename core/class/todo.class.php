@@ -88,7 +88,7 @@ class todo extends eqLogic {
 	  $i = 1;
 	  $except = array('new','getlist','list');
 	  foreach ($cmds as $cmd) {
-		  if (!in_array( $cmd->getLogicalId(), $except)) {
+		  if (!in_array( $cmd->getLogicalId(), $except) && $cmd->getIsVisible() == 1) {
 			  if ($i == $count ) {
 				  $list .=  ' ' . $cmd->getName();
 			  } else {
