@@ -58,7 +58,6 @@ class todo extends eqLogic {
 					$todoCmd->setType('info');
 					$todoCmd->setSubType('string');
 					$todoCmd->save();
-					self::allTodo($todo->getId());		
 					$todo->refreshWidget();
 					self::allTodo($todo->getId());	
 				}
@@ -84,7 +83,7 @@ class todo extends eqLogic {
 	  $eq = todo::byId($_id);
 	  $cmds = $eq->getCmd();
 	  $count = count($cmds);
-	  $list = 'Dans la liste :';
+	  $list = '';
 	  $i = 1;
 	  $except = array('new','getlist','list');
 	  foreach ($cmds as $cmd) {
@@ -303,9 +302,7 @@ class todoCmd extends cmd {
 			todo::createTodo($todo->getName(),$_options['message']);
 			break;		
 		}
-		        
     }
-
     /*     * **********************Getteur Setteur*************************** */
 }
 
