@@ -1,3 +1,11 @@
+==== 23.12.2017
+
+
+- Ajout d'une commande pour récupérer la liste des  tâches ( Non cochées) d'un équipement  . Pour les transmettres par mail ,TTS ...
+- Doc
+- Ajout d'une commande pour créer une tâche (Utilisable dans les scénarios)
+- Fichier xml supprimé
+
 ==== 12.05.2017
 
 - Correction d'un bug d'affichage
