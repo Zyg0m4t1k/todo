@@ -5,5 +5,7 @@
 	"author" : "zyg0m4t1k",
 	"require" : "3.0",
 	"category" : "organization",
-	"mobile" : "todos"
+	"mobile" : "todos",
+	"changelog" : "https://zyg0m4t1k.github.io/todo/#language#/changelog",
+	"documentation" : "https://zyg0m4t1k.github.io/todo/#language#/"	
 }
