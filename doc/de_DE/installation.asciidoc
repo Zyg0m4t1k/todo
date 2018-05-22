@@ -1,1 +1,0 @@
-Nach dem Download des Plugins auf Ihr Jeedom, ist es notwendig dieses zu aktivieren.
