@@ -17,7 +17,7 @@
  */
 
 try {
-    require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
+    require_once __DIR__ . '/../../../../core/php/core.inc.php';
     include_file('core', 'authentification', 'php');
 
     if (!isConnect('admin')) {
@@ -26,16 +26,14 @@ try {
 
     if (init('action') == 'changeTodo') {
       	$todo = todo::changeTodo(init('acte'),init('idcmd'),init('id'));
-		ajax::success();
+		ajax::success(init('id'));
     } elseif (init('action') == 'editCmd') { 
 		 $todo = todo::editCmd(init('id'),init('nom'),init('info'),init('datetodo'),init('timestamp'));
 		 ajax::success();
 	} elseif (init('action') == 'getAllTodo') { 
 		 $return = todo::getTodos();
 		 ajax::success($return);
-	} 
-	
-    if (init('action') == 'getTodo') {
+	} elseif (init('action') == 'getTodo') {
 		if (init('object_id') == '') {
 			$object = object::byId($_SESSION['user']->getOptions('defaultDashboardObject'));
 		} else {
@@ -67,6 +65,13 @@ try {
 
 		}
 		ajax::success($return);
+	} elseif (init('action') == 'loadData') {
+		$todo = todo::byId(init(id));
+		if (!is_object($todo)) {
+			throw new Exception(__('Todo inconnue : ', __FILE__) . init('id'), 9999);
+		}
+		$cmds = $todo->getCmd();
+		ajax::success(jeedom::toHumanReadable(utils::o2a($cmds)));		
 	}
 	
 		

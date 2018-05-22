@@ -17,7 +17,7 @@
  */
 
 /* * ***************************Includes********************************* */
-require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
+require_once __DIR__ . '/../../../../core/php/core.inc.php';
 
 class todo extends eqLogic {
     /*     * *************************Attributs****************************** */
@@ -35,32 +35,40 @@ class todo extends eqLogic {
 			case 'del': 
 			    $cmd = cmd::byId($idcmd);
 				 if (is_object($cmd)) {
-					 $id = $cmd->getEqLogic_id();			 
+					 $todo = $cmd->getEqLogic();
 					 $cmd->remove();
-					self::allTodo($id);	
+					 $todo->refreshWidget();
+					 $todo->allTodo();					 
 				 }	
-				
 				break;
 			case 'check':
 				$cmd = cmd::byId($idcmd);
 				if (is_object($cmd)) {
-					$cmd->setIsVisible($id);
+					$todo = $cmd->getEqLogic();
+					$cmd->setIsVisible(0);
 					$cmd->save();
-					self::allTodo($cmd->getEqLogic_id());						
-				}
-				break;
-			default: 
-			    $todo = todo::byId($action);
-				if (is_object($todo)) {
-					$todoCmd = new todoCmd();
-					$todoCmd->setName(__(str_replace("'", " ",$idcmd), __FILE__));
-					$todoCmd->setEqLogic_id($action);
-					$todoCmd->setType('info');
-					$todoCmd->setSubType('string');
-					$todoCmd->save();
 					$todo->refreshWidget();
-					self::allTodo($todo->getId());	
+					$todo->allTodo();	
 				}
+				break;			
+			case 'new': 
+				$todo = todo::byId($id);
+				$cmd = $todo->getCmd(null, str_replace(" ", "_",$idcmd));
+				if (!is_object($cmd)) {
+					$cmd = new todoCmd();
+					$cmd->setName(__(str_replace("'", " ",$idcmd), __FILE__));
+					$cmd->setLogicalId(str_replace(' ','_',$idcmd));
+					$cmd->setEqLogic_id($id);
+					$cmd->setType('info');
+					$cmd->setSubType('string');
+					$cmd->save();
+				} else {
+					$cmd->setIsVisible(1);
+					$cmd->save();
+					
+				}
+				$todo->refreshWidget();	
+				$todo->allTodo();
 				break;			
 		}
 	}
@@ -73,15 +81,15 @@ class todo extends eqLogic {
 		$cmd->setConfiguration('timestamp', $timestamp);
 		$cmd->setSubType('string');
 		$cmd->save();
-		self::allTodo($cmd->getEqLogic_id());		
+		$todo = $cmd->getEqLogic();
+		$todo->allTodo();		
 		
 		
 		
 	}
 
- 	public  function allTodo($_id) {
-	  $eq = todo::byId($_id);
-	  $cmds = $eq->getCmd();
+ 	public  function allTodo() {
+	  $cmds = $this->getCmd();
 	  $count = count($cmds);
 	  $list = '';
 	  $i = 1;
@@ -97,7 +105,7 @@ class todo extends eqLogic {
 		  }
 		  
 	  }
-	  $eq->checkAndUpdateCmd('list', $list);		
+	  $this->checkAndUpdateCmd('list', $list);		
 	}
 	 
     public static function getTodos() {
@@ -126,7 +134,17 @@ class todo extends eqLogic {
 		 return $return;
 	}
 
-
+	public function removeall() {
+		$cmds = $this->getCmd();
+		foreach ($cmds as $cmd) {
+			if($cmd->getConfiguration('type')) {
+				continue;
+			}
+			
+			$cmd->remove();
+		}
+		$this->refreshWidget();
+	}
     public static function createTodo($nom,$todo) {
 		$eqLogics = todo::byType('todo');
 		$exist = false;
@@ -134,7 +152,6 @@ class todo extends eqLogic {
             if ($eqLogic->getName() == $nom) {
 				$exist = true;
 				$id = $eqLogic->id;
-				
 				break;
 			} 
 		};
@@ -145,7 +162,6 @@ class todo extends eqLogic {
 			$eqLogic->setIsEnable(1);
 			$eqLogic->setName($nom);
 			$eqLogic->save();
-			$eqLogic = self::byId($eqLogic->getId());
 			$id =  $eqLogic->getId();	
 		}
 
@@ -154,8 +170,11 @@ class todo extends eqLogic {
 		$todoCmd->setEqLogic_id($id);
 		$todoCmd->setType('info');
 		$todoCmd->setSubType('string');
+		$todoCmd->setLogicalId(str_replace(' ','_',$todo));
 		$todoCmd->save();
-		self::allTodo($id);
+		$todo = todo::byId($id);
+		$todo->allTodo();
+		$todo->refreshWidget();
 	}
 			
 
@@ -175,6 +194,7 @@ class todo extends eqLogic {
 		$new->setEqLogic_id($this->getId());
 		$new->setType('action');
 		$new->setSubType('message');
+		$new->setConfiguration('type',true);
 		$new->save(); 
 		
 		$list = $this->getCmd(null, 'list');
@@ -186,10 +206,24 @@ class todo extends eqLogic {
 		$list->setName(__('Liste', __FILE__));
 		$list->setEqLogic_id($this->getId());
 		$list->setType('info');
+		$list->setConfiguration('type',true);
 		$list->setSubType('string');
-		$list->save(); 
+		$list->save();
 		
-		self::allTodo($this->getId());
+		$removeall = $this->getCmd(null, 'removeall');
+		if (!is_object($removeall)) {
+			$removeall = new todoCmd();
+			$removeall->setLogicalId('removeall');
+							
+		}
+		$removeall->setName(__('Remove all', __FILE__));
+		$removeall->setEqLogic_id($this->getId());
+		$removeall->setConfiguration('type',true);
+		$removeall->setType('action');
+		$removeall->setSubType('other');
+		$removeall->save(); 	
+			
+		$this->allTodo();
 		
 	}
 	
@@ -279,6 +313,128 @@ class todo extends eqLogic {
 
 
 			$replace['#li#'] = $li;
+			$replace['#script#'] = "<script>
+				loadData('" . $this->getId() . "');
+				function changeTodo(_action,_idcmd, _id) {
+					$.ajax({// fonction permettant de faire de l'ajax
+						type: \"POST\", // methode de transmission des données au fichier php
+						url: \"plugins/todo/core/ajax/todo.ajax.php\", // url du fichier php
+						data: {
+							action: \"changeTodo\",
+							acte: _action,
+							idcmd: _idcmd,
+							id: _id
+						},
+						dataType: 'json',
+						error: function(request, status, error) {
+							handleAjaxError(request, status, error);
+						},
+						success: function(data) { // si l'appel a bien fonctionné
+							if (data.state != 'ok') {
+								$('#div_alert').showAlert({message:  data.result,level: 'danger'});
+								return;
+							}
+							
+							loadData(data.result);
+							if (_action == 'new') {
+								 $('#'+_id).val('');
+							}
+						
+						}
+					});			
+				}	
+		function loadData(_id) {
+			console.log('loadData ' + _id);
+			$.ajax({// fonction permettant de faire de l'ajax
+				type: \"POST\", // methode de transmission des données au fichier php
+				url: \"plugins/todo/core/ajax/todo.ajax.php\", // url du fichier php
+				data: {
+					action: \"loadData\",
+					id: _id 
+				},
+				dataType: 'json',
+				error: function(request, status, error) {
+					handleAjaxError(request, status, error);
+				},
+				success: function(data) { // si l'appel a bien fonctionné
+					if (data.state != 'ok') {
+						$('#div_alert').showAlert({message:  data.result,level: 'danger'});
+						return;
+					}
+					if (data.result.length != 0) {
+						console.log(data.result);
+						console.log(_id);
+						
+						 var html = '',
+						 	autoComplete = [];
+						 for (var k=0; k<data.result.length; k++) {
+							 if(!data.result[k].configuration.type) {
+								 if(data.result[k].isVisible == 1){
+									 html += '<li id=\"'+data.result[k].id+'\" class=\"list-group-item list_edit\" style=\"background-color:transparent;font-size : 0.9em;\"><span><input value=\"'+data.result[k].id+'\" type=\"checkbox\" ></span><span class=\"name_mobile name_event_'+data.result[k].id+'\" name=\"'+data.result[k].eqLogic_id+'\" >'+data.result[k].name+'</span> <div class=\"actions\"><a  name=\"'+data.result[k].eqLogic_id+'\"  class=\"\" alt=\"'+data.result[k].id+'\">info</a><a  name=\"'+data.result[k].eqLogic_id+'\"  class=\"edit\" alt=\"'+data.result[k].id+'\">Edit</a><img src=\"plugins/todo/img/delete.png\" href=\"\" name=\"'+data.result[k].eqLogic_id+'\"  class=\"delete\" alt=\"'+data.result[k].id+'\"></div> </li>';
+								 } else {
+									 autoComplete.push(data.result[k].name);
+								 }
+							 }
+						 }
+						 
+						$('.todo[data-eqLogic_id=\"' + _id + '\"] .list-group').empty().append(html);
+						$('.todo[data-eqLogic_id=\"' + _id + '\"] .list-group :checkbox').unbind().change(function() {
+							id = $(this).val();
+							if(this.checked) {
+								changeTodo('check', id ,_id)
+							} 
+						});	
+						
+						$('#'+_id).autocomplete({
+							source: autoComplete
+						});					
+								
+						$( '.todo[data-eqLogic_id=\"' + _id + '\"] .btn_add' ).unbind().on('click', function() {
+							id = $(this).val();
+							input = $('#'+id).val();
+							if (input == '') {
+								return
+							}
+							changeTodo('new',input,id);
+							
+						});
+						
+						$( '.todo[data-eqLogic_id=\"' + _id + '\"] .delete').on('click', function() {
+							idcmd = $(this).attr('alt'); 
+							id = $(this).attr('name');
+							changeTodo('del',idcmd,id)
+							
+						});
+						
+						$( '.todo[data-eqLogic_id=\"' + _id + '\"] .edit' ).on('click', function() {
+							idcmd = $(this).attr('alt'); 
+							$('#md_modal').dialog({
+								width : 400,
+								height: 400,
+								autoOpen: false,
+								modal: true,
+								
+								title: \"Informations\"
+							});
+							$('#md_modal').load('index.php?v=d&plugin=todo&modal=editcmd&id='+ idcmd);		
+							$('#md_modal').dialog('open');
+						});							 
+					}
+				
+				}
+			});				
+			
+			
+		}							
+				
+			
+			
+			
+			
+			
+			
+			
+			</script>";
 
 			
 		return template_replace($replace, getTemplate('core', $_version, 'todo','todo'));
@@ -288,6 +444,7 @@ class todo extends eqLogic {
 }
 
 class todoCmd extends cmd {
+
 	
 	public function preSave() {
 		if ($this->getSubtype() == 'message') {
@@ -296,11 +453,17 @@ class todoCmd extends cmd {
 	}
 	
     public function execute($_options = array()) {
-		$todo = todo::byId($this->getEqLogic_id());
+		if ($this->getType() == 'info') {
+			return;
+		}		
+		$todo = $this->getEqLogic();
 		switch ($this->getLogicalId()) {
 			case 'new': 
 			todo::createTodo($todo->getName(),$_options['message']);
-			break;		
+			break;	
+			case 'removeall': 
+			$todo->removeall();
+			break;					
 		}
     }
     /*     * **********************Getteur Setteur*************************** */

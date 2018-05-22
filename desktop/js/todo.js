@@ -27,15 +27,20 @@ function addCmdToTable(_cmd) {
     if (!isset(_cmd.configuration)) {
         _cmd.configuration = {};
     }
-	if (_cmd.logicalId == 'getlist' || _cmd.logicalId == 'new' || _cmd.logicalId == 'list') {
+	console.log(_cmd.name)
+	if (_cmd.logicalId == 'getlist' || _cmd.logicalId == 'new' || _cmd.logicalId == 'list' || _cmd.logicalId == 'removeall') {
+		console.log(_cmd.options)
 		var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '" style="display : none;" >';
 		tr += '<td><input class="cmdAttr form-control input-sm" data-l1key="id" style="display : none;"><input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 90%;margin-left:auto;margin-right:auto;" placeholder="{{Nom}}" /></td>';
 		tr += '<td><span><input type="checkbox" data-size="mini" data-label-text="{{Visible}}" class="cmdAttr checkbox-inline" data-l1key="isVisible" checked/></span>'; 
 		tr += '<span class="type" type="info" style="display : none;">' + jeedom.cmd.availableType() + '</span>';
 		tr += '<span class="subType" subType="' + init(_cmd.subType) + '" style="display : none;"></span>';
 		tr += '</td>';
+		tr += '<td class="col-lg-6 actionOptions">';
+		tr += jeedom.cmd.displayActionOption(init(_cmd, ''), _cmd.options);
+		tr += '</td>';			
 		tr += '<td><i class="fa fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i>';
-		tr += '</td>';
+		tr += '</td>';	
 		tr += '</tr>';		
 		
 	} else {
