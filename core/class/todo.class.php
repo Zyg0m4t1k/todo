@@ -64,6 +64,7 @@ class todo extends eqLogic {
 					$cmd->save();
 				} else {
 					$cmd->setIsVisible(1);
+					$cmd->setLogicalId(str_replace(' ','_',$idcmd));
 					$cmd->save();
 					
 				}

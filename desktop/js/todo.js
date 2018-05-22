@@ -20,6 +20,11 @@ $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder:
 /*
  * Fonction pour l'ajout de commande, appellé automatiquement par plugin.template
  */
+ 
+$('body').delegate('.cmd .cmdAttr[data-l1key=name]', 'focusout', function (event) {
+	$(this).next().val($(this).val().replace(" ","_"));
+});
+
 function addCmdToTable(_cmd) {
     if (!isset(_cmd)) {
         var _cmd = {configuration: {}};
@@ -45,7 +50,7 @@ function addCmdToTable(_cmd) {
 		
 	} else {
 		var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '" >';
-		tr += '<td><input class="cmdAttr form-control input-sm" data-l1key="id" style="display : none;"><input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 90%;margin-left:auto;margin-right:auto;" placeholder="{{Nom}}" /></td>';
+		tr += '<td><input class="cmdAttr form-control input-sm" data-l1key="id" style="display : none;"><input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 90%;margin-left:auto;margin-right:auto;" placeholder="{{Nom}}" /><input class="cmdAttr form-control input-sm" data-l1key="logicalId" style="display:none;"  /></td>';
 		tr += '<td><input id="ident' + init(_cmd.id) + '" class="delai cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="cron_todo" style="width :90%;margin-left:auto;margin-right:auto;" placeholder="{{delai}}" readonly/><input type="hidden" class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="timestamp" value=""  ></td>';
 		tr += '<td><span><input type="checkbox" data-size="mini" data-label-text="{{Visible}}" class="cmdAttr checkbox-inline" data-l1key="isVisible" checked/></span>'; 
 		tr += '<span class="type" type="info" style="display : none;">' + jeedom.cmd.availableType() + '</span>';
