@@ -1,3 +1,14 @@
+21-05-2018
+===
+
+* Panel Desktop
+* Possibilité de définir la taille de la liste dnas le widget (scroll si plus)
+* Docs
+* Ajout d'un bouton  sur le widget pour reset la liste.
+* Ajout d'une commande pour effacer tous les éléments d'une liste
+* Plus de rafraichissement de la page lorsuq'une action est exécutée sur le widget (Hormis l'édition)
+* Changement dans la gestion des listes
+
 26-01-2018
 ==== 
 
