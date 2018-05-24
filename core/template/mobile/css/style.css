@@ -7,6 +7,10 @@ ul {
 	margin-left:5px;
 }
 
+.btn_add {
+	width:100px;
+	margin-right:5px;
+}
 
 .maliste{
 	background-color: rgba(51, 51, 51, 0.2);
@@ -42,40 +46,21 @@ ul {
 	margin:3px;
 }
 
-.actions a.edit{
-	background:url("../../../../img/edit.png") no-repeat center center;
-	cursor:pointer;
-}
-
 .actions a.delete{
 	background:url("../../../../img/delete.png") no-repeat center center;
 }
 
-.actions a.red{
-	background:url("../../../../img/red.png") no-repeat center center;
-	cursor:pointer;
-}
 
-.actions a.green{
-	background:url("../../../../img/green.png") no-repeat center center;
-	cursor:pointer;
-}
-
-.actions a.today{
-	background:url("../../../../img/today.png") no-repeat center center;
-	cursor:pointer;
-}
-
-.actions a.info{
-	background:url("../../../../img/info.png") no-repeat center center;
-	cursor:pointer;
-}
 
 .ui-checkbox > input {
-    left: -15px;
+    left: -10px;
     top: -6px;
 }
 
 .name_mobile {
 	margin-left: 10px;
+}
+
+.todo li div {
+	float:left;
 }

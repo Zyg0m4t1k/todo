@@ -25,7 +25,7 @@ try {
     }
 
     if (init('action') == 'changeTodo') {
-      	$todo = todo::changeTodo(init('acte'),init('idcmd'),init('id'));
+      	$todo = todo::changeTodo(init('acte'),init('idcmd'),init('id'),init('widget'));
 		ajax::success(init('id'));
     } elseif (init('action') == 'editCmd') { 
 		 $todo = todo::editCmd(init('id'),init('nom'),init('info'),init('datetodo'),init('timestamp'));

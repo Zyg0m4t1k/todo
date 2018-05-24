@@ -1,21 +1,23 @@
 <!DOCTYPE html><head>
    <link href="3rdparty/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<div class="maliste eqLogic eqLogic-widget " style="border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#;min-width: 300px;padding : 0px;" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="mobile">
+<div class="maliste eqLogic eqLogic-widget " style="border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#;min-height: #min-height#;min-width: #min-width#;padding : 0px;" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="mobile">
 	<link rel="stylesheet" href="plugins/todo/core/template/mobile/css/style.css" />
-<center><a href="#eqLink#" style="font-size : 1.5em;#hideEqLogicName#">#name_display# </a></center>    
+	<span class="statusCmd" style="position : absolute;left : 5px; width : 30px;z-index: 1030;"></span>
+    <span class="cmd cmd-widget" data-cmd_id="#refresh_id#" style="display:none;"></span>
+	<i class='fa fa-refresh pull-right cursor refresh' style="margin-top: 8px;margin-right: 15px;" onclick="launchReset('#refresh_id#')"></i>      
+	<center><a href="#eqLink#" style="font-size : 1.5em;#hideEqLogicName#">#name_display# </a></center>    
    <div class="row" style="margin:2px;">
 		<div class="col-lg-9"> 
         	<div class="input-group" >
-                <input id="#id#" style="color:white;background-color:#374D89" type="text" class="form-control" placeholder="Todo" >
+                <input id="#id#" style="padding:5px;color:white;background-color:#374D89;border:solid 1px #ccc;border-radius: 10px;" type="text" class="form-control" placeholder=" Todo" >
             </div>
          </div>
          <div class="col-lg-3">
-         <button value="#id#" type="button" class="btn btn-success btn_add">Go</button>
+         <button id="test_button" value="#id#" type="button" class="btn btn-success btn_add" onclick="createTodo('new',$('##id#').val(),'#id#');$('##id#').empty();"><i class="fa fa-plus"></i></button>
          </div>
     </div>
-	<div class="list_mobile">
-           
+	<div class="list_mobile" style="margin:10px; overflow-y: auto;max-height:#min-height-list#px;min-width:#min-width-list#px;">
 				<ul class="list-group">
 				#li#
 				</ul>
@@ -25,115 +27,39 @@
 </div>
     
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('.list-group :checkbox').change(function() {
-			id = $(this).val();
-			li = $('#'+id).text();
-			if(this.checked) {
-				$('#'+id).css("text-decoration", "line-through");
-				changeTodo('check', id, 0)
-			} else {
-				$('#'+id).css("text-decoration", "none");
-				changeTodo('check', id, 1)
-			}
-			
-		});
-		
-			
-				
-		$( ".btn_add" ).unbind().on('click', function() {
-			id = $(this).val();
-			input = $('#'+id).val();
-			if (input == '') {
-				return
-			}
-			//$("ul").append('<li id="'+ id + '" class="list-group-item" style="background-color:transparent;font-size : 0.9em;">' + input + '</li>')
-			val = 'val';
-			changeTodo(id,input,val);
-			
-		});
-		
-		$( ".delete" ).unbind().on('click', function() {
-			idcmd = $(this).attr('alt'); 
-			id = $(this).attr('name');
-			changeTodo('del',idcmd,id)
-			
-		});
-		
-		$( ".edit" ).unbind().on('click', function() {
-			idcmd = $(this).attr('alt'); 
-			$('#md_modal').dialog({
-				width : 400,
-				height: 400,
-				autoOpen: false,
-				modal: true,
-				
-				title: "{{Edit}}"
-			});
-            $('#md_modal').load('index.php?v=d&plugin=todo&modal=editcmd&id='+ idcmd);		
-			$('#md_modal').dialog('open');
-		});		
-	
-
-		function changeTodo(_action,_idcmd, _id) {
-			$.ajax({// fonction permettant de faire de l'ajax
-				type: "POST", // methode de transmission des données au fichier php
-				url: "plugins/todo/core/ajax/todo.ajax.php", // url du fichier php
-				data: {
-					action: "changeTodo",
-					acte: _action,
-					idcmd: _idcmd,
-					id: _id
-				},
-				dataType: 'json',
-				error: function(request, status, error) {
-					handleAjaxError(request, status, error);
-				},
-				success: function(data) { // si l'appel a bien fonctionné
-					if (data.state != 'ok') {
-						$('#div_alert').showAlert({message:  data.result,level: 'danger'});
-						return;
-					}
-				if (_action != 'check') {
-					page('view');
-				}
-				
-				}
-			});			
+	function launchReset(id) {
+		//jeedom.cmd.execute({id: '#refresh_id#'});
+		console.log('tutu');
+	};
+	function createTodo(action,name,id) {
+		if (name == '') {
+			return
 		}
-		
-		function page(_page) {
-			$.showLoading();
-			$('.ui-popup').popup('close');
-			jeedom.user.isConnect({
-				success: function (result) {
-					if (!result) {
-						initApplication(true);
-						return;
-					}
-					var page = 'index.php?v=m&ajax=1&p=' + _page;
-		
-					$('#page').hide().load(page, function () {
-						$('#page').trigger('create');
-				
-						var functionName = 'init' + _page.charAt(0).toUpperCase() + _page.substring(1).toLowerCase();
-						window[functionName]();
-						Waves.init();
-						
-						$('#pagecontainer').css('padding-top','64px');
-						$('#page').fadeIn(400);
-						setTimeout(function(){$('#pagecontainer').css('padding-top','64px');; }, 100);
-					});
-
+		changeTodo(action,name,id);
+	}
+	function changeTodo(_action,_idcmd, _id) {
+		$.ajax({// fonction permettant de faire de l'ajax
+			type: "POST", // methode de transmission des données au fichier php
+			url: "plugins/todo/core/ajax/todo.ajax.php", // url du fichier php
+			data: {
+				action: "changeTodo",
+				acte: _action,
+				idcmd: _idcmd,
+				id: _id
+			},
+			dataType: 'json',
+			error: function(request, status, error) {
+				handleAjaxError(request, status, error);
+			},
+			success: function(data) { // si l'appel a bien fonctionné
+				if (data.state != 'ok') {
+					$('#div_alert').showAlert({message:  data.result,level: 'danger'});
+					return;
 				}
-			});
-			
-			
-			
-			
-		}
-
-});
+			}
+		});			
+	}
 </script>
 <script src="3rdparty/bootstrap/bootstrap.min.js"></script>
+
 

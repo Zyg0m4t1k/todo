@@ -33,7 +33,7 @@ function addCmdToTable(_cmd) {
         _cmd.configuration = {};
     }
 	console.log(_cmd.name)
-	if (_cmd.logicalId == 'getlist' || _cmd.logicalId == 'new' || _cmd.logicalId == 'list' || _cmd.logicalId == 'removeall') {
+	if (_cmd.logicalId == 'getlist' || _cmd.logicalId == 'new' || _cmd.logicalId == 'list' || _cmd.logicalId == 'removeall' || _cmd.logicalId == 'refresh') {
 		console.log(_cmd.options)
 		var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '" style="display : none;" >';
 		tr += '<td><input class="cmdAttr form-control input-sm" data-l1key="id" style="display : none;"><input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 90%;margin-left:auto;margin-right:auto;" placeholder="{{Nom}}" /></td>';

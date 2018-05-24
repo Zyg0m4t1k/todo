@@ -1,7 +1,9 @@
-<div class="eqLogic eqLogic-widget allowResize todo" style="border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#;width: 350px;height: #height#; padding : 0px;" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#">
+<div class="eqLogic eqLogic-widget allowResize todo" style="border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#;width: #width#;height: #height#; min-height: #min-height#;min-width: #min-width#;padding : 0px;" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#">
 	<link rel="stylesheet" href="plugins/todo/core/template/dashboard/css/style.css" />
-<center><a href="#eqLink#" style="font-size : 1.5em;#hideEqLogicName#">#name_display# </a></center>
-  <div id='todo_#id#' >#script#</div>
+	<span class="statusCmd" style="position : absolute;left : 5px; width : 30px;z-index: 1030;"></span>
+    <span class="cmd cmd-widget" data-cmd_id="#refresh_id#" style="display:none;"></span>
+	<i class='fa fa-refresh pull-right cursor refresh' style="margin-top: 8px;margin-right: 15px;" onclick="refreshTodo('#refresh_id#')"></i>      
+	<center><a href="#eqLink#" style="font-size : 1.5em;#hideEqLogicName#">#name_display# </a></center>  
     <div class="row" style="margin:2px;">
 		<div class="col-lg-10"> 
         	<div class="input-group" >
@@ -12,127 +14,18 @@
          <button value="#id#" type="button" class="btn btn-success btn_add">Add!</button>
     </div>
         
-	<ul class="list-group" style="margin:10px; overflow-y: auto;max-height:300px;">
+	<ul class="list-group" style="margin:10px; overflow-y: auto;max-height:#min-height-list#px;min-width:#min-width-list#px;">
+    	#script#
 	</ul>
 </div>
 
-<script type="text/javascript">
-//		loadData('#id#');
-//		function changeTodo(_action,_idcmd, _id) {
-//			$.ajax({// fonction permettant de faire de l'ajax
-//				type: "POST", // methode de transmission des données au fichier php
-//				url: "plugins/todo/core/ajax/todo.ajax.php", // url du fichier php
-//				data: {
-//					action: "changeTodo",
-//					acte: _action,
-//					idcmd: _idcmd,
-//					id: _id
-//				},
-//				dataType: 'json',
-//				error: function(request, status, error) {
-//					handleAjaxError(request, status, error);
-//				},
-//				success: function(data) { // si l'appel a bien fonctionné
-//					if (data.state != 'ok') {
-//						$('#div_alert').showAlert({message:  data.result,level: 'danger'});
-//						return;
-//					}
-//					
-//					loadData(data.result);
-//					if (_action == 'new') {
-//						 $('#'+_id).val('');
-//					}
-//				
-//				}
-//			});			
-//		}
-//		
-//		function loadData(_id) {
-//			console.log('loadData ' + _id);
-//			$.ajax({// fonction permettant de faire de l'ajax
-//				type: "POST", // methode de transmission des données au fichier php
-//				url: "plugins/todo/core/ajax/todo.ajax.php", // url du fichier php
-//				data: {
-//					action: "loadData",
-//					id: _id 
-//				},
-//				dataType: 'json',
-//				error: function(request, status, error) {
-//					handleAjaxError(request, status, error);
-//				},
-//				success: function(data) { // si l'appel a bien fonctionné
-//					if (data.state != 'ok') {
-//						$('#div_alert').showAlert({message:  data.result,level: 'danger'});
-//						return;
-//					}
-//					if (data.result.length != 0) {
-//						console.log(data.result);
-//						console.log(_id);
-//						
-//						 var html = '',
-//						 	autoComplete = [];
-//						 for (var k=0; k<data.result.length; k++) {
-//							 if(!data.result[k].configuration.type) {
-//								 if(data.result[k].isVisible == 1){
-//									 html += '<li id="'+data.result[k].id+'" class="list-group-item list_edit" style="background-color:transparent;font-size : 0.9em;"><span><input value="'+data.result[k].id+'" type="checkbox" ></span><span class="name_mobile name_event_'+data.result[k].id+'" name="'+data.result[k].eqLogic_id+'" >'+data.result[k].name+'</span> <div class="actions"><a  name="'+data.result[k].eqLogic_id+'"  class="" alt="'+data.result[k].id+'">info</a><a  name="'+data.result[k].eqLogic_id+'"  class="edit" alt="'+data.result[k].id+'">Edit</a><img src="plugins/todo/img/delete.png" href="" name="'+data.result[k].eqLogic_id+'"  class="delete" alt="'+data.result[k].id+'"></div> </li>';
-//								 } else {
-//									 autoComplete.push(data.result[k].name);
-//								 }
-//							 }
-//						 }
-//						 
-//						$('.todo[data-eqLogic_id="' + _id + '"] .list-group').empty().append(html);
-//						$('.todo[data-eqLogic_id="' + _id + '"] .list-group :checkbox').unbind().change(function() {
-//							id = $(this).val();
-//							if(this.checked) {
-//								//$('#'+id).css("text-decoration", "line-through");
-//								changeTodo('check', id ,_id)
-//							} 
-//						});	
-//						
-//						$('#'+_id).autocomplete({
-//							source: autoComplete
-//						});					
-//								
-//						$( '.todo[data-eqLogic_id="' + _id + '"] .btn_add' ).unbind().on('click', function() {
-//							id = $(this).val();
-//							input = $('#'+id).val();
-//							if (input == '') {
-//								return
-//							}
-//							changeTodo('new',input,id);
-//							
-//						});
-//						
-//						$( '.todo[data-eqLogic_id="' + _id + '"] .delete').on('click', function() {
-//							idcmd = $(this).attr('alt'); 
-//							id = $(this).attr('name');
-//							changeTodo('del',idcmd,id)
-//							
-//						});
-//						
-//						$( '.todo[data-eqLogic_id="' + _id + '"] .edit' ).on('click', function() {
-//							idcmd = $(this).attr('alt'); 
-//							$('#md_modal').dialog({
-//								width : 400,
-//								height: 400,
-//								autoOpen: false,
-//								modal: true,
-//								
-//								title: "Informations"
-//							});
-//							$('#md_modal').load('index.php?v=d&plugin=todo&modal=editcmd&id='+ idcmd);		
-//							$('#md_modal').dialog('open');
-//						});							 
-//					}
-//				
-//				}
-//			});				
-//			
-//			
-//		}
-
+<script>
+	function refreshTodo(id) {
+		jeedom.cmd.execute({id: id});
+		console.log('tutu');
+	};
 </script>
+
 
 
 

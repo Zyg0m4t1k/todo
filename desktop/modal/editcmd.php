@@ -103,7 +103,7 @@ $timestamp = $cmd->getConfiguration('timestamp');
 			minDate: 0,
 			onClose: function(dateString) {
 				console.log( dateString );
-				var myDate = new Date(dateString).getTime()/1000 ;
+				var myDate = Math.floor(new Date(dateString).getTime()/1000) ;
 				$('#timestamp').attr({value : myDate});
 				
 			}
