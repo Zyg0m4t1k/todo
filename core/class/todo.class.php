@@ -198,10 +198,10 @@ class todo extends eqLogic {
 	
 	public function preSave() {
 		if($this->getDisplay('height') == 'auto') {
-			$this->setDisplay('height','440');
+			$this->setDisplay('height','440px');
 		}
 		if($this->getDisplay('width') == 'auto') {
-			$this->setDisplay('width','350');
+			$this->setDisplay('width','350px');
 		}			
 	}
 
