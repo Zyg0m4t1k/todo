@@ -66,7 +66,7 @@ try {
 		}
 		ajax::success($return);
 	} elseif (init('action') == 'loadData') {
-		$todo = todo::byId(init(id));
+		$todo = todo::byId(init('id'));
 		if (!is_object($todo)) {
 			throw new Exception(__('Todo inconnue : ', __FILE__) . init('id'), 9999);
 		}

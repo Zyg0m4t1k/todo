@@ -30,7 +30,7 @@ function todo_update() {
 			if($cmd->getConfiguration('type')) {
 				continue;
 			}
-			$cmd->setLogicalId(str_replace(' ','_',$cmd->getName()));
+			$cmd->setLogicalId(str_replace(' ','_',todo::conversion($cmd->getName())));
 			$cmd->save();
 		 }			 
 	 }

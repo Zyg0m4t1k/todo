@@ -91,7 +91,7 @@ Remarques
 Caractères spèciaux
 ---
 
-*Les caractères spéciaux sont à éviter, particulièrement le "_(underscore)" et le "'(apostrophe)" à proscrire 
+* Le "_(underscore)" est à proscrire dans le nom d'un élément d'une liste 
 
 
 

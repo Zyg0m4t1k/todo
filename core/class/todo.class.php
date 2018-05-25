@@ -56,15 +56,15 @@ class todo extends eqLogic {
 				$cmd = $todo->getCmd(null, str_replace(" ", "_",$idcmd));
 				if (!is_object($cmd)) {
 					$cmd = new todoCmd();
-					$cmd->setName(__(str_replace("'", " ",$idcmd), __FILE__));
-					$cmd->setLogicalId(str_replace(' ','_',$idcmd));
+					$cmd->setName(__($idcmd, __FILE__));
+					$cmd->setLogicalId(str_replace(' ','_',todo::conversion($idcmd)));
 					$cmd->setEqLogic_id($id);
 					$cmd->setType('info');
 					$cmd->setSubType('string');
 					$cmd->save();
 				} else {
 					$cmd->setIsVisible(1);
-					$cmd->setLogicalId(str_replace(' ','_',$idcmd));
+					$cmd->setLogicalId(str_replace(' ','_',todo::conversion($idcmd)));
 					$cmd->save();
 					
 				}
@@ -180,11 +180,11 @@ class todo extends eqLogic {
 		}
 
 		$todoCmd = new todoCmd();
-		$todoCmd->setName(__(str_replace("'", " ",$todo), __FILE__));
+		$todoCmd->setName(__($todo, __FILE__));
 		$todoCmd->setEqLogic_id($id);
 		$todoCmd->setType('info');
 		$todoCmd->setSubType('string');
-		$todoCmd->setLogicalId(str_replace(' ','_',$todo));
+		$todoCmd->setLogicalId(str_replace(' ','_',todo::conversion($todo)));
 		$todoCmd->save();
 		$todo = todo::byId($id);
 		$todo->allTodo();
@@ -194,6 +194,35 @@ class todo extends eqLogic {
 
 
     /*     * *********************Méthodes d'instance************************* */
+	
+	
+	public function conversion($string) {
+		$caractere = array(">", "<",  ":", "*", "/", "|", "?", '"', '<', '>', "'","&","%");
+		$string = str_replace($caractere, "", $string);
+		$string = strtolower($string);
+		$string = str_replace(
+		array(
+			'à', 'â', 'ä', 'á', 'ã', 'å',
+			'î', 'ï', 'ì', 'í',
+			'ô', 'ö', 'ò', 'ó', 'õ', 'ø',
+			'ù', 'û', 'ü', 'ú',
+			'é', 'è', 'ê', 'ë',
+			'ç', 'ÿ', 'ñ','  '
+			),
+			array(
+			'a', 'a', 'a', 'a', 'a', 'a',
+			'i', 'i', 'i', 'i',
+			'o', 'o', 'o', 'o', 'o', 'o',
+			'u', 'u', 'u', 'u',
+			'e', 'e', 'e', 'e',
+			'c', 'y', 'n',' '
+			),
+			$string
+		);
+		
+		return $string;
+	}	
+	
 	
 	
 	public function preSave() {
