@@ -421,7 +421,7 @@ class todo extends eqLogic {
 											 	var time_class = 'green';
 											  console.log('green');
 											 break;
-											 case (timsestamp < now):
+											 case (timestamp < now):
 											 	var time_class = 'red';
 											 console.log('red');
 											 break;
