@@ -362,6 +362,7 @@ class todo extends eqLogic {
 					$.ajax({// fonction permettant de faire de l'ajax
 						type: \"POST\", // methode de transmission des données au fichier php
 						url: \"plugins/todo/core/ajax/todo.ajax.php\", // url du fichier php
+						global:false,
 						data: {
 							action: \"changeTodo\",
 							acte: _action,
@@ -390,6 +391,7 @@ class todo extends eqLogic {
 					$.ajax({// fonction permettant de faire de l'ajax
 						type: \"POST\", // methode de transmission des données au fichier php
 						url: \"plugins/todo/core/ajax/todo.ajax.php\", // url du fichier php
+						global:false,
 						data: {
 							action: \"loadData\",
 							id: _id 

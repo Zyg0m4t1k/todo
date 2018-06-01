@@ -71,6 +71,9 @@ try {
 			throw new Exception(__('Todo inconnue : ', __FILE__) . init('id'), 9999);
 		}
 		$cmds = $todo->getCmd();
+		usort($cmds, function($a, $b) {
+			return $a->getId() - $b->getId();
+		});		
 		ajax::success(jeedom::toHumanReadable(utils::o2a($cmds)));		
 	}
 	
