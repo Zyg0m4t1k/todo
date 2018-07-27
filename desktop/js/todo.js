@@ -25,6 +25,142 @@ $('body').delegate('.cmd .cmdAttr[data-l1key=name]', 'focusout', function (event
 	$(this).next().val($(this).val().replace(" ","_"));
 });
 
+function createTodo(action,name,id) {
+	if (name == '') {
+		return
+	}
+	changeTodo(action,name,id);
+}
+
+function changeTodo(_action,_idcmd, _id) {
+	$.ajax({// fonction permettant de faire de l'ajax
+		type: "POST", // methode de transmission des données au fichier php
+		url: "plugins/todo/core/ajax/todo.ajax.php", // url du fichier php
+		global:false,
+		data: {
+			action: "changeTodo",
+			acte: _action,
+			idcmd: _idcmd,
+			id: _id
+		},
+		dataType: 'json',
+		error: function(request, status, error) {
+			handleAjaxError(request, status, error);
+		},
+		success: function(data) { // si l'appel a bien fonctionné
+			if (data.state != 'ok') {
+				$('#div_alert').showAlert({message:  data.result,level: 'danger'});
+				return;
+			}
+			
+			loadData(data.result);
+			if (_action == 'new') {
+				 $('#'+_id).val('');
+			}
+		}
+	});			
+}	
+function loadData(_id) {
+	//console.log('loadData ' + _id);
+	$.ajax({// fonction permettant de faire de l'ajax
+		type: "POST", // methode de transmission des données au fichier php
+		url: "plugins/todo/core/ajax/todo.ajax.php", // url du fichier php
+		global:false,
+		data: {
+			action: "loadData",
+			id: _id 
+		},
+		dataType: 'json',
+		error: function(request, status, error) {
+			handleAjaxError(request, status, error);
+		},
+		success: function(data) { // si l'appel a bien fonctionné
+			if (data.state != 'ok') {
+				$('#div_alert').showAlert({message:  data.result,level: 'danger'});
+				return;
+			}
+			if (data.result.length != 0) {
+				 var html = '',
+					autoComplete = [];
+				 for (var k=0; k<data.result.length; k++) {
+					 var time_class = ""
+					  if(data.result[k].configuration.timestamp) {
+						 var timestamp = data.result[k].configuration.timestamp;
+						 var t = new Date().getTime();
+						 var now = Math.floor(t / 1000);
+						 switch (true) {
+							 case (now > timestamp && now < Math.floor(timestamp + 86400)):
+								console.log('today');
+								var time_class = 'today';
+							 break;
+							 case (Math.floor(timestamp + 86400) > now):
+								var time_class = 'green';
+							  console.log('green');
+							 break;
+							 case (timestamp < now):
+								var time_class = 'red';
+							 console.log('red');
+							 break;
+							 default:
+								console.log('defaut');
+						 }										  
+						  
+					  }
+					 
+					 
+					 if(!data.result[k].configuration.type) {
+						 if(data.result[k].isVisible == 1){
+							 html += '<form style="display:none;"><div><label></label></div></form>';											 
+							 html += '<li id="'+data.result[k].id+'" class="list-group-item list_edit" style="background-color:transparent;font-size : 1.1em;"><span><input value="'+data.result[k].id+'" type="checkbox" ></span><span class="name_mobile name_event_'+data.result[k].id+'" name="'+data.result[k].eqLogic_id+'" >'+data.result[k].name+'</span> <div class="actions"><a  name="'+data.result[k].eqLogic_id+'"  class="'+time_class+'" alt="'+data.result[k].id+'">info</a><a  name="'+data.result[k].eqLogic_id+'"  class="edit" alt="'+data.result[k].id+'">Edit</a><img src="plugins/todo/img/delete.png" href="" name="'+data.result[k].eqLogic_id+'"  class="delete" alt="'+data.result[k].id+'"></div> </li>';
+						 } else {
+							 autoComplete.push(data.result[k].name);
+						 }
+					 }
+				 }
+				$('.todo[data-eqLogic_id="' + _id + '"] .list-group').empty().append(html);
+				$('.todo[data-eqLogic_id="' + _id + '"] .list-group :checkbox').unbind().change(function() {
+					id = $(this).val();
+					if(this.checked) {
+						changeTodo('check', id ,_id)
+					} 
+				});	
+				$('#'+_id).autocomplete({
+					source: autoComplete
+				});					
+				$( '.todo[data-eqLogic_id="' + _id + '"] .btn_add' ).unbind().on('click', function() {
+					id = $(this).val();
+					input = $('#'+id).val();
+					if (input == '') {
+						return
+					}
+					changeTodo('new',input,id);
+					
+				});
+				$( '.todo[data-eqLogic_id="' + _id + '"] .delete').on('click', function() {
+					idcmd = $(this).attr('alt'); 
+					id = $(this).attr('name');
+					changeTodo('del',idcmd,id)
+					
+				});
+				$( '.todo[data-eqLogic_id="' + _id + '"] .edit' ).on('click', function() {
+					idcmd = $(this).attr('alt'); 
+					$('#md_modal').dialog({
+						width : 400,
+						height: 400,
+						autoOpen: false,
+						modal: true,
+						title: "Informations"
+					});
+					$('#md_modal').load('index.php?v=d&plugin=todo&modal=editcmd&id='+ idcmd);		
+					$('#md_modal').dialog('open');
+				});							 
+			}
+		}
+	});				
+}	
+
+
+
 function addCmdToTable(_cmd) {
     if (!isset(_cmd)) {
         var _cmd = {configuration: {}};

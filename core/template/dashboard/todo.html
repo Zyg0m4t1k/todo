@@ -1,8 +1,6 @@
 <div class="eqLogic eqLogic-widget allowResize todo" style="border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#;width: #width#;height: #height#; min-height: #min-height#;min-width: #min-width#;padding : 0px;" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#">
 	<link rel="stylesheet" href="plugins/todo/core/template/dashboard/css/style.css" />
-	<span class="statusCmd" style="position : absolute;left : 5px; width : 30px;z-index: 1030;"></span>
-    <span class="cmd cmd-widget" data-cmd_id="#refresh_id#" style="display:none;"></span>
-	<i class='fa fa-refresh pull-right cursor refresh' style="margin-top: 8px;margin-right: 15px;" onclick="refreshTodo('#refresh_id#')"></i>      
+    <script src="/plugins/todo/desktop/js/todo.js"></script>
 	<center><a href="#eqLink#" style="font-size : 1.5em;#hideEqLogicName#">#name_display# </a></center>  
     <div class="row" style="margin:2px;">
 		<div class="col-lg-10"> 
@@ -10,20 +8,17 @@
             	<span class="input-group-addon" id="sizing-addon2">New</span>
                 <input id="#id#" class="new" type="text" class="form-control" placeholder="Todo" aria-describedby="sizing-addon2" >
             </div>
+            
          </div>
          <button value="#id#" type="button" class="btn btn-success btn_add">Add!</button>
     </div>
-        
 	<ul class="list-group" style="margin:10px; overflow-y: auto;max-height:#min-height-list#px;min-width:#min-width-list#px;">
-    	#script#
 	</ul>
+    <script>
+		loadData('#id#');
+	</script>
 </div>
 
-<script>
-	function refreshTodo(id) {
-		jeedom.cmd.execute({id: id});
-	};
-</script>
 
 
 

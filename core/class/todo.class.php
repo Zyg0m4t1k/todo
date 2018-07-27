@@ -38,7 +38,7 @@ class todo extends eqLogic {
 					 $todo = $cmd->getEqLogic();
 					 $cmd->remove();
 					 $todo->allTodo();	
-						 $todo->refreshWidget();
+					 $todo->refreshWidget();
 				 }	
 				break;
 			case 'check':
@@ -48,7 +48,7 @@ class todo extends eqLogic {
 					$cmd->setIsVisible(0);
 					$cmd->save();
 					$todo->allTodo();	
-						 $todo->refreshWidget();
+					$todo->refreshWidget();
 				}
 				break;			
 			case 'new': 
@@ -56,9 +56,10 @@ class todo extends eqLogic {
 				$cmd = $todo->getCmd(null, str_replace(" ", "_",$idcmd));
 				if (!is_object($cmd)) {
 					$cmd = new todoCmd();
-					$cmd->setName(__($idcmd, __FILE__));
+					$cmd->setName($idcmd);
 					$cmd->setLogicalId(str_replace(' ','_',todo::conversion($idcmd)));
 					$cmd->setEqLogic_id($id);
+					$cmd->setIsVisible(1);
 					$cmd->setType('info');
 					$cmd->setSubType('string');
 					$cmd->save();
@@ -69,7 +70,7 @@ class todo extends eqLogic {
 					
 				}
 				$todo->allTodo();
-				   $todo->refreshWidget();
+				$todo->refreshWidget();
 				break;			
 		}
 	}
@@ -180,7 +181,7 @@ class todo extends eqLogic {
 		}
 
 		$todoCmd = new todoCmd();
-		$todoCmd->setName(__($todo, __FILE__));
+		$todoCmd->setName($todo);
 		$todoCmd->setEqLogic_id($id);
 		$todoCmd->setType('info');
 		$todoCmd->setSubType('string');
@@ -308,21 +309,23 @@ class todo extends eqLogic {
 		if (!is_array($replace)) {
 			return $replace;
 		}
-		$_version = jeedom::versionAlias($_version);
+		$version = jeedom::versionAlias($_version);
 		$configuration = $this->getconfiguration();
 		$id = $this->getId();
 		$li = null;
 		$test = array();
 		$test = cmd::byEqLogicId($id);
-		$except = array('new','getlist','list','removeall','refresh');
-		$refresh = $this->getCmd(null, 'refresh');
-		if (is_object($refresh)) {
-			$replace['#refresh_id#'] = $refresh->getId();		
-		}
-		if ($_version == 'mobile') {
+		$except = array('new','getlist','list');
+		if ($version != 'mobile') {
+			$replace['#min-width#'] = $replace['#width#']+50;
+			$replace['#min-height#'] = $replace['#height#']+110;
+			$replace['#min-width-list#'] = $replace['#width#']-40;	
+			$replace['#min-height-list#'] = $replace['#height#']-110;			
+			
+		} else {
 			foreach (cmd::byEqLogicId($id) as $cmd_todo){
-				$array = array();
-				$array = $cmd_todo ;
+				$conf_todo = $cmd_todo->getConfiguration();
+				$cmd_id = $cmd_todo->getID();
 				$timestamp = $cmd_todo->getConfiguration('timestamp');
 				if ($timestamp != '') {
 					$now = time();
@@ -330,168 +333,32 @@ class todo extends eqLogic {
 						$class = 'today';
 					} elseif(($timestamp + 86400) > $now)  {
 						$class = 'green';
-					} else {
+					} elseif ($now < $timestamp ) {
 						$class = 'red';
+					} else {
+						$class = '';
 					}
 					
-				} else {
-					$class = '';
-				}
-				$cmd_id = $cmd_todo->getID();
+				}				
 				$name_event = $cmd_todo->getName();
 				if (!in_array( $cmd_todo->getLogicalId(), $except)) {
 					if($cmd_todo->getIsVisible() == 1){
-					 $li .= '<form style=\"display:none;\"><div><label></label></div></form>';	
-					$li .= '<li id="'.$cmd_id.'" class="list-group-item list_edit" style="background-color:transparent;font-size : 1.1em;"><div style="margin-left:7px;"><input value="'.$cmd_id.'" type="checkbox" onchange="changeTodo(\'check\',' . $cmd_id . ' , 0 );$(this).closest(\'li\').hide();" >
-		</div><div class="name_event_'.$cmd_id.'" name="'.$id.'" style="margin-left:20px;">'.$name_event.'</div> <div class="actions"><img src="plugins/todo/img/delete.png" href="" name="'.$id.'"  class="delete" alt="'.$cmd_id.'" onclick="changeTodo(\'del\',' . $cmd_id . ' ,' . $this->getid() . ' );$(this).closest(\'li\').hide();"></div> </li>';
-					} 
+					$li .= '<li id="'.$cmd_id.'" class="list-group-item list_edit" style="background-color:transparent;font-size : 0.9em;"><span style="margin-right:20px"><input value="'.$cmd_id.'" type="checkbox" >
+		</span><span class="name_mobile name_event_'.$cmd_id.'" name="'.$id.'" >'.$name_event.'</span> <div class="actions"><a  name="'.$id.'"  class="'.$class.'" alt="'.$cmd_id.'">info</a><img src="plugins/todo/img/delete.png" href="" name="'.$id.'"  class="delete" alt="'.$cmd_id.'"></div> </li>';
+					} else {
+					$li .= '<li id="'.$cmd_id.'" class="list-group-item list_edit" style="text-decoration:line-through;background-color:transparent;font-size : 0.9em;"><span style="margin-right:20px"><input value="'.$cmd_id.'" type="checkbox"" checked >
+		</span><span class="name_mobile name_event_'.$cmd_id.'" name="'.$id.'" >'.$name_event.' </span><div class="actions"><a  name="'.$id.'"  class="'.$class.'" alt="'.$cmd_id.'">info</a><img src="plugins/todo/img/delete.png" href="" name="'.$id.'"  class="delete" alt="'.$cmd_id.'"></div> </li>';
+					}
 				}
 			}
-			$replace['#min-width#'] = $this->getDisplay('width');
-			$replace['#min-height#'] = $this->getDisplay('height');
-			$replace['#min-width-list#'] = $replace['#width#']-40;	
-			$replace['#min-height-list#'] = $replace['#height#']-110;	
-			
-			$replace['#li#'] = $li;
-			return template_replace($replace, getTemplate('core', $_version, 'todo','todo'));
-		} 
-
-			$replace['#script#'] = "<script>
-				loadData('" . $this->getId() . "');
-				function changeTodo(_action,_idcmd, _id) {
-					$.ajax({// fonction permettant de faire de l'ajax
-						type: \"POST\", // methode de transmission des données au fichier php
-						url: \"plugins/todo/core/ajax/todo.ajax.php\", // url du fichier php
-						global:false,
-						data: {
-							action: \"changeTodo\",
-							acte: _action,
-							idcmd: _idcmd,
-							id: _id
-						},
-						dataType: 'json',
-						error: function(request, status, error) {
-							handleAjaxError(request, status, error);
-						},
-						success: function(data) { // si l'appel a bien fonctionné
-							if (data.state != 'ok') {
-								$('#div_alert').showAlert({message:  data.result,level: 'danger'});
-								return;
-							}
-							
-							loadData(data.result);
-							if (_action == 'new') {
-								 $('#'+_id).val('');
-							}
-						}
-					});			
-				}	
-				function loadData(_id) {
-					//console.log('loadData ' + _id);
-					$.ajax({// fonction permettant de faire de l'ajax
-						type: \"POST\", // methode de transmission des données au fichier php
-						url: \"plugins/todo/core/ajax/todo.ajax.php\", // url du fichier php
-						global:false,
-						data: {
-							action: \"loadData\",
-							id: _id 
-						},
-						dataType: 'json',
-						error: function(request, status, error) {
-							handleAjaxError(request, status, error);
-						},
-						success: function(data) { // si l'appel a bien fonctionné
-							if (data.state != 'ok') {
-								$('#div_alert').showAlert({message:  data.result,level: 'danger'});
-								return;
-							}
-							if (data.result.length != 0) {
-								 var html = '',
-									autoComplete = [];
-								 for (var k=0; k<data.result.length; k++) {
-									 var time_class = \"\"
-									  if(data.result[k].configuration.timestamp) {
-										 var timestamp = data.result[k].configuration.timestamp;
-										 var t = new Date().getTime();
-										 var now = Math.floor(t / 1000);
-										 switch (true) {
-											 case (now > timestamp && now < Math.floor(timestamp + 86400)):
-											 	console.log('today');
-												var time_class = 'today';
-											 break;
-											 case (Math.floor(timestamp + 86400) > now):
-											 	var time_class = 'green';
-											  console.log('green');
-											 break;
-											 case (timestamp < now):
-											 	var time_class = 'red';
-											 console.log('red');
-											 break;
-											 default:
-												console.log('defaut');
-										 }										  
-										  
-									  }
-									 
-									 
-									 if(!data.result[k].configuration.type) {
-										 if(data.result[k].isVisible == 1){
-											 html += '<form style=\"display:none;\"><div><label></label></div></form>';											 
-											 html += '<li id=\"'+data.result[k].id+'\" class=\"list-group-item list_edit\" style=\"background-color:transparent;font-size : 1.1em;\"><span><input value=\"'+data.result[k].id+'\" type=\"checkbox\" ></span><span class=\"name_mobile name_event_'+data.result[k].id+'\" name=\"'+data.result[k].eqLogic_id+'\" >'+data.result[k].name+'</span> <div class=\"actions\"><a  name=\"'+data.result[k].eqLogic_id+'\"  class=\"'+time_class+'\" alt=\"'+data.result[k].id+'\">info</a><a  name=\"'+data.result[k].eqLogic_id+'\"  class=\"edit\" alt=\"'+data.result[k].id+'\">Edit</a><img src=\"plugins/todo/img/delete.png\" href=\"\" name=\"'+data.result[k].eqLogic_id+'\"  class=\"delete\" alt=\"'+data.result[k].id+'\"></div> </li>';
-										 } else {
-											 autoComplete.push(data.result[k].name);
-										 }
-									 }
-								 }
-								$('.todo[data-eqLogic_id=\"' + _id + '\"] .list-group').empty().append(html);
-								$('.todo[data-eqLogic_id=\"' + _id + '\"] .list-group :checkbox').unbind().change(function() {
-									id = $(this).val();
-									if(this.checked) {
-										changeTodo('check', id ,_id)
-									} 
-								});	
-								$('#'+_id).autocomplete({
-									source: autoComplete
-								});					
-								$( '.todo[data-eqLogic_id=\"' + _id + '\"] .btn_add' ).unbind().on('click', function() {
-									id = $(this).val();
-									input = $('#'+id).val();
-									if (input == '') {
-										return
-									}
-									changeTodo('new',input,id);
-									
-								});
-								$( '.todo[data-eqLogic_id=\"' + _id + '\"] .delete').on('click', function() {
-									idcmd = $(this).attr('alt'); 
-									id = $(this).attr('name');
-									changeTodo('del',idcmd,id)
-									
-								});
-								$( '.todo[data-eqLogic_id=\"' + _id + '\"] .edit' ).on('click', function() {
-									idcmd = $(this).attr('alt'); 
-									$('#md_modal').dialog({
-										width : 400,
-										height: 400,
-										autoOpen: false,
-										modal: true,
-										title: \"Informations\"
-									});
-									$('#md_modal').load('index.php?v=d&plugin=todo&modal=editcmd&id='+ idcmd);		
-									$('#md_modal').dialog('open');
-								});							 
-							}
-						}
-					});				
-				}							
-				</script>";
-
-
-			$replace['#min-width#'] = $replace['#width#']+50;
-			$replace['#min-height#'] = $replace['#height#']+110;
-			$replace['#min-width-list#'] = $replace['#width#']-40;	
-			$replace['#min-height-list#'] = $replace['#height#']-110;
-			return template_replace($replace, getTemplate('core', $_version, 'todo','todo'));
+			$replace['#min-width#'] = $this->getDisplay('width') + 30;
+			$replace['#min-height#'] = $this->getDisplay('height') +50;
+			$replace['#min-width-list#'] = $replace['#min-width#']-40;	
+			$replace['#min-height-list#'] = $replace['#min-height#']-100;	
+			log::add('todo','debug', $replace['#min-width#'] . ' ' . $replace['#min-height#'] . ' ' . $replace['#min-width-list#'] . ' ' . $replace['#min-height-list#']);		
+		}
+		//$replace['#li#'] = $li;
+		return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'todo', 'todo')));
 				
 	}
 	

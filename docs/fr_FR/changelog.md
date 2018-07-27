@@ -1,3 +1,10 @@
+27.07.2018
+===
+
+- Widgets
+- Traductions 
+- Nettoyage du code.
+
 01-06-2018
 ===
 

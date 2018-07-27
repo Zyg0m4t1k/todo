@@ -1,6 +1,7 @@
 {
 	"id" : "todo",
 	"name" : "Todo List",
+	"description" : "Plugin qui permet la création de todolist",
 	"licence" : "AGPL",
 	"author" : "zyg0m4t1k",
 	"require" : "3.2",
