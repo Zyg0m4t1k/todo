@@ -321,7 +321,6 @@ class todo extends eqLogic {
 			$replace['#min-width-list#'] = $replace['#min-width#']-40;	
 			$replace['#min-height-list#'] = $replace['#min-height#']-100;	
 		}
-		log::add('todo','debug', $version . ' ' . $replace['#min-width#'] . ' ' . $replace['#min-height#'] . ' ' . $replace['#min-width-list#'] . ' ' . $replace['#min-height-list#']);
 		return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'todo', 'todo')));
 	}
 }
