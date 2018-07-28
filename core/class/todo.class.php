@@ -310,58 +310,20 @@ class todo extends eqLogic {
 			return $replace;
 		}
 		$version = jeedom::versionAlias($_version);
-		$configuration = $this->getconfiguration();
-		$id = $this->getId();
-		$li = null;
-		$test = array();
-		$test = cmd::byEqLogicId($id);
-		$except = array('new','getlist','list');
 		if ($version != 'mobile') {
-			$replace['#min-width#'] = $replace['#width#']+50;
-			$replace['#min-height#'] = $replace['#height#']+110;
+			$replace['#min-width#'] = $replace['#width#'];
+			$replace['#min-height#'] = $replace['#height#'];
 			$replace['#min-width-list#'] = $replace['#width#']-40;	
 			$replace['#min-height-list#'] = $replace['#height#']-110;			
-			
 		} else {
-			foreach (cmd::byEqLogicId($id) as $cmd_todo){
-				$conf_todo = $cmd_todo->getConfiguration();
-				$cmd_id = $cmd_todo->getID();
-				$timestamp = $cmd_todo->getConfiguration('timestamp');
-				if ($timestamp != '') {
-					$now = time();
-					if($now > $timestamp && $now < ($timestamp + 86400))  {
-						$class = 'today';
-					} elseif(($timestamp + 86400) > $now)  {
-						$class = 'green';
-					} elseif ($now < $timestamp ) {
-						$class = 'red';
-					} else {
-						$class = '';
-					}
-					
-				}				
-				$name_event = $cmd_todo->getName();
-				if (!in_array( $cmd_todo->getLogicalId(), $except)) {
-					if($cmd_todo->getIsVisible() == 1){
-					$li .= '<li id="'.$cmd_id.'" class="list-group-item list_edit" style="background-color:transparent;font-size : 0.9em;"><span style="margin-right:20px"><input value="'.$cmd_id.'" type="checkbox" >
-		</span><span class="name_mobile name_event_'.$cmd_id.'" name="'.$id.'" >'.$name_event.'</span> <div class="actions"><a  name="'.$id.'"  class="'.$class.'" alt="'.$cmd_id.'">info</a><img src="plugins/todo/img/delete.png" href="" name="'.$id.'"  class="delete" alt="'.$cmd_id.'"></div> </li>';
-					} else {
-					$li .= '<li id="'.$cmd_id.'" class="list-group-item list_edit" style="text-decoration:line-through;background-color:transparent;font-size : 0.9em;"><span style="margin-right:20px"><input value="'.$cmd_id.'" type="checkbox"" checked >
-		</span><span class="name_mobile name_event_'.$cmd_id.'" name="'.$id.'" >'.$name_event.' </span><div class="actions"><a  name="'.$id.'"  class="'.$class.'" alt="'.$cmd_id.'">info</a><img src="plugins/todo/img/delete.png" href="" name="'.$id.'"  class="delete" alt="'.$cmd_id.'"></div> </li>';
-					}
-				}
-			}
 			$replace['#min-width#'] = $this->getDisplay('width') + 30;
 			$replace['#min-height#'] = $this->getDisplay('height') +50;
 			$replace['#min-width-list#'] = $replace['#min-width#']-40;	
 			$replace['#min-height-list#'] = $replace['#min-height#']-100;	
-			log::add('todo','debug', $replace['#min-width#'] . ' ' . $replace['#min-height#'] . ' ' . $replace['#min-width-list#'] . ' ' . $replace['#min-height-list#']);		
 		}
-		//$replace['#li#'] = $li;
+		log::add('todo','debug', $version . ' ' . $replace['#min-width#'] . ' ' . $replace['#min-height#'] . ' ' . $replace['#min-width-list#'] . ' ' . $replace['#min-height-list#']);
 		return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'todo', 'todo')));
-				
 	}
-	
 }
 
 class todoCmd extends cmd {

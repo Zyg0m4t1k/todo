@@ -72,7 +72,7 @@ function loadData(_id) {
 						changeTodo('check', id ,_id)
 					} 
 				});					
-				$( '.todo[data-eqLogic_id="' + _id + '"] .btn_add' ).unbind().on('click', function() {
+				$( '.todo[data-eqLogic_id="' + _id + '"] .btn_add' ).on('click', function() {
 					id = $(this).val();
 					input = $('#'+id).val();
 					if (input == '') {
