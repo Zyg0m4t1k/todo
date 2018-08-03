@@ -1,16 +1,16 @@
 {
     "plugins\/todo\/desktop\/php\/panel.php": {
         "Liste objets": "Liste objets",
-        "Rechercher": "Rechercher"
+        "Rechercher": "Search"
     },
     "plugins\/todo\/desktop\/php\/todo.php": {
-        "Ajouter une todo List": "Ajouter une todo List",
-        "Rechercher": "Rechercher",
-        "Ajouter": "Ajouter",
-        "Configuration": "Configuration",
+        "Ajouter une todo List": "Add a todo list",
+        "Rechercher": "Search",
+        "Ajouter": "Add",
+        "Configuration": "Setup",
         "Mes listes": "Mes listes",
-        "Sauvegarder": "Sauvegarder",
-        "Supprimer": "Supprimer",
+        "Sauvegarder": "Save",
+        "Supprimer": "Delete",
         "Configuration avancée": "Configuration avancée",
         "Equipement": "Equipement",
         "Tâches": "Tâches",
@@ -19,9 +19,9 @@
         "Objet parent": "Objet parent",
         "Aucun": "Aucun",
         "Catégorie": "Catégorie",
-        "Activer": "Activer",
+        "Activer": "Enable",
         "Visible": "Visible",
-        "Ajouter un todo": "Ajouter un todo",
+        "Ajouter un todo": "Add a todo",
         "Nom": "Nom",
         "delai": "delai",
         "Remove": "Remove"
