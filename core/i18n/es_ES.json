@@ -1,46 +1,46 @@
 {
     "plugins\/todo\/desktop\/php\/panel.php": {
-        "Liste objets": "Liste objets",
-        "Rechercher": "Rechercher"
+        "Liste objets": "Lista de objetos",
+        "Rechercher": "Buscar"
     },
     "plugins\/todo\/desktop\/php\/todo.php": {
-        "Ajouter une todo List": "Ajouter une todo List",
-        "Rechercher": "Rechercher",
-        "Ajouter": "Ajouter",
-        "Configuration": "Configuration",
-        "Mes listes": "Mes listes",
-        "Sauvegarder": "Sauvegarder",
-        "Supprimer": "Supprimer",
-        "Configuration avancée": "Configuration avancée",
-        "Equipement": "Equipement",
-        "Tâches": "Tâches",
-        "Nom de l'équipement": "Nom de l'équipement",
-        "Nom de l'équipement todo": "Nom de l'équipement todo",
-        "Objet parent": "Objet parent",
-        "Aucun": "Aucun",
-        "Catégorie": "Catégorie",
-        "Activer": "Activer",
+        "Ajouter une todo List": "Agregar una todo List",
+        "Rechercher": "Buscar",
+        "Ajouter": "Agregar",
+        "Configuration": "Configuración",
+        "Mes listes": "Mis listas",
+        "Sauvegarder": "Guardar",
+        "Supprimer": "Borrar",
+        "Configuration avancée": "Configuración avanzada",
+        "Equipement": "Dispositivo",
+        "Tâches": "Tareas",
+        "Nom de l'équipement": "Nombre del dispositivo",
+        "Nom de l'équipement todo": "Nombre del dispositivo todo",
+        "Objet parent": "Objeto padre",
+        "Aucun": "Ninguno",
+        "Catégorie": "Categoría",
+        "Activer": "Activar",
         "Visible": "Visible",
-        "Ajouter un todo": "Ajouter un todo",
-        "Nom": "Nom",
-        "delai": "delai",
+        "Ajouter un todo": "Agregar un todo",
+        "Nom": "Nombre",
+        "delai": "plazo",
         "Remove": "Remove"
     },
     "plugins\/todo\/core\/class\/todo.class.php": {
         "New todo": "New todo",
-        "Liste": "Liste",
+        "Liste": "Lista",
         "Remove all": "Remove all",
         "Refresh": "Refresh"
     },
     "plugins\/todo\/desktop\/js\/todo.js": {
-        "Nom": "Nom",
+        "Nom": "Nombre",
         "Visible": "Visible",
-        "delai": "delai"
+        "delai": "plazo"
     },
     "plugins\/todo\/core\/template\/mobile\/js\/todo.js": {
         "Edit": "Edit"
     },
     "plugins\/todo\/core\/ajax\/todo.ajax.php": {
-        "Todo inconnue : ": "Todo inconnue : "
+        "Todo inconnue : ": "Todo desconocido :"
     }
 }
