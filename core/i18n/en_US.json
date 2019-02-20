@@ -1,6 +1,6 @@
 {
     "plugins\/todo\/desktop\/php\/panel.php": {
-        "Liste objets": "Liste objets",
+        "Liste objets": "Objects list",
         "Rechercher": "Search"
     },
     "plugins\/todo\/desktop\/php\/todo.php": {
@@ -8,39 +8,39 @@
         "Rechercher": "Search",
         "Ajouter": "Add",
         "Configuration": "Setup",
-        "Mes listes": "Mes listes",
+        "Mes listes": "My lists",
         "Sauvegarder": "Save",
         "Supprimer": "Delete",
         "Configuration avancée": "Advanced configuration",
-        "Equipement": "Equipement",
-        "Tâches": "Tâches",
+        "Equipement": "Device",
+        "Tâches": "Tasks",
         "Nom de l'équipement": "Device name",
         "Nom de l'équipement todo": "Todo device name",
-        "Objet parent": "Objet parent",
-        "Aucun": "Aucun",
-        "Catégorie": "Catégorie",
+        "Objet parent": "Parent object",
+        "Aucun": "None",
+        "Catégorie": "Category",
         "Activer": "Enable",
         "Visible": "Visible",
         "Ajouter un todo": "Add a todo",
-        "Nom": "Nom",
-        "delai": "delai",
+        "Nom": "Name",
+        "delai": "time limit",
         "Remove": "Remove"
     },
     "plugins\/todo\/core\/class\/todo.class.php": {
         "New todo": "New todo",
-        "Liste": "Liste",
+        "Liste": "List",
         "Remove all": "Remove all",
         "Refresh": "Refresh"
     },
     "plugins\/todo\/desktop\/js\/todo.js": {
-        "Nom": "Nom",
+        "Nom": "Name",
         "Visible": "Visible",
-        "delai": "delai"
+        "delai": "time limit"
     },
     "plugins\/todo\/core\/template\/mobile\/js\/todo.js": {
         "Edit": "Edit"
     },
     "plugins\/todo\/core\/ajax\/todo.ajax.php": {
-        "Todo inconnue : ": "Todo inconnue : "
+        "Todo inconnue : ": "Todo unknown:"
     }
 }
