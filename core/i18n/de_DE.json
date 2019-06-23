@@ -1,6 +1,6 @@
 {
     "plugins\/todo\/desktop\/php\/panel.php": {
-        "Liste objets": "Liste objets",
+        "Liste objets": "Objektliste",
         "Rechercher": "Rechercher"
     },
     "plugins\/todo\/desktop\/php\/todo.php": {
@@ -16,7 +16,7 @@
         "Tâches": "Tâches",
         "Nom de l'équipement": "Nom de l'équipement",
         "Nom de l'équipement todo": "Nom de l'équipement todo",
-        "Objet parent": "Objet parent",
+        "Objet parent": "Elternobjekt",
         "Aucun": "Aucun",
         "Catégorie": "Catégorie",
         "Activer": "Activer",
