@@ -180,7 +180,7 @@ function addCmdToTable(_cmd) {
 		tr += '<td class="col-lg-6 actionOptions">';
 		tr += jeedom.cmd.displayActionOption(init(_cmd, ''), _cmd.options);
 		tr += '</td>';			
-		tr += '<td><i class="fa fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i>';
+		tr += '<td><i class="fas fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i>';
 		tr += '</td>';	
 		tr += '</tr>';		
 		
@@ -192,7 +192,7 @@ function addCmdToTable(_cmd) {
 		tr += '<span class="type" type="info" style="display : none;">' + jeedom.cmd.availableType() + '</span>';
 		tr += '<span class="subType" subType="' + init(_cmd.subType) + '" style="display : none;"></span>';
 		tr += '</td>';
-		tr += '<td><i class="fa fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i>';
+		tr += '<td><i class="fas fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i>';
 		tr += '</td>';
 		tr += '</tr>';		
 		
