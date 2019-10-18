@@ -83,27 +83,50 @@ function loadData(_id) {
 				 var html = '',
 					autoComplete = [];
 				 for (var k=0; k<data.result.length; k++) {
+					 
 					 var time_class = ""
-					  if(data.result[k].configuration.timestamp) {
-						 var timestamp = data.result[k].configuration.timestamp;
-						 var t = new Date().getTime();
-						 var now = Math.floor(t / 1000);
-						 switch (true) {
-							 case (now > timestamp && now < Math.floor(timestamp + 86400)):
-								console.log('today');
-								var time_class = 'today';
-							 break;
-							 case (Math.floor(timestamp + 86400) > now):
-								var time_class = 'green';
+					  if(data.result[k].configuration.cron_todo && data.result[k].configuration.cron_todo != '') {
+						  	
+						 var date1 = data.result[k].configuration.cron_todo;
+						  console.log(data.result[k].name)
+						  console.log(date1);
+						 var arrStartDate = date1.split("/");
+						 var date1 = new Date(arrStartDate[2],arrStartDate[1] -1,arrStartDate[0]);
+						   console.log('date1 ' + date1)
+						 var today = new Date();
+						 var date2 = new Date(today.getFullYear(),today.getMonth() ,today.getDate());
+						  console.log('date2 ' + date2)
+						 if (+date1 === +date2) {
+							 console.log('today');
+							 var time_class = 'darkorange';
+						 } else if (+date1 > +date2) {
+							 var time_class = 'green';
 							  console.log('green');
-							 break;
-							 case (timestamp < now):
-								var time_class = 'red';
-							 console.log('red');
-							 break;
-							 default:
-								console.log('defaut');
-						 }										  
+							 
+						 } else {
+						 	var time_class = 'red';
+							console.log('red');
+						 }
+						  
+//						 var now = Math.floor(t / 1000);
+//						   console.log(timestamp);
+//						 switch (true) {
+//							 case (timestamp < now):
+//								var time_class = 'red';
+//							 console.log('red');
+//							 break;								 
+//							 case (now > timestamp && now < Math.floor(timestamp + 86400)):
+//								 
+//								console.log('today');
+//								var time_class = 'darkorange';
+//							 break;
+//							 case (Math.floor(timestamp + 86400) > now):
+//								var time_class = 'green';
+//							    console.log('green');
+//							 break;
+//							 default:
+//								console.log('defaut');
+//						 }										  
 						  
 					  }
 					 
@@ -111,7 +134,7 @@ function loadData(_id) {
 					 if(!data.result[k].configuration.type) {
 						 if(data.result[k].isVisible == 1){
 							 html += '<form style="display:none;"><div><label></label></div></form>';											 
-							 html += '<li id="'+data.result[k].id+'" class="list-group-item list_edit" style="background-color:transparent;font-size : 1.1em;"><span><input value="'+data.result[k].id+'" type="checkbox" ></span><span class="name_mobile name_event_'+data.result[k].id+'" name="'+data.result[k].eqLogic_id+'" >'+data.result[k].name+'</span> <div class="actions"><a  name="'+data.result[k].eqLogic_id+'"  class="'+time_class+'" alt="'+data.result[k].id+'">info</a><a  name="'+data.result[k].eqLogic_id+'"  class="edit" alt="'+data.result[k].id+'">Edit</a><img src="plugins/todo/img/delete.png" href="" name="'+data.result[k].eqLogic_id+'"  class="delete" alt="'+data.result[k].id+'"></div> </li>';
+							 html += '<li id="'+data.result[k].id+'" class="list-group-item list_edit" style="background-color:transparent;font-size : 1.1em;padding:10px;"><span><input value="'+data.result[k].id+'" type="checkbox" ></span><span class="name_mobile name_event_'+data.result[k].id+'" name="'+data.result[k].eqLogic_id+'" >'+data.result[k].name+'</span> <a  class="delete" name="'+data.result[k].eqLogic_id+'"  alt="'+data.result[k].id+'"><i style="font-size : 0.9em;padding-top:4px;color:rgb(155, 75, 70)" class="fas fa-minus-circle pull-right"></i></a><a  class="edit" name="'+data.result[k].eqLogic_id+'"  alt="'+data.result[k].id+'"><i style="font-size : 0.9em;padding-top:4px;color:rgb(58,90,85)" class="fas fa-sticky-note pull-right"></i></a><a  class="time_edit" name="'+data.result[k].eqLogic_id+'"  alt="'+data.result[k].id+'"><i style="font-size : 0.9em;padding-top:4px;color:' + time_class + '" class="fas fa-info-circle pull-right"></i></a> </li>';
 						 } else {
 							 autoComplete.push(data.result[k].name);
 						 }

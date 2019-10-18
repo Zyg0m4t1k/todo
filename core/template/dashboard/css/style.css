@@ -1,13 +1,13 @@
 
 
-.actions{
+.todo .actions{
 	display:inline-block;
 	position:absolute;
 	right:7px;
 	top:6px;
 }
 
-.actions a{
+.todo .actions a{
 	display:block;
 	width:16px;
 	height:16px;
@@ -16,31 +16,30 @@
 	text-indent:-9999px;
 }
 
-.actions a.edit{
+
+.todo .actions a.edit{
 	background:url("../../../../img/edit.png") no-repeat center center;
 	cursor:pointer;
 }
 
-.actions a.delete{
-	background:url("../../../../img/delete.png") no-repeat center center;
-}
 
-.actions a.info{
+
+.todo .actions a.info{
 	background:url("../../../../img/info.png") no-repeat center center;
 	cursor:pointer;
 }
 
-.actions a.red{
+.todo .actions a.red{
 	background:url("../../../../img/red.png") no-repeat center center;
 	cursor:pointer;
 }
 
-.actions a.green{
+.todo .actions a.green{
 	background:url("../../../../img/green.png") no-repeat center center;
 	cursor:pointer;
 }
 
-.actions a.today{
+.todo .actions a.today{
 	background:url("../../../../img/today.png") no-repeat center center;
 	cursor:pointer;
 }
