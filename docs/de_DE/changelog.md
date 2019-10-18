@@ -1,3 +1,12 @@
+18-10-2019
+===
+
+Changement pour Jeedom V4 seulement:
+
+- Optimisation des dates
+- Widget dashboard
+- Documentation
+
 29-09-2019
 ===
 

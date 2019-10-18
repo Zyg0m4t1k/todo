@@ -31,9 +31,13 @@ Les Widgets
 ---
 
 
-**Le dashboard**
+**Le dashboard (Jeedom v3)**
 
 ![viewdash](../images/viewdash.png)
+
+**Le dashboard (Jeedom v4)**
+
+![viewdash](../images/viewdash4.png)
 
 1. Vous pouvez ajouter un éléments via l'input et cliquer sur add ensuite. S'il existe il sera ajouté sinon il sera créé . Fonction Autocomplete 
 2. Le bouton refresh vide la liste (Mais n'efface pas le éléments)
