@@ -11,5 +11,5 @@
 	"changelog" : "https://zyg0m4t1k.github.io/todo/#language#/changelog",
 	"documentation" : "https://zyg0m4t1k.github.io/todo/#language#/"	,
 	"language" : ["fr_FR","en_US","de_DE","sp_SP","ru_RU","id_ID","it_IT"],
-	"compatibility" : ["miniplus","smart","rpi","docker","diy"]		
+	"compatibility" : ["miniplus","smart","rpi","docker","diy","v4"]		
 }

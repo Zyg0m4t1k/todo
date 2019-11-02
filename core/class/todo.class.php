@@ -154,7 +154,7 @@ class todo extends eqLogic {
 			if($cmd->getConfiguration('type')) {
 				continue;
 			}
-			$cmd->setIsVisible(0);
+			$cmd->setIsVisible(1);
 			$cmd->save();
 		}
 		$this->refreshWidget();

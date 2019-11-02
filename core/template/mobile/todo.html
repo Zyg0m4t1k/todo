@@ -3,6 +3,9 @@
     <link rel="stylesheet" href="plugins/todo/core/template/mobile/css/style.css" />   
     <script src="3rdparty/bootstrap/bootstrap.min.js"></script>  
     <script src="plugins/todo/core/template/mobile/js/todo.js"></script>
+	<span class="cmd refresh pull-right cursor" data-cmd_id="#refresh_id#">
+		<i class="fas fa-sync"></i>
+	</span>	
 	<center>
 		<span class="widget-name">
 			<span style="#hideEqLogicName#">#name_display# <span class="object_name">#object_name#</span></span><br/>
@@ -22,5 +25,12 @@
   	</div>
     <script>
 		loadData('#id#');
+		if ('#refresh_id#' != ''){
+			$('.eqLogic[data-eqLogic_uid=#uid#] .refresh').on('click', function () {
+				jeedom.cmd.execute({id: '#refresh_id#'});
+			});
+		}else{
+			$('.eqLogic[data-eqLogic_uid=#uid#] .refresh').remove();
+		}		
 	</script>    
 </div>
