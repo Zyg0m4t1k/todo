@@ -83,11 +83,11 @@ Les commandes
 ![todo2](../images/todo2.png)
 
 
-**Ou de récupérer la liste de toutes les tâches: **
+**Ou de récupérer la liste de toutes les tâches :**
 
 ![todo1](../images/todo1.png)
 
-**Ou d'effacer toutes les tâches: **
+**Ou de recréer toutes les tâches via la commande refresh**
 
 Remarques
 ===
