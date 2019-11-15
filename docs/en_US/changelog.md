@@ -1,3 +1,11 @@
+02-11-2019
+===
+
+- Widget dashboard et mobile
+- Documentation
+- Commande refresh recrée une liste sur la base des éléments déjà créés
+
+
 18-10-2019
 ===
 
