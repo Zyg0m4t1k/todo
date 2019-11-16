@@ -1,3 +1,20 @@
+
+14.11.2019
+===
+
+- Possibilité de dupliquer un équipement :)
+
+
+
+
+03.11.2019
+===
+
+- Changement pour la v4 de jeedom seulement
+- Mise à jour widget
+- Confirmation V4/Buster compatible
+
+
 02-11-2019
 ===
 
