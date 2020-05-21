@@ -48,6 +48,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			<li role="presentation"><a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab" data-action="returnToThumbnailDisplay"><i class="fas fa-arrow-circle-left"></i></a></li>
 			<li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-tachometer"></i> {{Equipement}}</a></li>
 			<li role="presentation"><a href="#infotodo" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-list-alt"></i> {{Tâches}}</a></li>
+			<li role="presentation"><a href="#infocmd" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-list-alt"></i> {{Commandes}}</a></li>
 		</ul> 
 		
 		<div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
@@ -99,7 +100,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			<div role="tabpanel" class="tab-pane" id="infotodo"> 
 				<a class="btn btn-success btn-sm cmdAction" data-action="add"><i class="fas fa-plus-circle"></i> {{Ajouter un todo}}</a>
 				<br/>        
-				<table id="table_cmd" class="table table-bordered table-condensed">
+				<table id="table_todo" class="table table-bordered table-condensed">
 					<thead>
 						<tr>
 							<th>{{Nom}}</th><th>{{delai}}</th><th>{{Visible}}</th><th>{{Remove}}</th>
@@ -109,6 +110,19 @@ $eqLogics = eqLogic::byType($plugin->getId());
 					</tbody>
 				</table>
 			</div>
+			<div role="tabpanel" class="tab-pane" id="infocmd"> 
+				<br/>        
+				<table id="table_cmd" class="table table-bordered table-condensed">
+					<thead>
+						<tr>
+							<th>{{Nom}}</th><th>{{Actions}}</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>			
+			
 		</div>
     </div>
 </div>

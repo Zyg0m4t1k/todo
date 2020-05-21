@@ -95,7 +95,7 @@ class todo extends eqLogic {
 	  $count = count($cmds);
 	  $list = '';
 	  $i = 1;
-	  $except = array('new','getlist','list','refresh','removeall');
+	  $except = array('new','getlist','list','refresh','removeall','cost','globalcost');
 	  foreach ($cmds as $cmd) {
 		  if (!in_array( $cmd->getLogicalId(), $except) && $cmd->getIsVisible() == 1) {
 			  if ($i == $count ) {
@@ -241,9 +241,8 @@ class todo extends eqLogic {
 		if (!is_object($new)) {
 			$new = new todoCmd();
 			$new->setLogicalId('new');
-							
+			$new->setName(__('New todo', __FILE__));				
 		}
-		$new->setName(__('New todo', __FILE__));
 		$new->setEqLogic_id($this->getId());
 		$new->setType('action');
 		$new->setSubType('message');
@@ -254,9 +253,8 @@ class todo extends eqLogic {
 		if (!is_object($list)) {
 			$list = new todoCmd();
 			$list->setLogicalId('list');
-							
+			$list->setName(__('Liste', __FILE__));				
 		}
-		$list->setName(__('Liste', __FILE__));
 		$list->setEqLogic_id($this->getId());
 		$list->setType('info');
 		$list->setConfiguration('type',true);
@@ -267,9 +265,8 @@ class todo extends eqLogic {
 		if (!is_object($removeall)) {
 			$removeall = new todoCmd();
 			$removeall->setLogicalId('removeall');
-							
+			$removeall->setName(__('Remove all', __FILE__));				
 		}
-		$removeall->setName(__('Remove all', __FILE__));
 		$removeall->setEqLogic_id($this->getId());
 		$removeall->setConfiguration('type',true);
 		$removeall->setType('action');
@@ -280,15 +277,51 @@ class todo extends eqLogic {
 		if (!is_object($refresh)) {
 			$refresh = new todoCmd();
 			$refresh->setLogicalId('refresh');
-							
+			$refresh->setName(__('Refresh', __FILE__));				
 		}
-		$refresh->setName(__('Refresh', __FILE__));
 		$refresh->setEqLogic_id($this->getId());
 		$refresh->setConfiguration('type',true);
 		$refresh->setType('action');
 		$refresh->setSubType('other');
-		$refresh->save(); 
-					
+		$refresh->save();
+		
+		$cost = $this->getCmd(null, 'cost');
+		if (!is_object($cost)) {
+			$cost = new todoCmd();
+			$cost->setLogicalId('cost');
+			$cost->setName(__('Coût', __FILE__));				
+		}
+		$cost->setEqLogic_id($this->getId());
+		$cost->setConfiguration('type',true);
+		$cost->setType('info');
+		$cost->setSubType('numeric');
+		$cost->save();
+		
+		$globalCost = $this->getCmd(null, 'globalcost');
+		if (!is_object($globalCost)) {
+			$globalCost = new todoCmd();
+			$globalCost->setLogicalId('globalcost');
+			$globalCost->setName(__('Coût global', __FILE__));				
+		}
+		$globalCost->setConfiguration('type',true);
+		$globalCost->setEqLogic_id($this->getId());
+		$globalCost->setType('info');
+		$globalCost->setSubType('numeric');
+		$globalCost->save();
+		
+		$cost = $globalcost =  0 ;
+		foreach ($this->getCmd() as $cmd) {
+			if (is_numeric($cmd->getConfiguration('price'))) {
+				$cost = $cost + $cmd->getConfiguration('price') * $cmd->getConfiguration('quantity',1);
+			}
+			if(is_array($cmd->getConfiguration('listbuying'))){
+				foreach ($cmd->getConfiguration('listbuying') as $data) {
+					$globalcost = $globalcost + $data['pricing'] ;
+				}
+			}
+		}
+		$this->checkAndUpdateCmd('cost', $cost);	
+		$this->checkAndUpdateCmd('globalcost', $cost);
 		$this->allTodo();
 		
 	}
@@ -329,7 +362,7 @@ class todoCmd extends cmd {
 
 	
 	public function preSave() {
-		if ($this->getSubtype() == 'message') {
+		if ($this->getSubtype() == 'message' && $this->getLogicalId() == 'new') {
 			$this->setDisplay('title_disable', 1);
 		}
 	}

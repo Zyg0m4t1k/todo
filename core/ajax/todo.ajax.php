@@ -24,8 +24,28 @@ try {
       	$todo = todo::changeTodo(init('acte'),init('idcmd'),init('id'),init('widget'));
 		ajax::success(init('id'));
     } elseif (init('action') == 'editCmd') { 
-		 $todo = todo::editCmd(init('id'),init('nom'),init('info'),init('datetodo'),init('timestamp'));
-		 ajax::success();
+		if (!isConnect('admin')) {
+			throw new Exception(__('401 - Accès non autorisé', __FILE__));
+		}
+		$cmdSave = json_decode(init('dataCmd'), true);
+		$cmd = null;
+		if (isset($cmdSave['id'])) {
+			$cmd = cmd::byId($cmdSave['id']);
+		}
+
+		utils::a2o($cmd, jeedom::fromHumanReadable($cmdSave));
+		$cmd->save();
+		$eq = $cmd->getEqlogic();
+		if(is_object($eq)) {
+			$eq->save();
+		}
+		ajax::success();
+//		
+//		
+//		
+//		
+//		 $todo = todo::editCmd(init('id'),init('nom'),init('info'),init('datetodo'),init('timestamp'));
+//		 ajax::success();
 	} elseif (init('action') == 'getAllTodo') { 
 		 $return = todo::getTodos();
 		 ajax::success($return);
