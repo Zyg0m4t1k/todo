@@ -1,7 +1,7 @@
 Description 
 ===
 
-Ce plugin vous permet de Créer des listes de tâches, d'actions , de courses. Libre à vous de savoir ce que vous allez en faire
+Ce plugin vous permet de créer des listes de tâches, d'actions , de courses. Libre à vous de savoir ce que vous allez en faire.
 
 
 Installation
@@ -15,7 +15,7 @@ Configuration
 
 Rien de particulier.Il faut télécharger le plugin sur le market et l'activer. 
 
-Après l'avoir activer , lancer les dépendances et aller dans Plugins/Organisation/Todo List. Cliquer sur le + pour créer un nouvel équipement.
+Après l'avoir activé, lancer les dépendances et aller dans Plugins/Organisation/Todo List. Cliquer sur le + pour créer un nouvel équipement.
 
 Utilisation
 ===
@@ -39,8 +39,8 @@ Les Widgets
 
 ![viewdash](../images/viewdash4.png)
 
-1. Vous pouvez ajouter un éléments via l'input et cliquer sur add ensuite. S'il existe il sera ajouté sinon il sera créé . Fonction Autocomplete 
-2. Le bouton refresh vide la liste (Mais n'efface pas le éléments)
+1. Vous pouvez ajouter un élément via l'input et cliquer sur Add ensuite. S'il existe, il sera ajouté sinon il sera créé . Fonction Autocomplete 
+2. Le bouton refresh vide la liste (Mais n'efface pas les éléments)
 3. Un check efface l'élément de la liste
 4. Un click sur le remove efface l'élément de l'équipement (définitif)
 5. Un click sur le crayon ouvre une modale pour permettre de configurer un peu plus l'élément.
@@ -56,7 +56,7 @@ Les Widgets
 >
 
 
-**Possibilité d'activer le Panel mobile et Desktop**
+**Possibilité d'activer le Panel Mobile et Desktop**
 
 
 
@@ -92,7 +92,7 @@ Les commandes
 Remarques
 ===
 
-Caractères spèciaux
+Caractères spéciaux
 ---
 
 * Le "_(underscore)" est à proscrire dans le nom d'un élément d'une liste 
