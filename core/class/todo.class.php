@@ -378,6 +378,8 @@ class todoCmd extends cmd {
 				break;	
 			case 'removeall': 
 				$todo->removeall();
+				$todo->allTodo();
+				$todo->refreshWidget();
 				break;
 			case 'refresh':
 				$todo->refreshList();
@@ -386,5 +388,3 @@ class todoCmd extends cmd {
     }
     /*     * **********************Getteur Setteur*************************** */
 }
-
-?>
