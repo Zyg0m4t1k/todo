@@ -1,101 +1,99 @@
-Description 
-===
-
-Ce plugin vous permet de Créer des listes de tâches, d'actions , de courses. Libre à vous de savoir ce que vous allez en faire
-
-
-Installation
-===
-
-Comme n'importe quel plugin.
-
-
-Configuration
-===
-
-Rien de particulier.Il faut télécharger le plugin sur le market et l'activer. 
-
-Après l'avoir activer , lancer les dépendances et aller dans Plugins/Organisation/Todo List. Cliquer sur le + pour créer un nouvel équipement.
-
-Utilisation
-===
-
-Les éléments
+---
+title: Todo List
+sidebar_position: 1
 ---
 
-Vous pouvez les créer à partir de l'équipement en cliquand sur l'onglet "Tâches"
+## Description
+
+Ce plugin permet de créer et gérer des listes de tâches (todo), d’actions ou de courses.
+Libre à vous de choisir comment les exploiter (widgets, scénarios, etc.).
+
+## Installation
+
+Comme n’importe quel plugin Jeedom :
+
+1. Installer depuis le Market
+2. Activer le plugin
+3. Lancer les dépendances si nécessaire
+
+## Configuration
+
+Aucune configuration particulière.
+
+Après activation :
+
+1. Aller dans **Plugins → Organisation → Todo List**
+2. Cliquer sur **+** pour créer un nouvel équipement
+3. Sauvegarder
+
+## Utilisation
+
+### Les éléments (tâches)
+
+Vous pouvez créer des éléments depuis l’équipement en cliquant sur l’onglet **“Tâches”**.
 
 ![todo3](../images/todo3.png)
 
-Les Widgets
----
+### Les widgets
 
-
-**Le dashboard (Jeedom v3)**
+#### Dashboard (Jeedom v3)
 
 ![viewdash](../images/viewdash.png)
 
-**Le dashboard (Jeedom v4)**
+#### Dashboard (Jeedom v4)
 
 ![viewdash](../images/viewdash4.png)
 
-1. Vous pouvez ajouter un éléments via l'input et cliquer sur add ensuite. S'il existe il sera ajouté sinon il sera créé . Fonction Autocomplete 
-2. Le bouton refresh vide la liste (Mais n'efface pas le éléments)
-3. Un check efface l'élément de la liste
-4. Un click sur le remove efface l'élément de l'équipement (définitif)
-5. Un click sur le crayon ouvre une modale pour permettre de configurer un peu plus l'élément.
-6. L'icône info permet de savoir si la tâche est dans les délais 
+Fonctionnement :
 
-**Vue mobile**
+1. Ajouter un élément via l’input puis cliquer sur **Add**
+   - S’il existe, il est ajouté
+   - Sinon, il est créé (autocomplete)
+2. Le bouton **Refresh** vide la liste (sans supprimer les éléments)
+3. Cocher une tâche la retire de la liste
+4. Cliquer sur **Remove** supprime l’élément de l’équipement (définitif)
+5. Cliquer sur le **crayon** ouvre une modale de configuration de l’élément
+6. L’icône **info** indique si la tâche est dans les délais
+
+#### Vue mobile
 
 ![viewmobile](../images/viewmobile.png)
 
-> <span style="color:red">**IMPORTANT**</span>
->
+> <span style={{ color: 'red' }}><strong>IMPORTANT</strong></span>
 > La taille sur la version mobile est définie à partir de la taille sur le dashboard.
->
 
+### Dates / statut (délais)
 
-**Possibilité d'activer le Panel mobile et Desktop**
+Vous pouvez ajouter une date à une tâche. Lors de l’affichage, une icône indique l’état :
 
+- **Rouge** : dépassée
+- **Vert** : OK
+- **Agenda** : aujourd’hui
 
-
-
-Utilisation
-===
-
-**Possibilité d'ajouter une date pour le todo et ensuite check lors de l'affichage qui vérifie si date passée ( icône rouge-> dépassée , icône verte-> ok , agenda-> aujourd'hui)**
-
-Possible d'ajouter une date via le menu du plugin
+Ajout d’une date via le menu du plugin :
 
 ![config](../images/config.png)
 
-**Ou via le dashboard en cliquant sur l'icône edit**
+Ou via le dashboard en cliquant sur l’icône **edit** :
 
 ![modal](../images/modal.png)
 
+## Commandes
 
-Les commandes
-====
-
-**Possibilité de créer une todo via un scénario :**
+### Créer une tâche via un scénario
 
 ![todo2](../images/todo2.png)
 
-
-**Ou de récupérer la liste de toutes les tâches :**
+### Récupérer la liste de toutes les tâches
 
 ![todo1](../images/todo1.png)
 
-**Ou de recréer toutes les tâches via la commande refresh**
+### Recréer toutes les tâches via la commande Refresh
 
-Remarques
-===
+La commande **Refresh** reconstruit la liste sur la base des éléments déjà créés.
 
-Caractères spèciaux
----
+## Remarques
 
-* Le "_(underscore)" est à proscrire dans le nom d'un élément d'une liste 
+### Caractères spéciaux
 
-
-
+- Le caractère `_` (underscore) est à proscrire dans le nom d’un élément.

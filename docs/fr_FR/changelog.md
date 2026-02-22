@@ -1,111 +1,97 @@
+---
+title: Changelog
+sidebar_position: 99
+---
 
-14.11.2019
-===
+## 2026-02-22
 
-- Possibilité de dupliquer un équipement :)
+- Compatibilité avec Jeedom v5.2 et Pixie
+- Nettoyage de la documentation
+- Vue mobile
 
+## 2019-11-14
 
+- Possibilité de dupliquer un équipement 🙂
 
+## 2019-11-03
 
-03.11.2019
-===
+- Changement pour Jeedom v4 uniquement
+- Mise à jour du widget
+- Confirmation compatibilité V4 / Buster
 
-- Changement pour la v4 de jeedom seulement
-- Mise à jour widget
-- Confirmation V4/Buster compatible
+## 2019-11-02
 
-
-02-11-2019
-===
-
-- Widget dashboard et mobile
+- Widgets dashboard et mobile
 - Documentation
-- Commande refresh recrée une liste sur la base des éléments déjà créés
+- La commande **Refresh** recrée une liste sur la base des éléments déjà créés
 
+## 2019-10-18
 
-18-10-2019
-===
-
-Changement pour Jeedom V4 seulement:
+Changement pour Jeedom v4 uniquement :
 
 - Optimisation des dates
 - Widget dashboard
 - Documentation
 
-29-09-2019
-===
+## 2019-09-29
 
-- Change droits
+- Changement des droits
 - Documentation
 
-01.09.2019
-===
+## 2019-09-01
 
-- Bugfix
-- Fix widgets
-- Fix php 7.3
-- change fa to fas
+- Correction de bugs
+- Correctifs widgets
+- Correctif PHP 7.3
+- Remplacement `fa` → `fas`
 
-27.07.2018
-===
+## 2018-07-27
 
 - Widgets
-- Traductions 
-- Nettoyage du code.
+- Traductions
+- Nettoyage du code
 
-01-06-2018
-===
+## 2018-06-01
 
 - Retour des commandes par date de création
-- Optimisation de l'affichage
+- Optimisation de l’affichage
 
-**-05-2018
-===
+## 2018-05
 
-* Synchronisation en direct
-* Widget revu en version mobile et desktop
-* Panel Desktop
-* Docs
-* Ajout d'un bouton  sur le widget pour reset la liste (éléments plus visibles mais pas effacés).
-* Ajout d'une commande pour effacer tous les éléments d'une liste
-* Plus de rafraichissement de la page lorsq'une action est exécutée sur le widget(Hormis l'édition)
-* Changement dans la gestion des listes
+- Synchronisation en direct
+- Widget revu en version mobile et desktop
+- Panel desktop
+- Documentation
+- Ajout d’un bouton sur le widget pour réinitialiser la liste (éléments plus visibles mais non effacés)
+- Ajout d’une commande pour effacer toutes les tâches d’une liste
+- Plus de rafraîchissement de page lors d’une action sur le widget (sauf édition)
+- Changement dans la gestion des listes
 
-26-01-2018
-==== 
+## 2018-01-26
 
 - Mise à jour de la documentation
 
-23.12.2017
-==== 
+## 2017-12-23
 
-- Ajout d'une commande pour récupérer la liste des  tâches ( Non cochées) d'un équipement  . Pour les transmettres par mail ,TTS ...
-- Doc
-- Ajout d'une commande pour créer une tâche (Utilisable dans les scénarios)
-- Fichier xml supprimé
+- Ajout d’une commande pour récupérer la liste des tâches non cochées (mail, TTS, etc.)
+- Documentation
+- Ajout d’une commande pour créer une tâche (utilisable dans les scénarios)
+- Suppression du fichier XML
 
+## 2017-05-12
 
-12.05.2017
-==== 
+- Correction d’un bug d’affichage
 
-- Correction d'un bug d'affichage
+## 2017-03-24
 
-
-24.03.2017
-==== 
-
-- Possibilité d'effacer la tâche depuis le widget (correction)
+- Possibilité d’effacer une tâche depuis le widget (correction)
 - Nettoyage du code
-- Correction d'un bug d'affichage
+- Correction d’un bug d’affichage
 
+## 2017-03-22
 
-22.03.2017
-==== 
+- Ajout de la documentation
 
-- Ajout de la doc.
+## 2016-01-26
 
-
-26.01.2016
-==== 
-
-- Passage en stable et compatible jeedom v2.
+- Passage en stable et compatibilité Jeedom v2
