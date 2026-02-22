@@ -1,0 +1,20 @@
+name: i18n + sync docs (manual)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - beta
+
+jobs:
+  full:
+    uses: Zyg0m4t1k/jeedom-i18n-tools/.github/workflows/full-translate.yml@master
+    with:
+      target_languages: "fr_FR,en_US,es_ES,de_DE,it_IT,pt_PT"
+      sync_site: true
+      site_repo: "Zyg0m4t1k/Zyg0m4t1k.github.io"
+      site_branch: "master"
+      use_deepl: false   # <- true si deepl
+    secrets:
+      SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+      # DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}  # <- à décommenter seulement si use_deepl=true
