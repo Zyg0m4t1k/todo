@@ -25,21 +25,21 @@ class todo extends eqLogic {
 
 
     /*     * ***********************Methode static*************************** */
-	
+
 
     public static $_widgetPossibility = array('custom' => true);
-	
+
 	public static function changeTodo($action, $idcmd,$id) {
-		
-		switch ($action) {	
-			case 'del': 
+
+		switch ($action) {
+			case 'del':
 			    $cmd = cmd::byId($idcmd);
 				 if (is_object($cmd)) {
 					 $todo = $cmd->getEqLogic();
 					 $cmd->remove();
-					 $todo->allTodo();	
+					 $todo->allTodo();
 					 $todo->refreshWidget();
-				 }	
+				 }
 				break;
 			case 'check':
 				$cmd = cmd::byId($idcmd);
@@ -47,11 +47,11 @@ class todo extends eqLogic {
 					$todo = $cmd->getEqLogic();
 					$cmd->setIsVisible(0);
 					$cmd->save();
-					$todo->allTodo();	
+					$todo->allTodo();
 					$todo->refreshWidget();
 				}
-				break;			
-			case 'new': 
+				break;
+			case 'new':
 				$todo = todo::byId($id);
 				$cmd = $todo->getCmd(null, str_replace(" ", "_",$idcmd));
 				if (!is_object($cmd)) {
@@ -67,14 +67,14 @@ class todo extends eqLogic {
 					$cmd->setIsVisible(1);
 					$cmd->setLogicalId(str_replace(' ','_',todo::conversion($idcmd)));
 					$cmd->save();
-					
+
 				}
 				$todo->allTodo();
 				$todo->refreshWidget();
-				break;			
+				break;
 		}
 	}
-	
+
 	public static function editCmd($id, $nom,$info,$datetodo,$timestamp) {
 		$cmd= cmd::byId($id);
 		$cmd->setName($nom);
@@ -84,10 +84,10 @@ class todo extends eqLogic {
 		$cmd->setSubType('string');
 		$cmd->save();
 		$todo = $cmd->getEqLogic();
-		$todo->allTodo();		
-		
-		
-		
+		$todo->allTodo();
+
+
+
 	}
 
  	public  function allTodo() {
@@ -105,11 +105,11 @@ class todo extends eqLogic {
 			  }
 		  $i++;
 		  }
-		  
+
 	  }
-	  $this->checkAndUpdateCmd('list', $list);		
+	  $this->checkAndUpdateCmd('list', $list);
 	}
-	 
+
     public static function getTodos() {
 		 $return = array();
 		 $i = 0;
@@ -119,7 +119,7 @@ class todo extends eqLogic {
 				foreach (cmd::byEqLogicId($todo->getId()) as $cmd_todo){
 					if ($cmd_todo->getName() != 'Creer') {
 					$return[$i]['nom'] = $todo->getName();
-					$return[$i]['id'] = $id;	
+					$return[$i]['id'] = $id;
 					$return[$i]['nom_cmd'][$j] = $cmd_todo->getName();
 					$return[$i]['id_cmd'][$j] = $cmd_todo->getId();
 					$return[$i]['timestamp'][$j] = $cmd_todo->getConfiguration('timestamp');
@@ -142,12 +142,12 @@ class todo extends eqLogic {
 			if($cmd->getConfiguration('type')) {
 				continue;
 			}
-			
+
 			$cmd->remove();
 		}
 		$this->refreshWidget();
 	}
-	
+
 	public function refreshList() {
 		$cmds = $this->getCmd();
 		foreach ($cmds as $cmd) {
@@ -158,8 +158,8 @@ class todo extends eqLogic {
 			$cmd->save();
 		}
 		$this->refreshWidget();
-	}	
-	
+	}
+
     public static function createTodo($nom,$todo) {
 		$eqLogics = todo::byType('todo');
 		$exist = false;
@@ -168,16 +168,16 @@ class todo extends eqLogic {
 				$exist = true;
 				$id = $eqLogic->id;
 				break;
-			} 
+			}
 		};
-		
+
 		if (!$exist) {
 			$eqLogic = new eqLogic();
 			$eqLogic->setEqType_name('todo');
 			$eqLogic->setIsEnable(1);
 			$eqLogic->setName($nom);
 			$eqLogic->save();
-			$id =  $eqLogic->getId();	
+			$id =  $eqLogic->getId();
 		}
 
 		$todoCmd = new todoCmd();
@@ -191,13 +191,13 @@ class todo extends eqLogic {
 		$todo->allTodo();
 		$todo->refreshWidget();
 	}
-			
+
 
 
     /*     * *********************Méthodes d'instance************************* */
-	
-	
-	public function conversion($string) {
+
+
+	public static function conversion($string) {
 		$caractere = array(">", "<",  ":", "*", "/", "|", "?", '"', '<', '>', "'","&","%");
 		$string = str_replace($caractere, "", $string);
 		$string = strtolower($string);
@@ -220,95 +220,95 @@ class todo extends eqLogic {
 			),
 			$string
 		);
-		
+
 		return $string;
-	}	
-	
-	
-	
+	}
+
+
+
 	public function preSave() {
 		if($this->getDisplay('height') == 'auto') {
 			$this->setDisplay('height','440px');
 		}
 		if($this->getDisplay('width') == 'auto') {
 			$this->setDisplay('width','350px');
-		}			
+		}
 	}
 
     public function postSave() {
-	
+
 		$new = $this->getCmd(null, 'new');
 		if (!is_object($new)) {
 			$new = new todoCmd();
 			$new->setLogicalId('new');
-			$new->setName(__('New todo', __FILE__));				
+			$new->setName(__('New todo', __FILE__));
 		}
 		$new->setEqLogic_id($this->getId());
 		$new->setType('action');
 		$new->setSubType('message');
 		$new->setConfiguration('type',true);
-		$new->save(); 
-		
+		$new->save();
+
 		$list = $this->getCmd(null, 'list');
 		if (!is_object($list)) {
 			$list = new todoCmd();
 			$list->setLogicalId('list');
-			$list->setName(__('Liste', __FILE__));				
+			$list->setName(__('Liste', __FILE__));
 		}
 		$list->setEqLogic_id($this->getId());
 		$list->setType('info');
 		$list->setConfiguration('type',true);
 		$list->setSubType('string');
 		$list->save();
-		
+
 		$removeall = $this->getCmd(null, 'removeall');
 		if (!is_object($removeall)) {
 			$removeall = new todoCmd();
 			$removeall->setLogicalId('removeall');
-			$removeall->setName(__('Remove all', __FILE__));				
+			$removeall->setName(__('Remove all', __FILE__));
 		}
 		$removeall->setEqLogic_id($this->getId());
 		$removeall->setConfiguration('type',true);
 		$removeall->setType('action');
 		$removeall->setSubType('other');
 		$removeall->save();
-		
+
 		$refresh = $this->getCmd(null, 'refresh');
 		if (!is_object($refresh)) {
 			$refresh = new todoCmd();
 			$refresh->setLogicalId('refresh');
-			$refresh->setName(__('Refresh', __FILE__));				
+			$refresh->setName(__('Refresh', __FILE__));
 		}
 		$refresh->setEqLogic_id($this->getId());
 		$refresh->setConfiguration('type',true);
 		$refresh->setType('action');
 		$refresh->setSubType('other');
 		$refresh->save();
-		
+
 		$cost = $this->getCmd(null, 'cost');
 		if (!is_object($cost)) {
 			$cost = new todoCmd();
 			$cost->setLogicalId('cost');
-			$cost->setName(__('Coût', __FILE__));				
+			$cost->setName(__('Coût', __FILE__));
 		}
 		$cost->setEqLogic_id($this->getId());
 		$cost->setConfiguration('type',true);
 		$cost->setType('info');
 		$cost->setSubType('numeric');
 		$cost->save();
-		
+
 		$globalCost = $this->getCmd(null, 'globalcost');
 		if (!is_object($globalCost)) {
 			$globalCost = new todoCmd();
 			$globalCost->setLogicalId('globalcost');
-			$globalCost->setName(__('Coût global', __FILE__));				
+			$globalCost->setName(__('Coût global', __FILE__));
 		}
 		$globalCost->setConfiguration('type',true);
 		$globalCost->setEqLogic_id($this->getId());
 		$globalCost->setType('info');
 		$globalCost->setSubType('numeric');
 		$globalCost->save();
-		
+
 		$cost = $globalcost =  0 ;
 		foreach ($this->getCmd() as $cmd) {
 			if (is_numeric($cmd->getConfiguration('price'))) {
@@ -320,23 +320,23 @@ class todo extends eqLogic {
 				}
 			}
 		}
-		$this->checkAndUpdateCmd('cost', $cost);	
+		$this->checkAndUpdateCmd('cost', $cost);
 		$this->checkAndUpdateCmd('globalcost', $cost);
 		$this->allTodo();
-		
+
 	}
-	
-	
+
+
 
     public function preRemove() {
-        
+
     }
 
     public function postRemove() {
-        
+
     }
 
-	
+
 	public function toHtml($_version = 'dashboard') {
 		$replace = $this->preToHtml($_version);
 		if (!is_array($replace)) {
@@ -344,15 +344,16 @@ class todo extends eqLogic {
 		}
 		$version = jeedom::versionAlias($_version);
 		if ($version != 'mobile') {
-			$replace['#min-width#'] = $replace['#width#'];
-			$replace['#min-height#'] = $replace['#height#'];
-			$replace['#min-width-list#'] = $replace['#width#']-40;	
-			$replace['#min-height-list#'] = $replace['#height#']-110;			
+			$width  = isset($replace['#width#'])  ? (int) $replace['#width#']  : 0;
+			$height = isset($replace['#height#']) ? (int) $replace['#height#'] : 0;
+
+			$replace['#min-width-list#']  = $width  - 40;
+			$replace['#min-height-list#'] = $height - 110;
 		} else {
 			$replace['#min-width#'] = $this->getDisplay('width') + 30;
 			$replace['#min-height#'] = $this->getDisplay('height') +50;
-			$replace['#min-width-list#'] = $replace['#min-width#']-40;	
-			$replace['#min-height-list#'] = $replace['#min-height#']-100;	
+			$replace['#min-width-list#'] = $replace['#min-width#']-40;
+			$replace['#min-height-list#'] = $replace['#min-height#']-100;
 		}
 		return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'todo', 'todo')));
 	}
@@ -360,28 +361,28 @@ class todo extends eqLogic {
 
 class todoCmd extends cmd {
 
-	
+
 	public function preSave() {
 		if ($this->getSubtype() == 'message' && $this->getLogicalId() == 'new') {
 			$this->setDisplay('title_disable', 1);
 		}
 	}
-	
+
     public function execute($_options = array()) {
 		if ($this->getType() == 'info') {
 			return;
-		}		
+		}
 		$todo = $this->getEqLogic();
 		switch ($this->getLogicalId()) {
-			case 'new': 
+			case 'new':
 				todo::createTodo($todo->getName(),$_options['message']);
-				break;	
-			case 'removeall': 
+				break;
+			case 'removeall':
 				$todo->removeall();
 				break;
 			case 'refresh':
 				$todo->refreshList();
-			break;					
+			break;
 		}
     }
     /*     * **********************Getteur Setteur*************************** */

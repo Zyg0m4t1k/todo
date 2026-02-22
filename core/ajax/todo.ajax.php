@@ -23,7 +23,7 @@ try {
     if (init('action') == 'changeTodo') {
       	$todo = todo::changeTodo(init('acte'),init('idcmd'),init('id'),init('widget'));
 		ajax::success(init('id'));
-    } elseif (init('action') == 'editCmd') { 
+    } elseif (init('action') == 'editCmd') {
 		if (!isConnect('admin')) {
 			throw new Exception(__('401 - Accès non autorisé', __FILE__));
 		}
@@ -40,13 +40,13 @@ try {
 			$eq->save();
 		}
 		ajax::success();
-//		
-//		
-//		
-//		
+//
+//
+//
+//
 //		 $todo = todo::editCmd(init('id'),init('nom'),init('info'),init('datetodo'),init('timestamp'));
 //		 ajax::success();
-	} elseif (init('action') == 'getAllTodo') { 
+	} elseif (init('action') == 'getAllTodo') {
 		 $return = todo::getTodos();
 		 ajax::success($return);
 	} elseif (init('action') == 'getTodo') {
@@ -89,14 +89,14 @@ try {
 		$cmds = $todo->getCmd();
 		usort($cmds, function($a, $b) {
 			return $a->getId() - $b->getId();
-		});		
-		ajax::success(jeedom::toHumanReadable(utils::o2a($cmds)));		
+		});
+		ajax::success(jeedom::toHumanReadable(utils::o2a($cmds)));
 	}
-	
-		
+
+
     throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
     /*     * *********Catch exeption*************** */
 } catch (Exception $e) {
-    ajax::error(displayExeption($e), $e->getCode());
+    ajax::error(displayException($e), $e->getCode());
 }
 ?>

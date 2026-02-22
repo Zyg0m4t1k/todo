@@ -1,5 +1,5 @@
 <div class="eqLogic eqLogic-widget allowResize allowReorderCmd #custom_layout# #eqType#" data-eqType="#eqType#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#"  style="border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#;width: #width#;height: #height#; min-height: #min-height#px;min-width: #min-width#px;padding : 0px;" data-translate-category="#translate_category#" data-category="#category#" data-tags="#tags#">
-    <script src="/plugins/todo/desktop/js/todo.js"></script>
+
 	<center class="widget-name">
 		<span class="warning" title="#alert_name#">
 			<i class='#alert_icon#'></i>
@@ -15,19 +15,148 @@
 		<div class="input-group">
 		  <span class="input-group-addon" id="sizing-addon2"><i class="fas fa-sticky-note"></i></span>
 		  <input id="#id#" type="text" class="new form-control" aria-describedby="sizing-addon2">
-		  <span class="input-group-btn"><button value="#id#" type="button" class="btn btn-success btn_add"><i class="fas fa-sign-in-alt"></i></button></span>			
-		</div>		
+		  <span class="input-group-btn"><button value="#id#" type="button" class="btn btn-success btn_add"><i class="fas fa-sign-in-alt"></i></button></span>
+		</div>
     </div>
 	<ul class="list-group" style="margin:10px; overflow-y: auto;max-height:#min-height-list#px;min-width:#min-width-list#px;">
 	</ul>
-    <script>
-		loadData('#id#');
-		if ('#refresh_id#' != ''){
-			$('.eqLogic[data-eqLogic_uid=#uid#] .refresh').on('click', function () {
-				jeedom.cmd.execute({id: '#refresh_id#'});
-			});
-		}else{
-			$('.eqLogic[data-eqLogic_uid=#uid#] .refresh').remove();
-		}		
-	</script>
+<script>
+(function () {
+  const idEq = '#id#';
+  console.log(idEq)
+  loadData(idEq)
+  function loadData(idEq) {
+    $.ajax({
+      type: "POST",
+      url: "plugins/todo/core/ajax/todo.ajax.php",
+      global: false,
+      data: { action: "loadData", id: idEq },
+      dataType: 'json',
+      error: function (request, status, error) {
+        handleAjaxError(request, status, error);
+      },
+      success: function (data) {
+        if (data.state != 'ok') {
+          $('#div_alert').showAlert({message: data.result, level: 'danger'});
+          return;
+        }
+		console.log('ok')
+		console.log(data.result)
+
+        if (data.result.length != 0) {
+          let html = '';
+          const autoComplete = [];
+
+          for (let k = 0; k < data.result.length; k++) {
+            let time_class = "";
+
+            if (data.result[k].configuration.cron_todo && data.result[k].configuration.cron_todo != '') {
+              const dateStr = data.result[k].configuration.cron_todo;
+              const arrStartDate = dateStr.split("/");
+              const d1 = new Date(arrStartDate[2], arrStartDate[1] - 1, arrStartDate[0]);
+              const today = new Date();
+              const d2 = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+              if (+d1 === +d2) time_class = 'darkorange';
+              else if (+d1 > +d2) time_class = 'green';
+              else time_class = 'red';
+            }
+
+            if (!data.result[k].configuration.type) {
+              if (data.result[k].isVisible == 1) {
+                html += '<form style="display:none;"><div><label></label></div></form>';
+                html += '<li id="' + data.result[k].id + '" class="list-group-item list_edit" style="background-color:transparent;font-size:1.1em;padding:10px;">'
+                      + '<span><input value="' + data.result[k].id + '" type="checkbox"></span>'
+                      + '<span class="name_mobile name_event_' + data.result[k].id + '" name="' + data.result[k].eqLogic_id + '">' + data.result[k].name + '</span> '
+                      + '<a class="delete" name="' + data.result[k].eqLogic_id + '" alt="' + data.result[k].id + '"><i style="font-size:0.9em;padding-top:4px;color:rgb(155, 75, 70)" class="fas fa-minus-circle pull-right"></i></a>'
+                      + '<a class="edit" name="' + data.result[k].eqLogic_id + '" alt="' + data.result[k].id + '"><i style="font-size:0.9em;padding-top:4px;color:rgb(58,90,85)" class="fas fa-sticky-note pull-right"></i></a>'
+                      + '<a class="time_edit" name="' + data.result[k].eqLogic_id + '" alt="' + data.result[k].id + '"><i style="font-size:0.9em;padding-top:4px;color:' + time_class + '" class="fas fa-info-circle pull-right"></i></a>'
+                      + '</li>';
+              } else {
+                autoComplete.push(data.result[k].name);
+              }
+            }
+          }
+
+          $('.todo[data-eqLogic_id="' + idEq + '"] .list-group').empty().append(html);
+
+          $('.todo[data-eqLogic_id="' + idEq + '"] .list-group :checkbox').off('change').on('change', function () {
+            const id = $(this).val();
+            if (this.checked) changeTodo('check', id, idEq);
+          });
+
+          $('#' + idEq).autocomplete({ source: autoComplete });
+
+          $('.todo[data-eqLogic_id="' + idEq + '"] .btn_add').off('click').on('click', function () {
+            const id = $(this).val();
+            const input = $('#' + id).val();
+            if (input === '') return;
+            changeTodo('new', input, id);
+          });
+
+          $('.todo[data-eqLogic_id="' + idEq + '"] .delete').off('click').on('click', function () {
+            const idcmd = $(this).attr('alt');
+            const id = $(this).attr('name');
+            changeTodo('del', idcmd, id);
+          });
+
+          $('.todo[data-eqLogic_id="' + idEq + '"] .edit').off('click').on('click', function () {
+            const idcmd = $(this).attr('alt');
+            $('#md_modal').dialog({
+              width: 400,
+              height: 400,
+              autoOpen: false,
+              modal: true,
+              title: "Informations"
+            });
+            $('#md_modal').load('index.php?v=d&plugin=todo&modal=editcmd&id=' + idcmd);
+            $('#md_modal').dialog('open');
+          });
+        }
+      }
+    });
+  }
+
+  function changeTodo(_action,_idcmd, _id) {
+	$.ajax({// fonction permettant de faire de l'ajax
+		type: "POST", // methode de transmission des données au fichier php
+		url: "plugins/todo/core/ajax/todo.ajax.php", // url du fichier php
+		global:false,
+		data: {
+			action: "changeTodo",
+			acte: _action,
+			idcmd: _idcmd,
+			id: _id
+		},
+		dataType: 'json',
+		error: function(request, status, error) {
+			handleAjaxError(request, status, error);
+		},
+		success: function(data) { // si l'appel a bien fonctionné
+			if (data.state != 'ok') {
+				$('#div_alert').showAlert({message:  data.result,level: 'danger'});
+				return;
+			}
+
+			loadData(data.result);
+			if (_action == 'new') {
+				 $('#'+_id).val('');
+			}
+		}
+	});
+}
+
+  if ('#refresh_id#' != '') {
+    $('.eqLogic[data-eqLogic_uid=#uid#] .refresh').off('click').on('click', function () {
+      jeedom.cmd.execute({id: '#refresh_id#'});
+    });
+  } else {
+    $('.eqLogic[data-eqLogic_uid=#uid#] .refresh').remove();
+  }
+
+  // Si tu veux charger au rendu :
+  // loadData(_id);
+
+})();
+</script>
 </div>

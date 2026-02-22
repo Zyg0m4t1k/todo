@@ -14,7 +14,7 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
- function initTodoTodos(_object_id) {
+ function initTodoPanel(_object_id) {
     jeedom.object.all({
         error: function (error) {
             $('#div_alert').showAlert({message: error.message, level: 'danger'});
@@ -27,11 +27,11 @@
                     if (isset(objects[i].display) && isset(objects[i].display.icon)) {
                         icon = objects[i].display.icon;
                     }
-                    li += '<li></span><a href="#" class="link" data-page="todos" data-plugin="todo" data-title="' + icon.replace(/\"/g, "\'") + ' ' + objects[i].name + '" data-option="' + objects[i].id + '"><span>' + icon + '</span> ' + objects[i].name + '</a></li>';
+                    li += '<li></span><a href="#" class="link" data-page="panel" data-plugin="todo" data-title="' + icon.replace(/\"/g, "\'") + ' ' + objects[i].name + '" data-option="' + objects[i].id + '"><span>' + icon + '</span> ' + objects[i].name + '</a></li>';
                 }
             }
             li += '</ul>';
-            panel(li);
+            jeedomUtils.loadPanel(li);
         }
     });
     displayTodo(_object_id);
@@ -50,7 +50,7 @@ function displayTodo(_object_id) {
         data: {
             action: 'getTodo',
             object_id: _object_id,
-            version: 'mview'
+            version: 'mobile'
         },
         dataType: 'json',
         error: function (request, status, error) {
