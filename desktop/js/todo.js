@@ -20,7 +20,7 @@ $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder:
 /*
  * Fonction pour l'ajout de commande, appellé automatiquement par plugin.template
  */
- 
+
 $('body').delegate('.cmd .cmdAttr[data-l1key=name]', 'focusout', function (event) {
 	$(this).next().val($(this).val().replace(" ","_"));
 });
@@ -52,14 +52,14 @@ function changeTodo(_action,_idcmd, _id) {
 				$('#div_alert').showAlert({message:  data.result,level: 'danger'});
 				return;
 			}
-			
+
 			loadData(data.result);
 			if (_action == 'new') {
 				 $('#'+_id).val('');
 			}
 		}
-	});			
-}	
+	});
+}
 function loadData(_id) {
 	//console.log('loadData ' + _id);
 	$.ajax({// fonction permettant de faire de l'ajax
@@ -68,7 +68,7 @@ function loadData(_id) {
 		global:false,
 		data: {
 			action: "loadData",
-			id: _id 
+			id: _id
 		},
 		dataType: 'json',
 		error: function(request, status, error) {
@@ -83,13 +83,11 @@ function loadData(_id) {
 				 var html = '',
 					autoComplete = [];
 				 for (var k=0; k<data.result.length; k++) {
-					 
+
 					 var time_class = ""
 					  if(data.result[k].configuration.cron_todo && data.result[k].configuration.cron_todo != '') {
-						  	
+
 						 var date1 = data.result[k].configuration.cron_todo;
-						  console.log(data.result[k].name)
-						  console.log(date1);
 						 var arrStartDate = date1.split("/");
 						 var date1 = new Date(arrStartDate[2],arrStartDate[1] -1,arrStartDate[0]);
 						   console.log('date1 ' + date1)
@@ -97,24 +95,18 @@ function loadData(_id) {
 						 var date2 = new Date(today.getFullYear(),today.getMonth() ,today.getDate());
 						  console.log('date2 ' + date2)
 						 if (+date1 === +date2) {
-							 console.log('today');
 							 var time_class = 'darkorange';
 						 } else if (+date1 > +date2) {
 							 var time_class = 'green';
-							  console.log('green');
-							 
 						 } else {
 						 	var time_class = 'red';
-							console.log('red');
 						 }
-						  									  
-						  
 					  }
-					 
-					 
+
+
 					 if(!data.result[k].configuration.type) {
 						 if(data.result[k].isVisible == 1){
-							 html += '<form style="display:none;"><div><label></label></div></form>';											 
+							 html += '<form style="display:none;"><div><label></label></div></form>';
 							 html += '<li id="'+data.result[k].id+'" class="list-group-item list_edit" style="background-color:transparent;font-size : 1.1em;padding:10px;"><span><input value="'+data.result[k].id+'" type="checkbox" ></span><span class="name_mobile name_event_'+data.result[k].id+'" name="'+data.result[k].eqLogic_id+'" >'+data.result[k].name+'</span> <a  class="delete" name="'+data.result[k].eqLogic_id+'"  alt="'+data.result[k].id+'"><i style="font-size : 0.9em;padding-top:4px;color:rgb(155, 75, 70)" class="fas fa-minus-circle pull-right"></i></a><a  class="edit" name="'+data.result[k].eqLogic_id+'"  alt="'+data.result[k].id+'"><i style="font-size : 0.9em;padding-top:4px;color:rgb(58,90,85)" class="fas fa-sticky-note pull-right"></i></a><a  class="time_edit" name="'+data.result[k].eqLogic_id+'"  alt="'+data.result[k].id+'"><i style="font-size : 0.9em;padding-top:4px;color:' + time_class + '" class="fas fa-info-circle pull-right"></i></a> </li>';
 						 } else {
 							 autoComplete.push(data.result[k].name);
@@ -126,11 +118,11 @@ function loadData(_id) {
 					id = $(this).val();
 					if(this.checked) {
 						changeTodo('check', id ,_id)
-					} 
-				});	
+					}
+				});
 				$('#'+_id).autocomplete({
 					source: autoComplete
-				});					
+				});
 				$( '.todo[data-eqLogic_id="' + _id + '"] .btn_add' ).unbind().on('click', function() {
 					id = $(this).val();
 					input = $('#'+id).val();
@@ -138,16 +130,16 @@ function loadData(_id) {
 						return
 					}
 					changeTodo('new',input,id);
-					
+
 				});
 				$( '.todo[data-eqLogic_id="' + _id + '"] .delete').on('click', function() {
-					idcmd = $(this).attr('alt'); 
+					idcmd = $(this).attr('alt');
 					id = $(this).attr('name');
 					changeTodo('del',idcmd,id)
-					
+
 				});
 				$( '.todo[data-eqLogic_id="' + _id + '"] .edit' ).on('click', function() {
-					idcmd = $(this).attr('alt'); 
+					idcmd = $(this).attr('alt');
 					$('#md_modal').dialog({
 						width : 400,
 						height: 400,
@@ -155,13 +147,13 @@ function loadData(_id) {
 						modal: true,
 						title: "Informations"
 					});
-					$('#md_modal').load('index.php?v=d&plugin=todo&modal=editcmd&id='+ idcmd);		
+					$('#md_modal').load('index.php?v=d&plugin=todo&modal=editcmd&id='+ idcmd);
 					$('#md_modal').dialog('open');
-				});							 
+				});
 			}
 		}
-	});				
-}	
+	});
+}
 
 
 
@@ -172,58 +164,93 @@ function addCmdToTable(_cmd) {
     if (!isset(_cmd.configuration)) {
         _cmd.configuration = {};
     }
-	console.log(_cmd.name)
 	if (_cmd.logicalId == 'getlist' || _cmd.logicalId == 'new' || _cmd.logicalId == 'list' || _cmd.logicalId == 'removeall' || _cmd.logicalId == 'refresh' || _cmd.logicalId == 'cost' || _cmd.logicalId == 'globalcost') {
 		console.log(_cmd.options)
 		var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '" >';
 		tr += '<td><input class="cmdAttr form-control input-sm" data-l1key="id" style="display : none;"><input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 90%;margin-left:auto;margin-right:auto;" placeholder="{{Nom}}" /></td>';
-		tr += '<td><span><input type="checkbox" data-size="mini" data-label-text="{{Visible}}" class="cmdAttr checkbox-inline" data-l1key="isVisible" checked/></span>'; 
+		tr += '<td><span><input type="checkbox" data-size="mini" data-label-text="{{Visible}}" class="cmdAttr checkbox-inline" data-l1key="isVisible" checked/></span>';
 		tr += '<span class="type" type="info" style="display : none;">' + jeedom.cmd.availableType() + '</span>';
 		tr += '<span class="subType" subType="' + init(_cmd.subType) + '" style="display : none;"></span>';
-		tr += '</td>';			
+		tr += '</td>';
 		tr += '<td>';
 		  if (is_numeric(_cmd.id)) {
 			tr += '<a class="btn btn-default btn-xs cmdAction" data-action="configure"><i class="fas fa-cogs"></i></a> ';
 			tr += '<a class="btn btn-default btn-xs cmdAction" data-action="test"><i class="fa fa-rss"></i> {{Tester}}</a>';
-		  }		
-		tr += '</td>';	
+		  }
+		tr += '</td>';
 		tr += '</tr>';
 		$('#table_cmd tbody').append(tr);
 		$('#table_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
 		if (isset(_cmd.type)) {
 			$('#table_cmd tbody tr:last .cmdAttr[data-l1key=type]').value(init(_cmd.type));
 		}
-		jeedom.cmd.changeType($('#table_cmd tbody tr:last'), init(_cmd.subType));			
-		
+		jeedom.cmd.changeType($('#table_cmd tbody tr:last'), init(_cmd.subType));
+
 	} else {
-		var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '" >';
-		tr += '<td><input class="cmdAttr form-control input-sm" data-l1key="id" style="display : none;"><input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 90%;margin-left:auto;margin-right:auto;" placeholder="{{Nom}}" /><input class="cmdAttr form-control input-sm" data-l1key="logicalId" style="display:none;"  /></td>';
-		tr += '<td><input id="ident' + init(_cmd.id) + '" class="delai cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="cron_todo" style="width :90%;margin-left:auto;margin-right:auto;" placeholder="{{delai}}" readonly/><input type="hidden" class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="timestamp" value=""  ></td>';
-		tr += '<td><span><input type="checkbox" data-size="mini" data-label-text="{{Visible}}" class="cmdAttr checkbox-inline" data-l1key="isVisible" checked/></span>'; 
-		tr += '<span class="type" type="info" style="display : none;">' + jeedom.cmd.availableType() + '</span>';
-		tr += '<span class="subType" subType="' + init(_cmd.subType) + '" style="display : none;"></span>';
-		tr += '</td>';
-		tr += '<td><i class="fas fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i>';
-		tr += '</td>';
-		tr += '</tr>';
-		$('#table_todo tbody').append(tr);
-		$('#table_todo tbody tr:last').setValues(_cmd, '.cmdAttr');
-		if (isset(_cmd.type)) {
-			$('#table_todo tbody tr:last .cmdAttr[data-l1key=type]').value(init(_cmd.type));
-		}
-		jeedom.cmd.changeType($('#table_todo tbody tr:last'), init(_cmd.subType));		
+  var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">'
+  tr += '<td class="hidden-xs">'
+  tr += '<span class="cmdAttr" data-l1key="id"></span>'
+  tr += '</td>'
+  tr += '<td>'
+  tr += '<div class="input-group">'
+  tr += '<input class="cmdAttr form-control input-sm roundedLeft" data-l1key="name" placeholder="{{Nom de la commande}}">'
+  tr += '<span class="input-group-btn"><a class="cmdAction btn btn-sm btn-default" data-l1key="chooseIcon" title="{{Choisir une icône}}"><i class="fas fa-icons"></i></a></span>'
+  tr += '<span class="cmdAttr input-group-addon roundedRight" data-l1key="display" data-l2key="icon" style="font-size:19px;padding:0 5px 0 0!important;"></span>'
+  tr += '</div>'
+  tr += '<select class="cmdAttr form-control input-sm" data-l1key="value" style="display:none;margin-top:5px;" title="{{Commande info liée}}">'
+  tr += '<option value="">{{Aucune}}</option>'
+  tr += '</select>'
+  tr += '</td>'
+  tr += '<td>'
+  tr += '<span class="type" type="' + init(_cmd.type) + '">' + jeedom.cmd.availableType() + '</span>'
+  tr += '<span class="subType" subType="' + init(_cmd.subType) + '"></span>'
+  tr += '</td>'
+  tr += '<td>'
+  tr += '<label class="checkbox-inline"><input type="checkbox" class="cmdAttr" data-l1key="isVisible" checked/>{{Afficher}}</label> '
+  tr += '<label class="checkbox-inline"><input type="checkbox" class="cmdAttr" data-l1key="isHistorized" checked/>{{Historiser}}</label> '
+  tr += '<label class="checkbox-inline"><input type="checkbox" class="cmdAttr" data-l1key="display" data-l2key="invertBinary"/>{{Inverser}}</label> '
+  tr += '<div style="margin-top:7px;">'
+  tr += '<input class="tooltips cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="minValue" placeholder="{{Min}}" title="{{Min}}" style="width:30%;max-width:80px;display:inline-block;margin-right:2px;">'
+  tr += '<input class="tooltips cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="maxValue" placeholder="{{Max}}" title="{{Max}}" style="width:30%;max-width:80px;display:inline-block;margin-right:2px;">'
+  tr += '<input class="tooltips cmdAttr form-control input-sm" data-l1key="unite" placeholder="Unité" title="{{Unité}}" style="width:30%;max-width:80px;display:inline-block;margin-right:2px;">'
+  tr += '</div>'
+  tr += '</td>'
+  tr += '<td>';
+  tr += '<span class="cmdAttr" data-l1key="htmlstate"></span>';
+  tr += '</td>';
+  tr += '<td>'
+  if (is_numeric(_cmd.id)) {
+    tr += '<a class="btn btn-default btn-xs cmdAction" data-action="configure"><i class="fas fa-cogs"></i></a> '
+    tr += '<a class="btn btn-default btn-xs cmdAction" data-action="test"><i class="fas fa-rss"></i> {{Tester}}</a>'
+  }
+  tr += '<i class="fas fa-minus-circle pull-right cmdAction cursor" data-action="remove" title="{{Supprimer la commande}}"></i></td>'
+  tr += '</tr>'
+ $('#table_todo tbody').append(tr);
+  var tr = $('#table_todo tbody tr').last()
+  jeedom.eqLogic.buildSelectCmd({
+    id: $('.eqLogicAttr[data-l1key=id]').value(),
+    filter: { type: 'info' },
+    error: function (error) {
+      $('#div_alert').showAlert({ message: error.message, level: 'danger' })
+    },
+    success: function (result) {
+      tr.find('.cmdAttr[data-l1key=value]').append(result)
+      tr.setValues(_cmd, '.cmdAttr')
+      jeedom.cmd.changeType(tr, init(_cmd.subType))
+    }
+  })
 
 	}
 
 	$( "input[id^='ident']" ).datepicker({
 		  dateFormat: 'dd/mm/yy',
-		  minDate: 0,	  
+		  minDate: 0,
 		  onClose: function( dateString ){
 			  var newdate = dateString.split("/").reverse().join("-");
 			  var myDate = new Date( newdate ).getTime() / 1000 ;
 			  $( this ).next().val( myDate );
 		   }
-	});			
+	});
 }
 
 
