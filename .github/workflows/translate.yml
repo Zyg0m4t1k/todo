@@ -14,7 +14,5 @@ jobs:
       sync_site: true
       site_repo: "Zyg0m4t1k/Zyg0m4t1k.github.io"
       site_branch: "master"
-      use_deepl: false   # <- true si deepl
     secrets:
       SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
-      # DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}  # <- à décommenter seulement si use_deepl=true
