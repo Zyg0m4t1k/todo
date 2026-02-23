@@ -6,6 +6,10 @@ on:
     branches:
       - beta
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   full:
     uses: Zyg0m4t1k/jeedom-i18n-tools/.github/workflows/full-translate.yml@master
