@@ -14,10 +14,10 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
- function initTodoPanel(_object_id) {
+function initTodoPanel(_object_id) {
     jeedom.object.all({
         error: function (error) {
-            $('#div_alert').showAlert({message: error.message, level: 'danger'});
+            $('#div_alert').showAlert({ message: error.message, level: 'danger' });
         },
         success: function (objects) {
             var li = ' <ul data-role="listview">';
@@ -27,18 +27,29 @@
                     if (isset(objects[i].display) && isset(objects[i].display.icon)) {
                         icon = objects[i].display.icon;
                     }
-                    li += '<li></span><a href="#" class="link" data-page="panel" data-plugin="todo" data-title="' + icon.replace(/\"/g, "\'") + ' ' + objects[i].name + '" data-option="' + objects[i].id + '"><span>' + icon + '</span> ' + objects[i].name + '</a></li>';
+                    li +=
+                        '<li></span><a href="#" class="link" data-page="panel" data-plugin="todo" data-title="' +
+                        icon.replace(/\"/g, "\'") +
+                        ' ' +
+                        objects[i].name +
+                        '" data-option="' +
+                        objects[i].id +
+                        '"><span>' +
+                        icon +
+                        '</span> ' +
+                        objects[i].name +
+                        '</a></li>';
                 }
             }
             li += '</ul>';
             jeedomUtils.loadPanel(li);
-        }
+        },
     });
     displayTodo(_object_id);
 
-    $(window).on("orientationchange", function (event) {
+    $(window).on('orientationchange', function (event) {
         setTileSize('.eqLogic');
-        $('#div_displayEquipementTodo').packery({gutter : 4});
+        $('#div_displayEquipementTodo').packery({ gutter: 4 });
     });
 }
 
@@ -50,7 +61,7 @@ function displayTodo(_object_id) {
         data: {
             action: 'getTodo',
             object_id: _object_id,
-            version: 'mobile'
+            version: 'mobile',
         },
         dataType: 'json',
         error: function (request, status, error) {
@@ -58,7 +69,7 @@ function displayTodo(_object_id) {
         },
         success: function (data) {
             if (data.state != 'ok') {
-                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                $('#div_alert').showAlert({ message: data.result, level: 'danger' });
                 return;
             }
             $('#div_displayEquipementTodo').empty();
@@ -66,8 +77,8 @@ function displayTodo(_object_id) {
                 $('#div_displayEquipementTodo').append(data.result.eqLogics[i]).trigger('create');
             }
             setTileSize('.eqLogic');
-            $('#div_displayEquipementTodo').packery({gutter : 4});
+            $('#div_displayEquipementTodo').packery({ gutter: 4 });
             $.hideLoading();
-        }
+        },
     });
 }

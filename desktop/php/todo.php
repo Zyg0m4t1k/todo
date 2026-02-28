@@ -1,6 +1,7 @@
 <?php
-if (!isConnect('admin')) {
-	throw new Exception('{{401 - Accès non autorisé}}');
+if (!isConnect('admin'))
+{
+    throw new Exception('{{401 - Accès non autorisé}}');
 }
 $plugin = plugin::byId('todo');
 sendVarToJS('eqType', $plugin->getId());
@@ -27,15 +28,16 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		<input class="form-control" placeholder="{{Rechercher}}" id="in_searchEqlogic" />
 		<div class="eqLogicThumbnailContainer">
 		<?php
-			foreach ($eqLogics as $eqLogic) {
-				$opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
-				echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" >';
-				echo '<img src="' . $plugin->getPathImgIcon() . '" />';
-				echo "<br>";
-				echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
-				echo '</div>';
-			}
-		?>
+            foreach ($eqLogics as $eqLogic)
+            {
+                $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
+                echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" >';
+                echo '<img src="' . $plugin->getPathImgIcon() . '" />';
+                echo "<br>";
+                echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
+                echo '</div>';
+            }
+?>
 		</div>
 	</div>
 	<div class="col-xs-12 eqLogic" style="display: none;">
@@ -68,10 +70,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
 									<option value="">{{Aucun}}</option>
 									<?php
-										foreach (jeeObject::all() as $object) {
-											echo '<option value="' . $object->getId() . '">' . $object->getName() . '</option>';
-										}
-									?>
+                                        foreach (jeeObject::all() as $object)
+                                        {
+                                            echo '<option value="' . $object->getId() . '">' . $object->getName() . '</option>';
+                                        }
+?>
 								</select>
 							</div>
 						</div>
@@ -79,12 +82,13 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<label class="col-sm-3 control-label">{{Catégorie}}</label>
 							<div class="col-sm-9">
 							<?php
-								foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
-									echo '<label class="checkbox-inline">';
-									echo '<input type="checkbox" class="eqLogicAttr" data-l1key="category" data-l2key="' . $key . '" />' . $value['name'];
-									echo '</label>';
-								}
-							?>
+                                foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value)
+                                {
+                                    echo '<label class="checkbox-inline">';
+                                    echo '<input type="checkbox" class="eqLogicAttr" data-l1key="category" data-l2key="' . $key . '" />' . $value['name'];
+                                    echo '</label>';
+                                }
+?>
 							</div>
 						</div>          
 						<div class="form-group">

@@ -16,25 +16,28 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
-if (!isConnect('admin')) {
+if (!isConnect('admin'))
+{
     throw new Exception('{{401 - Accès non autorisé}}');
 }
 
 include_file('3rdparty', 'datetimepicker/jquery.datetimepicker', 'css', 'todo');
-include_file('3rdparty', 'datetimepicker/jquery.datetimepicker', 'js', 'todo'); 
+include_file('3rdparty', 'datetimepicker/jquery.datetimepicker', 'js', 'todo');
 
-if (init('id') == '') {
+if (init('id') == '')
+{
     throw new Exception('{{L\'id de l\'opération ne peut etre vide : }}' . init('id'));
 }
 $idcmd = init('id');
-$cmd= cmd::byId($idcmd);
-if (!is_object($cmd)) {
-	throw new Exception('{{Aucun todo associé à l\'id : }}' . init('id'));
+$cmd = cmd::byId($idcmd);
+if (!is_object($cmd))
+{
+    throw new Exception('{{Aucun todo associé à l\'id : }}' . init('id'));
 }
 
 $human_cmd = jeedom::toHumanReadable($cmd);
-sendVarToJS('cmdAttr',  utils::o2a($human_cmd));
-sendVarToJS('cmdId',  init('id'));
+sendVarToJS('cmdAttr', utils::o2a($human_cmd));
+sendVarToJS('cmdId', init('id'));
 ?>
 <div id="cmdEdit">
 	<div class="input-group">

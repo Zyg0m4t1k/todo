@@ -1,19 +1,19 @@
 {
-	"id" : "todo",
-	"name" : "Todo List",
-	"description" : "Plugin qui permet la création de todolist",
-	"licence" : "AGPL",
-	"author" : "zyg0m4t1k",
-	"require": "4.5",
-	"os": {
-		"min": 11,
-		"max": 13.99
-	},
-	"category" : "organization",
-	"display" : "panel",
-	"mobile" : "panel",
-	"changelog": "https://zyg0m4t1k.github.io/plugins/todo/changelog/",
-	"documentation": "https://zyg0m4t1k.github.io/plugins/todo/",
-	"language" : ["fr_FR","en_US","de_DE","sp_SP","it_IT","pt_PT"],
-	"compatibility" : ["miniplus","smart","rpi","docker","diy","v4"]		
+    "id": "todo",
+    "name": "Todo List",
+    "description": "Plugin qui permet la création de todolist",
+    "licence": "AGPL",
+    "author": "zyg0m4t1k",
+    "require": "4.5",
+    "os": {
+        "min": 11,
+        "max": 13.99
+    },
+    "category": "organization",
+    "display": "panel",
+    "mobile": "panel",
+    "changelog": "https://zyg0m4t1k.github.io/plugins/todo/changelog/",
+    "documentation": "https://zyg0m4t1k.github.io/plugins/todo/",
+    "language": ["fr_FR", "en_US", "de_DE", "sp_SP", "it_IT", "pt_PT"],
+    "compatibility": ["miniplus", "smart", "rpi", "docker", "diy", "v4"]
 }

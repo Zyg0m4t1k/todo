@@ -1,4 +1,4 @@
-name: i18n + sync docs (manual)
+name: i18n (Mips)
 
 on:
   workflow_dispatch:
@@ -10,13 +10,21 @@ permissions:
   contents: write
   pull-requests: write
 
+concurrency:
+  group: i18n-${{ github.repository }}
+  cancel-in-progress: true
+
 jobs:
-  full:
-    uses: Zyg0m4t1k/jeedom-i18n-tools/.github/workflows/full-translate.yml@master
-    with:
-      target_languages: "fr_FR,en_US,es_ES,de_DE,it_IT,pt_PT"
-      sync_site: true
-      site_repo: "Zyg0m4t1k/Zyg0m4t1k.github.io"
-      site_branch: "master"
-    secrets:
-      SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+  translate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout plugin repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate i18n (Mips) + open PR
+        uses: Mips2648/plugins-translations@v2
+        with:
+          target_languages: fr_FR,en_US,es_ES,de_DE,it_IT,pt_PT

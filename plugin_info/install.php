@@ -18,27 +18,28 @@
 
 require_once __DIR__ . '/../../../core/php/core.inc.php';
 
-function todo_install() {
-    
+function todo_install()
+{
 }
 
-function todo_update() {
-	 foreach (todo::byType('todo') as $todo) {
-		 $todo->save();
-		 $cmds = $todo->getCmd();
-		 foreach($cmds as $cmd) {
-			if($cmd->getConfiguration('type')) {
-				continue;
-			}
-			$cmd->setLogicalId(str_replace(' ','_',todo::conversion($cmd->getName())));
-			$cmd->save();
-		 }			 
-	 }
+function todo_update()
+{
+    foreach (todo::byType('todo') as $todo)
+    {
+        $todo->save();
+        $cmds = $todo->getCmd();
+        foreach ($cmds as $cmd)
+        {
+            if ($cmd->getConfiguration('type'))
+            {
+                continue;
+            }
+            $cmd->setLogicalId(str_replace(' ', '_', todo::conversion($cmd->getName())));
+            $cmd->save();
+        }
+    }
 }
 
-
-function todo_remove() {
-    
+function todo_remove()
+{
 }
-
-?>

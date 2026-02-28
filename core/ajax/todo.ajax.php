@@ -16,87 +16,106 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
-try {
+try
+{
     require_once __DIR__ . '/../../../../core/php/core.inc.php';
     include_file('core', 'authentification', 'php');
 
-    if (init('action') == 'changeTodo') {
-      	$todo = todo::changeTodo(init('acte'),init('idcmd'),init('id'),init('widget'));
-		ajax::success(init('id'));
-    } elseif (init('action') == 'editCmd') {
-		if (!isConnect('admin')) {
-			throw new Exception(__('401 - Accès non autorisé', __FILE__));
-		}
-		$cmdSave = json_decode(init('dataCmd'), true);
-		$cmd = null;
-		if (isset($cmdSave['id'])) {
-			$cmd = cmd::byId($cmdSave['id']);
-		}
+    if (init('action') == 'changeTodo')
+    {
+        $todo = todo::changeTodo(init('acte'), init('idcmd'), init('id'), init('widget'));
+        ajax::success(init('id'));
+    } elseif (init('action') == 'editCmd')
+    {
+        if (!isConnect('admin'))
+        {
+            throw new Exception(__('401 - Accès non autorisé', __FILE__));
+        }
+        $cmdSave = json_decode(init('dataCmd'), true);
+        $cmd = null;
+        if (isset($cmdSave['id']))
+        {
+            $cmd = cmd::byId($cmdSave['id']);
+        }
 
-		utils::a2o($cmd, jeedom::fromHumanReadable($cmdSave));
-		$cmd->save();
-		$eq = $cmd->getEqlogic();
-		if(is_object($eq)) {
-			$eq->save();
-		}
-		ajax::success();
-//
-//
-//
-//
-//		 $todo = todo::editCmd(init('id'),init('nom'),init('info'),init('datetodo'),init('timestamp'));
-//		 ajax::success();
-	} elseif (init('action') == 'getAllTodo') {
-		 $return = todo::getTodos();
-		 ajax::success($return);
-	} elseif (init('action') == 'getTodo') {
-		if (init('object_id') == '') {
-			$object = jeeObject::byId($_SESSION['user']->getOptions('defaultDashboardObject'));
-		} else {
-			$object = jeeObject::byId(init('object_id'));
-		}
-		if (!is_object($object)) {
-			$object = jeeObject::rootObject();
-		}
-		$return = array();
-		$return['eqLogics'] = array();
-		if (init('object_id') == '') {
-			foreach (jeeObject::all() as $object) {
-				foreach ($object->getEqLogic(true, false, 'todo') as $todo) {
-					$return['eqLogics'][] = $todo->toHtml(init('version'));
-				}
-			}
-		} else {
-			foreach ($object->getEqLogic(true, false, 'todo') as $todo) {
-				$return['eqLogics'][] = $todo->toHtml(init('version'));
-			}
-			foreach (jeeObject::buildTree($object) as $child) {
-				$todos = $child->getEqLogic(true, false, 'todo');
-				if (count($todos) > 0) {
-					foreach ($todos as $todo) {
-						$return['eqLogics'][] = $todo->toHtml(init('version'));
-					}
-				}
-			}
-
-		}
-		ajax::success($return);
-	} elseif (init('action') == 'loadData') {
-		$todo = todo::byId(init('id'));
-		if (!is_object($todo)) {
-			throw new Exception(__('Todo inconnue : ', __FILE__) . init('id'), 9999);
-		}
-		$cmds = $todo->getCmd();
-		usort($cmds, function($a, $b) {
-			return $a->getId() - $b->getId();
-		});
-		ajax::success(jeedom::toHumanReadable(utils::o2a($cmds)));
-	}
-
+        utils::a2o($cmd, jeedom::fromHumanReadable($cmdSave));
+        $cmd->save();
+        $eq = $cmd->getEqlogic();
+        if (is_object($eq))
+        {
+            $eq->save();
+        }
+        ajax::success();
+        //
+        //
+        //
+        //
+        //		 $todo = todo::editCmd(init('id'),init('nom'),init('info'),init('datetodo'),init('timestamp'));
+        //		 ajax::success();
+    } elseif (init('action') == 'getAllTodo')
+    {
+        $return = todo::getTodos();
+        ajax::success($return);
+    } elseif (init('action') == 'getTodo')
+    {
+        if (init('object_id') == '')
+        {
+            $object = jeeObject::byId($_SESSION['user']->getOptions('defaultDashboardObject'));
+        } else
+        {
+            $object = jeeObject::byId(init('object_id'));
+        }
+        if (!is_object($object))
+        {
+            $object = jeeObject::rootObject();
+        }
+        $return = array();
+        $return['eqLogics'] = array();
+        if (init('object_id') == '')
+        {
+            foreach (jeeObject::all() as $object)
+            {
+                foreach ($object->getEqLogic(true, false, 'todo') as $todo)
+                {
+                    $return['eqLogics'][] = $todo->toHtml(init('version'));
+                }
+            }
+        } else
+        {
+            foreach ($object->getEqLogic(true, false, 'todo') as $todo)
+            {
+                $return['eqLogics'][] = $todo->toHtml(init('version'));
+            }
+            foreach (jeeObject::buildTree($object) as $child)
+            {
+                $todos = $child->getEqLogic(true, false, 'todo');
+                if (count($todos) > 0)
+                {
+                    foreach ($todos as $todo)
+                    {
+                        $return['eqLogics'][] = $todo->toHtml(init('version'));
+                    }
+                }
+            }
+        }
+        ajax::success($return);
+    } elseif (init('action') == 'loadData')
+    {
+        $todo = todo::byId(init('id'));
+        if (!is_object($todo))
+        {
+            throw new Exception(__('Todo inconnue : ', __FILE__) . init('id'), 9999);
+        }
+        $cmds = $todo->getCmd();
+        usort($cmds, function ($a, $b) {
+            return $a->getId() - $b->getId();
+        });
+        ajax::success(jeedom::toHumanReadable(utils::o2a($cmds)));
+    }
 
     throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
     /*     * *********Catch exeption*************** */
-} catch (Exception $e) {
+} catch (Exception $e)
+{
     ajax::error(displayException($e), $e->getCode());
 }
-?>
