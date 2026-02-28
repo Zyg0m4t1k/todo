@@ -1,0 +1,73 @@
+{
+    "plugins\/todo\/core\/ajax\/todo.ajax.php": {
+        "401 - Accès non autorisé": "401 - Accesso non autorizzato",
+        "Aucune methode correspondante à : ": "",
+        "Todo inconnue : ": ""
+    },
+    "plugins\/todo\/core\/class\/todo.class.php": {
+        "Coût": "",
+        "Coût global": "",
+        "Liste": "Liste",
+        "New todo": "",
+        "Refresh": "",
+        "Remove all": ""
+    },
+    "plugins\/todo\/desktop\/js\/todo.js": {
+        "Afficher": "Mostra",
+        "Aucune": "Aucune",
+        "Choisir une icône": "Seleziona un\\'icona",
+        "Commande info liée": "",
+        "Historiser": "Storicizza",
+        "Inverser": "Inverti",
+        "Max": "Max",
+        "Min": "Min",
+        "Nom": "Nome",
+        "Nom de la commande": "",
+        "Supprimer la commande": "",
+        "Tester": "Prova",
+        "Unité": "Unità",
+        "Visible": "Visibile"
+    },
+    "plugins\/todo\/desktop\/modal\/editcmd.php": {
+        "401 - Accès non autorisé": "401 - Accesso non autorizzato",
+        "Aucun todo associé à l\\'id : ": "",
+        "Coût": "",
+        "L\\'id de l\\'opération ne peut etre vide : ": "",
+        "Prix Unité": "",
+        "Quantité": "",
+        "date": ""
+    },
+    "plugins\/todo\/desktop\/php\/panel.php": {
+        "401 - Accès non autorisé": "401 - Accesso non autorizzato",
+        "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "",
+        "Liste objets": "",
+        "Rechercher": "Ricercare"
+    },
+    "plugins\/todo\/desktop\/php\/todo.php": {
+        "401 - Accès non autorisé": "401 - Accesso non autorizzato",
+        "Actions": "Stock",
+        "Activer": "Attivare",
+        "Ajouter": "Ajouter",
+        "Ajouter un todo": "",
+        "Aucun": "Nessuno",
+        "Catégorie": "Categoria",
+        "Commandes": "Comandi",
+        "Configuration": "Configurazione",
+        "Configuration avancée": "Configurazione avanzata",
+        "Dupliquer": "Duplicato",
+        "Equipement": "Dispositivo",
+        "Gestion": "Gestione",
+        "Mes listes": "",
+        "Nom": "Nome",
+        "Nom de l'équipement": "",
+        "Nom de l'équipement todo": "",
+        "Objet parent": "Oggetto padre",
+        "Rechercher": "Ricercare",
+        "Remove": "",
+        "Sauvegarder": "Sauvegarder",
+        "Supprimer": "Supprimer",
+        "Tâches": "",
+        "Visible": "Visibile",
+        "delai": ""
+    }
+}
