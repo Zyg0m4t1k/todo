@@ -1,73 +1,73 @@
 {
-    "plugins\/todo\/core\/ajax\/todo.ajax.php": {
-        "401 - Accès non autorisé": "401 - Unauthorized access",
-        "Aucune methode correspondante à : ": "",
-        "Todo inconnue : ": ""
-    },
-    "plugins\/todo\/core\/class\/todo.class.php": {
-        "Coût": "",
-        "Coût global": "",
-        "Liste": "List",
-        "New todo": "",
-        "Refresh": "",
-        "Remove all": ""
-    },
-    "plugins\/todo\/desktop\/js\/todo.js": {
-        "Afficher": "Show",
-        "Aucune": "None",
-        "Choisir une icône": "Choose an icon",
-        "Commande info liée": "",
-        "Historiser": "Historize",
-        "Inverser": "Invert",
-        "Max": "Maximum",
-        "Min": "Minimum",
-        "Nom": "Name",
-        "Nom de la commande": "",
-        "Supprimer la commande": "",
-        "Tester": "Test",
-        "Unité": "Unit",
-        "Visible": "Visible"
-    },
-    "plugins\/todo\/desktop\/modal\/editcmd.php": {
-        "401 - Accès non autorisé": "401 - Unauthorized access",
-        "Aucun todo associé à l\\'id : ": "",
-        "Coût": "",
-        "L\\'id de l\\'opération ne peut etre vide : ": "",
-        "Prix Unité": "",
-        "Quantité": "",
-        "date": ""
-    },
-    "plugins\/todo\/desktop\/php\/panel.php": {
-        "401 - Accès non autorisé": "401 - Unauthorized access",
-        "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "",
-        "Liste objets": "",
-        "Rechercher": "Search"
-    },
-    "plugins\/todo\/desktop\/php\/todo.php": {
-        "401 - Accès non autorisé": "401 - Unauthorized access",
-        "Actions": "Actions",
-        "Activer": "Enable",
-        "Ajouter": "Add",
-        "Ajouter un todo": "",
-        "Aucun": "None",
-        "Catégorie": "Category",
-        "Commandes": "Commands",
-        "Configuration": "Configuration",
-        "Configuration avancée": "Advanced configuration",
-        "Dupliquer": "Duplicate",
-        "Equipement": "Equipment",
-        "Gestion": "Management",
-        "Mes listes": "",
-        "Nom": "Name",
-        "Nom de l'équipement": "",
-        "Nom de l'équipement todo": "",
-        "Objet parent": "Parent object",
-        "Rechercher": "Search",
-        "Remove": "",
-        "Sauvegarder": "Save",
-        "Supprimer": "Delete",
-        "Tâches": "",
-        "Visible": "Visible",
-        "delai": ""
-    }
+  "plugins/todo/core/ajax/todo.ajax.php": {
+    "401 - Accès non autorisé": "401 - Unauthorized access",
+    "Aucune methode correspondante à : ": "No corresponding method for: ",
+    "Todo inconnue : ": "Unknown todo: "
+  },
+  "plugins/todo/core/class/todo.class.php": {
+    "Coût": "Cost",
+    "Coût global": "Total cost",
+    "Liste": "List",
+    "New todo": "New todo",
+    "Refresh": "Refresh",
+    "Remove all": "Remove all"
+  },
+  "plugins/todo/desktop/js/todo.js": {
+    "Afficher": "Show",
+    "Aucune": "None",
+    "Choisir une icône": "Choose an icon",
+    "Commande info liée": "Linked info command",
+    "Historiser": "Historize",
+    "Inverser": "Invert",
+    "Max": "Maximum",
+    "Min": "Minimum",
+    "Nom": "Name",
+    "Nom de la commande": "Command name",
+    "Supprimer la commande": "Delete command",
+    "Tester": "Test",
+    "Unité": "Unit",
+    "Visible": "Visible"
+  },
+  "plugins/todo/desktop/modal/editcmd.php": {
+    "401 - Accès non autorisé": "401 - Unauthorized access",
+    "Aucun todo associé à l\\'id : ": "No todo associated with id: ",
+    "Coût": "Cost",
+    "L\\'id de l\\'opération ne peut etre vide : ": "Operation id cannot be empty: ",
+    "Prix Unité": "Unit price",
+    "Quantité": "Quantity",
+    "date": "Date"
+  },
+  "plugins/todo/desktop/php/panel.php": {
+    "401 - Accès non autorisé": "401 - Unauthorized access",
+    "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http://jeedom.fr/premier_pas.php\" target=\"_blank\">page</a>": "No root object found. To create one, go to General -> Object.<br/> If this is your first time using Jeedom, please consult this <a href=\"http://jeedom.fr/premier_pas.php\" target=\"_blank\">page</a>",
+    "Liste objets": "Objects list",
+    "Rechercher": "Search"
+  },
+  "plugins/todo/desktop/php/todo.php": {
+    "401 - Accès non autorisé": "401 - Unauthorized access",
+    "Actions": "Actions",
+    "Activer": "Enable",
+    "Ajouter": "Add",
+    "Ajouter un todo": "Add a todo",
+    "Aucun": "None",
+    "Catégorie": "Category",
+    "Commandes": "Commands",
+    "Configuration": "Configuration",
+    "Configuration avancée": "Advanced configuration",
+    "Dupliquer": "Duplicate",
+    "Equipement": "Equipment",
+    "Gestion": "Management",
+    "Mes listes": "My lists",
+    "Nom": "Name",
+    "Nom de l'équipement": "Equipment name",
+    "Nom de l'équipement todo": "Todo equipment name",
+    "Objet parent": "Parent object",
+    "Rechercher": "Search",
+    "Remove": "Remove",
+    "Sauvegarder": "Save",
+    "Supprimer": "Delete",
+    "Tâches": "Tasks",
+    "Visible": "Visible",
+    "delai": "Delay"
+  }
 }
