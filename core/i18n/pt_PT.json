@@ -1,73 +1,73 @@
 {
-  "plugins/todo/core/ajax/todo.ajax.php": {
-    "401 - Accès non autorisé": "401 - Acesso não autorizado",
-    "Aucune methode correspondante à : ": "Nenhum método correspondente a: ",
-    "Todo inconnue : ": "Tarefa desconhecida: "
-  },
-  "plugins/todo/core/class/todo.class.php": {
-    "Coût": "Custo",
-    "Coût global": "Custo total",
-    "Liste": "Lista",
-    "New todo": "Nova tarefa",
-    "Refresh": "Atualizar",
-    "Remove all": "Remover tudo"
-  },
-  "plugins/todo/desktop/js/todo.js": {
-    "Afficher": "Mostrar",
-    "Aucune": "Nenhuma",
-    "Choisir une icône": "Escolha um ícone",
-    "Commande info liée": "Comando de informação associado",
-    "Historiser": "Histórico",
-    "Inverser": "Inverter",
-    "Max": "Máx.",
-    "Min": "Mínimo",
-    "Nom": "Nome",
-    "Nom de la commande": "Nome do comando",
-    "Supprimer la commande": "Eliminar comando",
-    "Tester": "Testar",
-    "Unité": "Unidade",
-    "Visible": "Visível"
-  },
-  "plugins/todo/desktop/modal/editcmd.php": {
-    "401 - Accès non autorisé": "401 - Acesso não autorizado",
-    "Aucun todo associé à l\\'id : ": "Nenhuma tarefa associada ao ID: ",
-    "Coût": "Custo",
-    "L\\'id de l\\'opération ne peut etre vide : ": "O ID da operação não pode estar vazio: ",
-    "Prix Unité": "Preço unitário",
-    "Quantité": "Quantidade",
-    "date": "Data"
-  },
-  "plugins/todo/desktop/php/panel.php": {
-    "401 - Accès non autorisé": "401 - Acesso não autorizado",
-    "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http://jeedom.fr/premier_pas.php\" target=\"_blank\">page</a>": "Nenhum objeto raiz encontrado. Para criar um, vá para Geral → Objeto.<br/> Se é a primeira vez que utiliza o Jeedom, consulte esta <a href=\"http://jeedom.fr/premier_pas.php\" target=\"_blank\">página</a>.",
-    "Liste objets": "Lista de objetos",
-    "Rechercher": "Pesquisar"
-  },
-  "plugins/todo/desktop/php/todo.php": {
-    "401 - Accès non autorisé": "401 - Acesso não autorizado",
-    "Actions": "Ações",
-    "Activer": "Ativar",
-    "Ajouter": "Adicionar",
-    "Ajouter un todo": "Adicionar tarefa",
-    "Aucun": "Nenhum",
-    "Catégorie": "Categoria",
-    "Commandes": "Comandos",
-    "Configuration": "Configuração",
-    "Configuration avancée": "Configuração avançada",
-    "Dupliquer": "Duplicar",
-    "Equipement": "Equipamento",
-    "Gestion": "Gestão",
-    "Mes listes": "Minhas listas",
-    "Nom": "Nome",
-    "Nom de l'équipement": "Nome do equipamento",
-    "Nom de l'équipement todo": "Nome do equipamento Todo",
-    "Objet parent": "Objeto pai",
-    "Rechercher": "Pesquisar",
-    "Remove": "Remover",
-    "Sauvegarder": "Guardar",
-    "Supprimer": "Eliminar",
-    "Tâches": "Tarefas",
-    "Visible": "Visível",
-    "delai": "Atraso"
-  }
+    "plugins\/todo\/core\/ajax\/todo.ajax.php": {
+        "401 - Accès non autorisé": "401 - Acesso não autorizado",
+        "Aucune methode correspondante à : ": "Nenhum método correspondente a: ",
+        "Todo inconnue : ": "Tarefa desconhecida: "
+    },
+    "plugins\/todo\/core\/class\/todo.class.php": {
+        "Coût": "Custo",
+        "Coût global": "Custo total",
+        "Liste": "Lista",
+        "New todo": "Nova tarefa",
+        "Refresh": "Atualizar",
+        "Remove all": "Remover tudo"
+    },
+    "plugins\/todo\/desktop\/js\/todo.js": {
+        "Afficher": "Mostrar",
+        "Aucune": "Nenhuma",
+        "Choisir une icône": "Escolha um ícone",
+        "Commande info liée": "Comando de informação associado",
+        "Historiser": "Histórico",
+        "Inverser": "Inverter",
+        "Max": "Máx.",
+        "Min": "Mínimo",
+        "Nom": "Nome",
+        "Nom de la commande": "Nome do comando",
+        "Supprimer la commande": "Eliminar comando",
+        "Tester": "Testar",
+        "Unité": "Unidade",
+        "Visible": "Visível"
+    },
+    "plugins\/todo\/desktop\/modal\/editcmd.php": {
+        "401 - Accès non autorisé": "401 - Acesso não autorizado",
+        "Aucun todo associé à l\\'id : ": "Nenhuma tarefa associada ao ID: ",
+        "Coût": "Custo",
+        "L\\'id de l\\'opération ne peut etre vide : ": "O ID da operação não pode estar vazio: ",
+        "Prix Unité": "Preço unitário",
+        "Quantité": "Quantidade",
+        "date": "Data"
+    },
+    "plugins\/todo\/desktop\/php\/panel.php": {
+        "401 - Accès non autorisé": "401 - Acesso não autorizado",
+        "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "Nenhum objeto raiz encontrado. Para criar um, vá para Geral → Objeto.<br\/> Se é a primeira vez que utiliza o Jeedom, consulte esta <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">página<\/a>.",
+        "Liste objets": "Lista de objetos",
+        "Rechercher": "Pesquisar"
+    },
+    "plugins\/todo\/desktop\/php\/todo.php": {
+        "401 - Accès non autorisé": "401 - Acesso não autorizado",
+        "Actions": "Ações",
+        "Activer": "Ativar",
+        "Ajouter": "Adicionar",
+        "Ajouter un todo": "Adicionar tarefa",
+        "Aucun": "Nenhum",
+        "Catégorie": "Categoria",
+        "Commandes": "Comandos",
+        "Configuration": "Configuração",
+        "Configuration avancée": "Configuração avançada",
+        "Dupliquer": "Duplicar",
+        "Equipement": "Equipamento",
+        "Gestion": "Gestão",
+        "Mes listes": "Minhas listas",
+        "Nom": "Nome",
+        "Nom de l'équipement": "Nome do equipamento",
+        "Nom de l'équipement todo": "Nome do equipamento Todo",
+        "Objet parent": "Objeto pai",
+        "Rechercher": "Pesquisar",
+        "Remove": "Remover",
+        "Sauvegarder": "Guardar",
+        "Supprimer": "Eliminar",
+        "Tâches": "Tarefas",
+        "Visible": "Visível",
+        "delai": "Atraso"
+    }
 }
