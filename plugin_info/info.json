@@ -12,8 +12,8 @@
 	"category": "organization",
 	"display": "panel",
 	"mobile": "panel",
-	"changelog": "https://zyg0m4t1k.github.io/plugins/todo/changelog/",
-	"documentation": "https://zyg0m4t1k.github.io/plugins/todo/",
+	"changelog": "https://zyg0m4t1k.github.io/plugins/docs/todo/changelog/",
+	"documentation": "https://zyg0m4t1k.github.io/docs/plugins/todo/",
 	"language": [
 		"de_DE",
 		"en_US",
