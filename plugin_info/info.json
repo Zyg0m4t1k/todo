@@ -1,7 +1,15 @@
 {
 	"id": "todo",
 	"name": "Todo List",
-	"description": "Plugin qui permet la création de todolist",
+	"description": {
+		"fr_FR": "Créez des listes de tâches simples avec notes, dates et suivi de budget. Compatible scénarios Jeedom.",
+		"en_US": "Create simple task lists with notes, dates and budget tracking. Compatible with Jeedom scenarios.",
+		"es_ES": "Crea listas de tareas sencillas con notas, fechas y seguimiento de presupuesto. Compatible con escenarios de Jeedom.",
+		"de_DE": "Erstellen Sie einfache Aufgabenlisten mit Notizen, Terminen und Budgetverfolgung. Kompatibel mit Jeedom-Szenarien.",
+		"it_IT": "Crea semplici liste di attività con note, date e monitoraggio del budget. Compatibile con gli scenari Jeedom.",
+		"pt_PT": "Crie listas de tarefas simples com notas, datas e controlo de orçamento. Compatível com cenários Jeedom."
+	}
+
 	"licence": "AGPL",
 	"author": "zyg0m4t1k",
 	"require": "4.5",
