@@ -1,73 +1,73 @@
 {
-  "plugins/todo/core/ajax/todo.ajax.php": {
-    "401 - Accès non autorisé": "401 - Accesso non autorizzato",
-    "Aucune methode correspondante à : ": "Nessun metodo corrispondente a: ",
-    "Todo inconnue : ": "Attività sconosciuta: "
-  },
-  "plugins/todo/core/class/todo.class.php": {
-    "Coût": "Costo",
-    "Coût global": "Costo totale",
-    "Liste": "Liste",
-    "New todo": "Nuova attività",
-    "Refresh": "Aggiorna",
-    "Remove all": "Rimuovi tutto"
-  },
-  "plugins/todo/desktop/js/todo.js": {
-    "Afficher": "Mostra",
-    "Aucune": "nessuna",
-    "Choisir une icône": "Seleziona un\\'icona",
-    "Commande info liée": "Comando info collegato",
-    "Historiser": "Storicizza",
-    "Inverser": "Inverti",
-    "Max": "Max",
-    "Min": "Min",
-    "Nom": "Nome",
-    "Nom de la commande": "Nome comando",
-    "Supprimer la commande": "Elimina comando",
-    "Tester": "Prova",
-    "Unité": "Unità",
-    "Visible": "Visibile"
-  },
-  "plugins/todo/desktop/modal/editcmd.php": {
-    "401 - Accès non autorisé": "401 - Accesso non autorizzato",
-    "Aucun todo associé à l\\'id : ": "Nessuna attività associata all'ID: ",
-    "Coût": "Costo",
-    "L\\'id de l\\'opération ne peut etre vide : ": "L'ID dell'operazione non può essere vuoto: ",
-    "Prix Unité": "Prezzo unitario",
-    "Quantité": "Quantità",
-    "date": "Data"
-  },
-  "plugins/todo/desktop/php/panel.php": {
-    "401 - Accès non autorisé": "401 - Accesso non autorizzato",
-    "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http://jeedom.fr/premier_pas.php\" target=\"_blank\">page</a>": "Nessun oggetto radice trovato. Per crearne uno, vai su Generale → Oggetto.<br/> Se è la prima volta che utilizzi Jeedom, consulta questa <a href=\"http://jeedom.fr/premier_pas.php\" target=\"_blank\">pagina</a>.",
-    "Liste objets": "Elenco oggetti",
-    "Rechercher": "Ricercare"
-  },
-  "plugins/todo/desktop/php/todo.php": {
-    "401 - Accès non autorisé": "401 - Accesso non autorizzato",
-    "Actions": "Stock",
-    "Activer": "Attivare",
-    "Ajouter": "Ajouter",
-    "Ajouter un todo": "Aggiungi attività",
-    "Aucun": "Nessuno",
-    "Catégorie": "Categoria",
-    "Commandes": "Comandi",
-    "Configuration": "Configurazione",
-    "Configuration avancée": "Configurazione avanzata",
-    "Dupliquer": "Duplicato",
-    "Equipement": "Dispositivo",
-    "Gestion": "Gestione",
-    "Mes listes": "Le mie liste",
-    "Nom": "Nome",
-    "Nom de l'équipement": "Nome dell'apparecchiatura",
-    "Nom de l'équipement todo": "Nome dell'apparecchiatura Todo",
-    "Objet parent": "Oggetto padre",
-    "Rechercher": "Ricercare",
-    "Remove": "Rimuovi",
-    "Sauvegarder": "Sauvegarder",
-    "Supprimer": "Supprimer",
-    "Tâches": "Attività",
-    "Visible": "Visibile",
-    "delai": "Ritardo"
-  }
+    "plugins\/todo\/core\/ajax\/todo.ajax.php": {
+        "401 - Accès non autorisé": "401 - Accesso non autorizzato",
+        "Aucune methode correspondante à : ": "Nessun metodo corrispondente a: ",
+        "Todo inconnue : ": "Attività sconosciuta: "
+    },
+    "plugins\/todo\/core\/class\/todo.class.php": {
+        "Coût": "Costo",
+        "Coût global": "Costo totale",
+        "Liste": "Liste",
+        "New todo": "Nuova attività",
+        "Refresh": "Aggiorna",
+        "Remove all": "Rimuovi tutto"
+    },
+    "plugins\/todo\/desktop\/js\/todo.js": {
+        "Afficher": "Mostra",
+        "Aucune": "nessuna",
+        "Choisir une icône": "Seleziona un\\'icona",
+        "Commande info liée": "Comando info collegato",
+        "Historiser": "Storicizza",
+        "Inverser": "Inverti",
+        "Max": "Max",
+        "Min": "Min",
+        "Nom": "Nome",
+        "Nom de la commande": "Nome comando",
+        "Supprimer la commande": "Elimina comando",
+        "Tester": "Prova",
+        "Unité": "Unità",
+        "Visible": "Visibile"
+    },
+    "plugins\/todo\/desktop\/modal\/editcmd.php": {
+        "401 - Accès non autorisé": "401 - Accesso non autorizzato",
+        "Aucun todo associé à l\\'id : ": "Nessuna attività associata all'ID: ",
+        "Coût": "Costo",
+        "L\\'id de l\\'opération ne peut etre vide : ": "L'ID dell'operazione non può essere vuoto: ",
+        "Prix Unité": "Prezzo unitario",
+        "Quantité": "Quantità",
+        "date": "Data"
+    },
+    "plugins\/todo\/desktop\/php\/panel.php": {
+        "401 - Accès non autorisé": "401 - Accesso non autorizzato",
+        "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "Nessun oggetto radice trovato. Per crearne uno, vai su Generale → Oggetto.<br\/> Se è la prima volta che utilizzi Jeedom, consulta questa <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">pagina<\/a>.",
+        "Liste objets": "Elenco oggetti",
+        "Rechercher": "Ricercare"
+    },
+    "plugins\/todo\/desktop\/php\/todo.php": {
+        "401 - Accès non autorisé": "401 - Accesso non autorizzato",
+        "Actions": "Stock",
+        "Activer": "Attivare",
+        "Ajouter": "Ajouter",
+        "Ajouter un todo": "Aggiungi attività",
+        "Aucun": "Nessuno",
+        "Catégorie": "Categoria",
+        "Commandes": "Comandi",
+        "Configuration": "Configurazione",
+        "Configuration avancée": "Configurazione avanzata",
+        "Dupliquer": "Duplicato",
+        "Equipement": "Dispositivo",
+        "Gestion": "Gestione",
+        "Mes listes": "Le mie liste",
+        "Nom": "Nome",
+        "Nom de l'équipement": "Nome dell'apparecchiatura",
+        "Nom de l'équipement todo": "Nome dell'apparecchiatura Todo",
+        "Objet parent": "Oggetto padre",
+        "Rechercher": "Ricercare",
+        "Remove": "Rimuovi",
+        "Sauvegarder": "Sauvegarder",
+        "Supprimer": "Supprimer",
+        "Tâches": "Attività",
+        "Visible": "Visibile",
+        "delai": "Ritardo"
+    }
 }
