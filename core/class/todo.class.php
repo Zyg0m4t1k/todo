@@ -334,23 +334,26 @@ class todo extends eqLogic
         $globalCost->setSubType('numeric');
         $globalCost->save();
 
-        $cost = $globalcost =  0 ;
+        $cost = $globalcost = 0;
         foreach ($this->getCmd() as $cmd)
         {
             if (is_numeric($cmd->getConfiguration('price')))
             {
-                $cost = $cost + $cmd->getConfiguration('price') * $cmd->getConfiguration('quantity', 1);
+                $cost += (float) $cmd->getConfiguration('price') * (float) $cmd->getConfiguration('quantity', 1);
             }
             if (is_array($cmd->getConfiguration('listbuying')))
             {
                 foreach ($cmd->getConfiguration('listbuying') as $data)
                 {
-                    $globalcost = $globalcost + $data['pricing'] ;
+                    if (isset($data['pricing']) && is_numeric($data['pricing']))
+                    {
+                        $globalcost += (float) $data['pricing'];
+                    }
                 }
             }
         }
         $this->checkAndUpdateCmd('cost', $cost);
-        $this->checkAndUpdateCmd('globalcost', $cost);
+        $this->checkAndUpdateCmd('globalcost', $globalcost);
         $this->allTodo();
     }
 
@@ -392,9 +395,41 @@ class todoCmd extends cmd
 {
     public function preSave()
     {
-        if ($this->getSubtype() == 'message' && $this->getLogicalId() == 'new')
+        $logicalId = $this->getLogicalId();
+
+        // Commandes système : on conserve leur nature action/info officielle.
+        if ($logicalId == 'new')
         {
+            $this->setType('action');
+            $this->setSubType('message');
             $this->setDisplay('title_disable', 1);
+            return;
+        }
+        if (in_array($logicalId, array('removeall', 'refresh')))
+        {
+            $this->setType('action');
+            $this->setSubType('other');
+            return;
+        }
+        if (in_array($logicalId, array('cost', 'globalcost')))
+        {
+            $this->setType('info');
+            $this->setSubType('numeric');
+            return;
+        }
+        if ($logicalId == 'list')
+        {
+            $this->setType('info');
+            $this->setSubType('string');
+            return;
+        }
+
+        // Toutes les commandes utilisateur créées par le plugin doivent rester en info/string.
+        // Cela évite le basculement accidentel en info/numeric lors d'un clic/sauvegarde Jeedom.
+        if ($this->getEqType() == 'todo' && $this->getConfiguration('type') != true)
+        {
+            $this->setType('info');
+            $this->setSubType('string');
         }
     }
 

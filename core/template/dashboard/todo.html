@@ -24,7 +24,18 @@
 (function () {
   const idEq = '#id#';
   console.log(idEq)
+  bindAddButton(idEq);
   loadData(idEq)
+
+  function bindAddButton(idEq) {
+    $('.todo[data-eqLogic_id="' + idEq + '"] .btn_add').off('click.todoAdd').on('click.todoAdd', function () {
+      const id = $(this).val();
+      const input = $('#' + id).val();
+      if (input === '') return;
+      changeTodo('new', input, id);
+    });
+  }
+
   function loadData(idEq) {
     $.ajax({
       type: "POST",
@@ -87,12 +98,7 @@
 
           $('#' + idEq).autocomplete({ source: autoComplete });
 
-          $('.todo[data-eqLogic_id="' + idEq + '"] .btn_add').off('click').on('click', function () {
-            const id = $(this).val();
-            const input = $('#' + id).val();
-            if (input === '') return;
-            changeTodo('new', input, id);
-          });
+          bindAddButton(idEq);
 
           $('.todo[data-eqLogic_id="' + idEq + '"] .delete').off('click').on('click', function () {
             const idcmd = $(this).attr('alt');
