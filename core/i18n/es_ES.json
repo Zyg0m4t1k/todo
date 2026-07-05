@@ -1,73 +1,73 @@
 {
-  "plugins/todo/core/ajax/todo.ajax.php": {
-    "401 - Accès non autorisé": "401 - Acceso no autorizado",
-    "Aucune methode correspondante à : ": "Ningún método correspondiente a: ",
-    "Todo inconnue : ": "Tarea desconocida: "
-  },
-  "plugins/todo/core/class/todo.class.php": {
-    "Coût": "Costo",
-    "Coût global": "Costo total",
-    "Liste": "Listado",
-    "New todo": "Nueva tarea",
-    "Refresh": "Actualizar",
-    "Remove all": "Eliminar todo"
-  },
-  "plugins/todo/desktop/js/todo.js": {
-    "Afficher": "Mostrar",
-    "Aucune": "Alguna",
-    "Choisir une icône": "Elija el icono",
-    "Commande info liée": "Comando de información vinculado",
-    "Historiser": "Guardar historial",
-    "Inverser": "Invertir",
-    "Max": "Máx.",
-    "Min": "Mínimo",
-    "Nom": "Nombre",
-    "Nom de la commande": "Nombre del comando",
-    "Supprimer la commande": "Eliminar comando",
-    "Tester": "Probar",
-    "Unité": "Unidad",
-    "Visible": "Visible"
-  },
-  "plugins/todo/desktop/modal/editcmd.php": {
-    "401 - Accès non autorisé": "401 - Acceso no autorizado",
-    "Aucun todo associé à l\\'id : ": "Ninguna tarea asociada al ID: ",
-    "Coût": "Costo",
-    "L\\'id de l\\'opération ne peut etre vide : ": "El ID de la operación no puede estar vacío: ",
-    "Prix Unité": "Precio unitario",
-    "Quantité": "Cantidad",
-    "date": "Fecha"
-  },
-  "plugins/todo/desktop/php/panel.php": {
-    "401 - Accès non autorisé": "401 - Acceso no autorizado",
-    "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http://jeedom.fr/premier_pas.php\" target=\"_blank\">page</a>": "No se encontró ningún objeto raíz. Para crear uno, vaya a General → Objeto.<br/> Si es la primera vez que utiliza Jeedom, consulte esta <a href=\"http://jeedom.fr/premier_pas.php\" target=\"_blank\">página</a>.",
-    "Liste objets": "Lista de objetos",
-    "Rechercher": "Buscar"
-  },
-  "plugins/todo/desktop/php/todo.php": {
-    "401 - Accès non autorisé": "401 - Acceso no autorizado",
-    "Actions": "Acciones",
-    "Activer": "Activar",
-    "Ajouter": "Agregar",
-    "Ajouter un todo": "Añadir tarea",
-    "Aucun": "Ninguno",
-    "Catégorie": "Categoría",
-    "Commandes": "Comandos",
-    "Configuration": "Configuración ",
-    "Configuration avancée": "Configuración avanzada",
-    "Dupliquer": "Duplicar",
-    "Equipement": "Dispositivos",
-    "Gestion": "Administración",
-    "Mes listes": "Mis listas",
-    "Nom": "Nombre",
-    "Nom de l'équipement": "Nombre del equipo",
-    "Nom de l'équipement todo": "Nombre del equipo Todo",
-    "Objet parent": "Objeto padre",
-    "Rechercher": "Buscar",
-    "Remove": "Eliminar",
-    "Sauvegarder": "Para salvaguardar",
-    "Supprimer": "Eliminar",
-    "Tâches": "Tareas",
-    "Visible": "Visible",
-    "delai": "Retraso"
-  }
+    "plugins\/todo\/core\/ajax\/todo.ajax.php": {
+        "401 - Accès non autorisé": "401 - Acceso no autorizado",
+        "Aucune methode correspondante à : ": "Ningún método correspondiente a: ",
+        "Todo inconnue : ": "Tarea desconocida: "
+    },
+    "plugins\/todo\/core\/class\/todo.class.php": {
+        "Coût": "Costo",
+        "Coût global": "Costo total",
+        "Liste": "Listado",
+        "New todo": "Nueva tarea",
+        "Refresh": "Actualizar",
+        "Remove all": "Eliminar todo"
+    },
+    "plugins\/todo\/desktop\/js\/todo.js": {
+        "Afficher": "Mostrar",
+        "Aucune": "Alguna",
+        "Choisir une icône": "Elija el icono",
+        "Commande info liée": "Comando de información vinculado",
+        "Historiser": "Guardar historial",
+        "Inverser": "Invertir",
+        "Max": "Máx.",
+        "Min": "Mínimo",
+        "Nom": "Nombre",
+        "Nom de la commande": "Nombre del comando",
+        "Supprimer la commande": "Eliminar comando",
+        "Tester": "Probar",
+        "Unité": "Unidad",
+        "Visible": "Visible"
+    },
+    "plugins\/todo\/desktop\/modal\/editcmd.php": {
+        "401 - Accès non autorisé": "401 - Acceso no autorizado",
+        "Aucun todo associé à l\\'id : ": "Ninguna tarea asociada al ID: ",
+        "Coût": "Costo",
+        "L\\'id de l\\'opération ne peut etre vide : ": "El ID de la operación no puede estar vacío: ",
+        "Prix Unité": "Precio unitario",
+        "Quantité": "Cantidad",
+        "date": "Fecha"
+    },
+    "plugins\/todo\/desktop\/php\/panel.php": {
+        "401 - Accès non autorisé": "401 - Acceso no autorizado",
+        "Aucun objet racine trouvé. Pour en créer un, allez dans Générale -> Objet.<br\/> Si vous ne savez pas quoi faire ou que c\\'est la premiere fois que vous utilisez Jeedom n\\'hésitez pas a consulter cette <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">page<\/a>": "No se encontró ningún objeto raíz. Para crear uno, vaya a General → Objeto.<br\/> Si es la primera vez que utiliza Jeedom, consulte esta <a href=\"http:\/\/jeedom.fr\/premier_pas.php\" target=\"_blank\">página<\/a>.",
+        "Liste objets": "Lista de objetos",
+        "Rechercher": "Buscar"
+    },
+    "plugins\/todo\/desktop\/php\/todo.php": {
+        "401 - Accès non autorisé": "401 - Acceso no autorizado",
+        "Actions": "Acciones",
+        "Activer": "Activar",
+        "Ajouter": "Agregar",
+        "Ajouter un todo": "Añadir tarea",
+        "Aucun": "Ninguno",
+        "Catégorie": "Categoría",
+        "Commandes": "Comandos",
+        "Configuration": "Configuración ",
+        "Configuration avancée": "Configuración avanzada",
+        "Dupliquer": "Duplicar",
+        "Equipement": "Dispositivos",
+        "Gestion": "Administración",
+        "Mes listes": "Mis listas",
+        "Nom": "Nombre",
+        "Nom de l'équipement": "Nombre del equipo",
+        "Nom de l'équipement todo": "Nombre del equipo Todo",
+        "Objet parent": "Objeto padre",
+        "Rechercher": "Buscar",
+        "Remove": "Eliminar",
+        "Sauvegarder": "Para salvaguardar",
+        "Supprimer": "Eliminar",
+        "Tâches": "Tareas",
+        "Visible": "Visible",
+        "delai": "Retraso"
+    }
 }

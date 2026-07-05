@@ -9,7 +9,6 @@
 		"it_IT": "Crea semplici liste di attività con note, date e monitoraggio del budget. Compatibile con gli scenari Jeedom.",
 		"pt_PT": "Crie listas de tarefas simples com notas, datas e controlo de orçamento. Compatível com cenários Jeedom."
 	},
-
 	"licence": "AGPL",
 	"author": "zyg0m4t1k",
 	"require": "4.5",
