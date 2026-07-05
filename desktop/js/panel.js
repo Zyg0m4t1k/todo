@@ -16,7 +16,7 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
- positionEqLogic();
+ jeedomUtils.positionEqLogic();
  setTimeout(function () {
     $('.div_displayEquipement').packery({
         itemSelector: ".eqLogic-widget",
